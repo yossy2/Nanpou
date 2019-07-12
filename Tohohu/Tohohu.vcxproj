@@ -77,6 +77,14 @@
     <IncludePath>$(SolutionDir);$(DXLIB_DIR);$(IncludePath)</IncludePath>
     <LibraryPath>$(DXLIB_DIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir);$(DXLIB_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXLIB_DIR);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir);$(DXLIB_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXLIB_DIR);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
