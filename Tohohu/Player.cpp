@@ -44,7 +44,7 @@ void PlayerDraw(void)
 // Ž©‹@‚ÌˆÚ“®
 void PlayerMove(void)
 {
-	// ==========’á‘¬Ó°ÄÞ”»’è
+	// ========== ’á‘¬Ó°ÄÞ”»’è
 	if (CheckHitKey(keyList.slow))
 	{
 		player.speed = PLAYER_DEF_SPEED / 2;
