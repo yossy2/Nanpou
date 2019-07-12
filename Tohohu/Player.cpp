@@ -1,6 +1,6 @@
 #define PL_DEF
 #include <math.h>
-#include "DxLib.h"
+#include <DxLib.h>
 #include "main.h"
 #include "Player.h"
 

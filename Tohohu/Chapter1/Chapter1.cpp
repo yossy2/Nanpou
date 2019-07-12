@@ -1,10 +1,10 @@
-#include "DxLib.h"
-#include "main.h"
-#include "GameScene.h"
+#include <DxLib.h>
+#include <main.h>
+#include <GameScene.h>
+#include "Chapter1.h"
 #include "Enemy1_a.h"
 #include "EnemyShot1_a.h"
-#include "Chapter1.h"
-#include "Player.h"
+#include <Player.h>
 
 // 1Í‰Šú‰»
 bool ChapterInit1(void)

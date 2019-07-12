@@ -1,6 +1,6 @@
 #define MAIN_DEF
 
-#include "DxLib.h"
+#include <DxLib.h>
 #include "main.h"
 #include "Init.h"
 #include "TitleScene.h"

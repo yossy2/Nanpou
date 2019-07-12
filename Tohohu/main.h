@@ -51,9 +51,9 @@ struct EShot
 	Vector2 pos;	// 座標
 	Vector2 speed;	// 移動量
 	float moveAngle;// 移動角度(ﾗｼﾞｱﾝ)
-	float count;	// 移動用のｶｳﾝﾄ
 	float hitRad;	// 当たり判定の円の半径
 	int rotaAngle;	// 回転角度(度)
+	int count;		// 移動用のｶｳﾝﾄ
 	bool flag;		// 表示ﾌﾗｸﾞ
 };
 

@@ -1,7 +1,7 @@
 #define ESHOT1_A_DEF
 #include <math.h>
-#include "DxLib.h"
-#include "main.h"
+#include <DxLib.h>
+#include <main.h>
 #include "Enemy1_a.h"
 #include "EnemyShot1_a.h"
 

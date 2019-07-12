@@ -1,10 +1,10 @@
 #define ENEMY1_A_DEF
 #include <math.h>
-#include "DxLib.h"
-#include "main.h"
+#include <DxLib.h>
+#include <main.h>
 #include "Enemy1_a.h"
 #include "EnemyShot1_a.h"
-#include "Player.h"
+#include <Player.h>
 
 int enemyImg1A;			// “GA‚Ì‰æ‘œID
 
@@ -64,7 +64,7 @@ void EnemyCtl1_A(void)
 	if (flamCnt % ENEMY1_A_INV == 0 && (flamCnt / ENEMY1_A_INV) < ENEMY1_A_NUM)
 	{
 		enemy1A[flamCnt / ENEMY1_A_INV].drawFlag = true;
-		enemy1A[flamCnt / ENEMY1_A_INV].pos.x = (rand() % (GAME_SCREEN_SIZE_X - ENEMY1_A_SIZE_X)) + ENEMY1_A_SIZE_X / 2;
+		enemy1A[flamCnt / ENEMY1_A_INV].pos.x = (float)((rand() % (GAME_SCREEN_SIZE_X - ENEMY1_A_SIZE_X)) + ENEMY1_A_SIZE_X / 2);
 		enemy1A[flamCnt / ENEMY1_A_INV].pos.y = -ENEMY1_A_SIZE_Y;
 	}
 }
@@ -76,7 +76,7 @@ void DrawEnemy1_A(void)
 	{
 		if (enemy1A[i].drawFlag)
 		{
-			DrawRotaGraph(enemy1A[i].pos.x + GAME_SCREEN_X, enemy1A[i].pos.y + GAME_SCREEN_Y,
+			DrawRotaGraphF(enemy1A[i].pos.x + GAME_SCREEN_X, enemy1A[i].pos.y + GAME_SCREEN_Y,
 				1.0, 0.0, enemyImg1A, true, false);
 		}
 	}
