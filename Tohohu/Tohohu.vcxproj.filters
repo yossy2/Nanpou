@@ -39,13 +39,13 @@
     <ClCompile Include="Init.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy1_a.cpp">
+    <ClCompile Include="Chapter1\Chapter1.cpp">
       <Filter>ソース ファイル\Chapter1</Filter>
     </ClCompile>
-    <ClCompile Include="Chapter1.cpp">
+    <ClCompile Include="Chapter1\Enemy1_a.cpp">
       <Filter>ソース ファイル\Chapter1</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyShot1_a.cpp">
+    <ClCompile Include="Chapter1\EnemyShot1_a.cpp">
       <Filter>ソース ファイル\Chapter1</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,13 +68,13 @@
     <ClInclude Include="Init.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy1_a.h">
+    <ClInclude Include="Chapter1\Chapter1.h">
       <Filter>ヘッダー ファイル\Chapter1</Filter>
     </ClInclude>
-    <ClInclude Include="Chapter1.h">
+    <ClInclude Include="Chapter1\Enemy1_a.h">
       <Filter>ヘッダー ファイル\Chapter1</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyShot1_a.h">
+    <ClInclude Include="Chapter1\EnemyShot1_a.h">
       <Filter>ヘッダー ファイル\Chapter1</Filter>
     </ClInclude>
   </ItemGroup>

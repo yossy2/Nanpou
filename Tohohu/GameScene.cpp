@@ -1,10 +1,10 @@
 #define GAME_DEF
 #include <time.h>
-#include "DxLib.h"
+#include <DxLib.h>
 #include "main.h"
 #include "GameScene.h"
 #include "Player.h"
-#include "Chapter1.h"
+#include <Chapter1/Chapter1.h>
 
 // ¹Ş°Ñ¼°İ‰Šú‰»
 bool GameInit(void)
