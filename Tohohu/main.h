@@ -1,0 +1,82 @@
+#pragma once
+
+// ﾃﾞﾊﾞｯｸﾞﾒｯｾｰｼﾞ用定義
+#ifdef _DEBUG
+#define AST(){\
+	CHAR ast_mes[256];\
+	wsprintf(ast_mes,"%s %d行目\0",__FILE__,__LINE__);\
+	MessageBox(0,ast_mes,"ｱｻｰﾄ表示", MB_OK);\
+	}
+#else
+#define AST()
+#endif
+
+// enum定義
+
+
+// define定義
+#define SCREEN_SIZE_X 1080		// ｳｲﾝﾄﾞｳｻｲｽﾞX
+#define SCREEN_SIZE_Y 720		// ｳｲﾝﾄﾞｳｻｲｽﾞY
+
+#define GAME_SCREEN_SIZE_X 640	// ｹﾞｰﾑ画面ｻｲｽﾞX
+#define GAME_SCREEN_SIZE_Y 680	// ｹﾞｰﾑ画面ｻｲｽﾞY
+
+#define GAME_SCREEN_X 20.0f		// ｹﾞｰﾑ画面のｵﾌｾｯﾄX
+#define GAME_SCREEN_Y 20.0f		// ｹﾞｰﾑ画面のｵﾌｾｯﾄY
+
+#define PI 3.14159265359f		// 円周率
+
+// enum定義
+// 方向
+enum DIR
+{
+	DIR_UP,
+	DIR_RIGHT,
+	DIR_DOWN,
+	DIR_LEFT,
+	DIR_MAX,
+};
+
+// 構造体
+// 二次元座標
+struct Vector2
+{
+	float x;
+	float y;
+};
+
+// 敵の弾
+struct EShot
+{
+	Vector2 pos;	// 座標
+	Vector2 speed;	// 移動量
+	float moveAngle;// 移動角度(ﾗｼﾞｱﾝ)
+	float count;	// 移動用のｶｳﾝﾄ
+	float hitRad;	// 当たり判定の円の半径
+	int rotaAngle;	// 回転角度(度)
+	bool flag;		// 表示ﾌﾗｸﾞ
+};
+
+// 雑魚敵
+struct Enemy
+{
+	Vector2 pos;	// 座標
+	Vector2 move;	// 移動量
+	float hitRad;	// 当たり判定の円の半径
+	float moveCount;// 移動し始めてからのｶｳﾝﾄ
+	int life;		// 残り体力
+	bool drawFlag;	// 描画ﾌﾗｸﾞ
+	bool atkFlag;	// 攻撃ﾌﾗｸﾞ
+};
+
+// extern宣言
+#ifdef MAIN_DEF
+#define MAIN_EX
+#else
+#define MAIN_EX extern
+#endif
+
+MAIN_EX void(*sceneFunc)(void);		// ｼｰﾝ管理用関数ﾎﾟｲﾝﾀ
+MAIN_EX void(*sceneOldFunc)(void);	// 1ﾌﾚｰﾑ前のsceneFuncの状態
+
+MAIN_EX int flamCnt;				// そのｼｰﾝになってからのﾌﾚｰﾑ数
