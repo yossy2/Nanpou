@@ -16,7 +16,7 @@ bool PlayerInit(void)
 	keyList.move[DIR_RIGHT] = KEY_INPUT_RIGHT;
 	keyList.move[DIR_DOWN] = KEY_INPUT_DOWN;
 	keyList.move[DIR_LEFT] = KEY_INPUT_LEFT;
-
+	keyList.shot = KEY_INPUT_Z;
 	keyList.slow = KEY_INPUT_LCONTROL;
 
 	// âÊëúÇÃì«Ç›çûÇ›
