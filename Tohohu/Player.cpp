@@ -3,6 +3,7 @@
 #include <DxLib.h>
 #include "main.h"
 #include "Player.h"
+#include "PlayerShot.h"
 
 // ©‹@‚Ì‰Šú‰»
 bool PlayerInit(void)
@@ -19,6 +20,9 @@ bool PlayerInit(void)
 	keyList.shot = KEY_INPUT_Z;
 	keyList.slow = KEY_INPUT_LCONTROL;
 
+	// ÌßÚ²Ô°¼®¯Ä‚Ì‰Šú‰»
+	PlayerShotInit();
+
 	// ‰æ‘œ‚Ì“Ç‚İ‚İ
 	playerImg = LoadGraph("image/player.png");
 	if (playerImg == -1)
@@ -33,11 +37,13 @@ bool PlayerInit(void)
 void PlayerCtl(void)
 {
 	PlayerMove();
+	PlayerShotFunc();
 }
 
 // ©‹@‚Ì•`‰æ
 void PlayerDraw(void)
 {
+	PlayerShotDraw();
 	DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,1.0,0.0, playerImg,true,false);
 }
 
