@@ -15,4 +15,4 @@ bool GameInit(void);		// ¹Ş°Ñ¼°İ‰Šú‰»
 void GameScene(void);		// ¹Ş°Ñ¼°İˆ—
 void GameDraw(void);		// ¹Ş°Ñ¼°İ•`‰æ
 
-bool CheckHitObj(Vector2 aPos, Vector2 bPos);		// “–‚½‚è”»’è
+bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad);		// “–‚½‚è”»’è
