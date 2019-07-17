@@ -5,6 +5,8 @@
 
 #define PLAYER_DEF_SPEED 6
 
+#define PLAYER_HIT_RAD 3
+
 // enum’è‹`
 // ÌßÚ²Ô°ID
 enum PL_ID
@@ -21,6 +23,7 @@ struct Player
 	Vector2 move;		// ˆÚ“®—Ê
 	float speed;		// ‘¬‚³
 	float moveAngle;	// ˆÚ“®Šp“x
+	bool flag;			// •`‰æŠÇ—
 };
 
 struct KeyList

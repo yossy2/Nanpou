@@ -11,6 +11,7 @@ bool PlayerInit(void)
 	player.pos.x = (float)(GAME_SCREEN_SIZE_X) / 2.0f;
 	player.pos.y = (float)(GAME_SCREEN_SIZE_Y - PLAYER_SIZE_Y/2);
 	player.speed = PLAYER_DEF_SPEED;
+	player.flag = true;
 
 	// ∑∞ê›íË
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
@@ -44,7 +45,10 @@ void PlayerCtl(void)
 void PlayerDraw(void)
 {
 	PlayerShotDraw();
-	DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,1.0,0.0, playerImg,true,false);
+	if (player.flag)
+	{
+		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y, 1.0, 0.0, playerImg, true, false);
+	}
 }
 
 // é©ã@ÇÃà⁄ìÆ

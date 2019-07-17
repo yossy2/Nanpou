@@ -4,6 +4,7 @@
 #include <main.h>
 #include "Enemy1_a.h"
 #include "EnemyShot1_a.h"
+#include "Player.h"
 
 int eShotImg1A;
 
@@ -54,6 +55,18 @@ void EShotCtl1_A(void)
 				eShot1A[i].pos.y < -(float)ESHOT1_A_SIZE_X ||
 				eShot1A[i].pos.y >(float)(GAME_SCREEN_SIZE_Y + ESHOT1_A_SIZE_X))
 			{
+				eShot1A[i].flag = false;
+			}
+		}
+	}
+	// “–‚½‚è”»’è
+	for (int i = 0; i < ESHOT1_A_NUM; i++)
+	{
+		if (eShot1A[i].flag && player.flag)
+		{
+			if (CheckHitObj(eShot1A[i].pos, ESHOT1_A_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
+			{
+				player.flag = false;
 				eShot1A[i].flag = false;
 			}
 		}

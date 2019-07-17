@@ -66,6 +66,16 @@ void EnemyCtl1_A(void)
 		enemy1A[flamCnt / ENEMY1_A_INV].pos.x = (float)((rand() % (GAME_SCREEN_SIZE_X - ENEMY1_A_SIZE_X)) + ENEMY1_A_SIZE_X / 2);
 		enemy1A[flamCnt / ENEMY1_A_INV].pos.y = -ENEMY1_A_SIZE_Y;
 	}
+	for (int i = 0; i < ENEMY1_A_NUM; i++)
+	{
+		if (enemy1A[i].drawFlag && player.flag)
+		{
+			if (CheckHitObj(enemy1A[i].pos, ENEMY1_A_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
+			{
+				player.flag = false;
+			}
+		}
+	}
 }
 
 // •`‰æ
