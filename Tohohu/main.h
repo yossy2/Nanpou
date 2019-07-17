@@ -80,3 +80,6 @@ MAIN_EX void(*sceneFunc)(void);		// ¼°İŠÇ——pŠÖ”Îß²İÀ
 MAIN_EX void(*sceneOldFunc)(void);	// 1ÌÚ°Ñ‘O‚ÌsceneFunc‚Ìó‘Ô
 
 MAIN_EX int flamCnt;				// ‚»‚Ì¼°İ‚É‚È‚Á‚Ä‚©‚ç‚ÌÌÚ°Ñ”
+
+//=======================ŠÖ”´¸½ÀİéŒ¾================================
+bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad);		// “–‚½‚è”»’è

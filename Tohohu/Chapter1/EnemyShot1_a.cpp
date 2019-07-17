@@ -56,7 +56,6 @@ void EShotCtl1_A(void)
 			{
 				eShot1A[i].flag = false;
 			}
-
 		}
 	}
 }
