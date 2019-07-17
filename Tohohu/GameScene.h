@@ -14,3 +14,5 @@ GAME_EX int systemImg;					// ½º±‚È‚Ç‚ğ•\¦‚·‚é‰æ–Ê˜g
 bool GameInit(void);		// ¹Ş°Ñ¼°İ‰Šú‰»
 void GameScene(void);		// ¹Ş°Ñ¼°İˆ—
 void GameDraw(void);		// ¹Ş°Ñ¼°İ•`‰æ
+
+bool CheckHitObj(Vector2 aPos, Vector2 bPos);		// “–‚½‚è”»’è

@@ -59,13 +59,13 @@ void PlayerShotMove(void)
 		if (pShot[i].flag)
 		{
 			pShot[i].pos.y -= pShot[i].speed;
-			if (pShot[i].pos.y < -PSHOT_SIZE_Y)
+			if (pShot[i].pos.y < pShot[i].endPos)
 			{
 				pShot[i].flag = false;
 			}
 		}
 	}
-	if (!CheckHitKey(keyList.shot) || pShotCnt < 3)
+	if (!CheckHitKey(keyList.shot) || pShotCnt < PSHOT_TIME)
 	{
 		return;
 	}
@@ -74,7 +74,7 @@ void PlayerShotMove(void)
 		if (!pShot[i].flag)
 		{
 			pShot[i].pos.x = player.pos.x;
-			pShot[i].pos.y = player.pos.y;
+			pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 			pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 			pShot[i].flag = true;
 			pShotCnt = 0;

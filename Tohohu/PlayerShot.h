@@ -3,7 +3,8 @@
 #define PSHOT_SIZE_X 24
 #define PSHOT_SIZE_Y 24
 #define PSHOT_NUM 50
-#define PSHOT_DEF_SPEED 15
+#define PSHOT_DEF_SPEED 20
+#define PSHOT_TIME 5
 
 struct PlayerShot
 {
