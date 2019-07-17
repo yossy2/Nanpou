@@ -48,6 +48,9 @@
     <ClCompile Include="Chapter1\EnemyShot1_a.cpp">
       <Filter>ソース ファイル\Chapter1</Filter>
     </ClCompile>
+    <ClCompile Include="Chapter1\Enemy1_b.cpp">
+      <Filter>ソース ファイル\Chapter1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -75,6 +78,9 @@
       <Filter>ヘッダー ファイル\Chapter1</Filter>
     </ClInclude>
     <ClInclude Include="Chapter1\EnemyShot1_a.h">
+      <Filter>ヘッダー ファイル\Chapter1</Filter>
+    </ClInclude>
+    <ClInclude Include="Chapter1\Enemy1_b.h">
       <Filter>ヘッダー ファイル\Chapter1</Filter>
     </ClInclude>
   </ItemGroup>

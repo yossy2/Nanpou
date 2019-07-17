@@ -13,7 +13,6 @@ bool EnemyInit1_A(void)
 {
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
-		enemy1A[i].pos = { -100.0f,0.0f };
 		enemy1A[i].drawFlag = false;
 	}
 
