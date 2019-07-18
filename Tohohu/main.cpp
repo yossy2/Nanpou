@@ -46,3 +46,18 @@ bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad)
 
 	return hitFlag;
 }
+
+// ‰æ–ÊŠO”»’è
+bool isMoveOut(Vector2 pos)
+{
+	// ‰æ–ÊŠO”»’è
+	if (pos.x < -100 ||
+		pos.x >(float)(GAME_SCREEN_SIZE_X) + 100 ||
+		pos.y < -100 ||
+		pos.y >(float)(GAME_SCREEN_SIZE_Y) + 100)
+	{
+		return true;
+	}
+
+	return false;
+}

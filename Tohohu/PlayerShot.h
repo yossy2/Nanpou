@@ -16,7 +16,7 @@ struct PlayerShot
 	float endPos;			// •`‰æI—¹ˆÊ’u
 };
 
-// =============ŠÖ”´¸½ÀİéŒ¾
+// =============ŠÖ”ÌßÛÄÀ²ÌßéŒ¾
 void PlayerShotInit(void);		// ‰Šú‰»
 void PlayerShotFunc(void);		// ˆ—
 void PlayerShotDraw(void);		// •`‰æ

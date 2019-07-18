@@ -72,8 +72,8 @@ struct Enemy
 	Vector2 pos;	// 座標
 	Vector2 move;	// 移動量
 	float hitRad;	// 当たり判定の円の半径
-	float moveCount;// 移動し始めてからのｶｳﾝﾄ
 	float moveAngle;// 移動角度(度)
+	int moveCount;// 移動し始めてからのｶｳﾝﾄ
 	int life;		// 残り体力
 	bool drawFlag;	// 描画ﾌﾗｸﾞ
 	bool atkFlag;	// 攻撃ﾌﾗｸﾞ
@@ -92,5 +92,6 @@ MAIN_EX void(*sceneOldFunc)(void);	// 1ﾌﾚｰﾑ前のsceneFuncの状態
 
 MAIN_EX int flamCnt;				// そのｼｰﾝになってからのﾌﾚｰﾑ数
 
-//=======================関数ｴｸｽﾀﾝ宣言================================
+//=======================関数ﾌﾟﾛﾄﾀｲﾌﾟ宣言================================
 bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad);		// 当たり判定
+bool isMoveOut(Vector2 pos);									// 画面外判定

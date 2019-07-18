@@ -50,10 +50,7 @@ void EnemyCtl1_A(void)
 		}
 
 		// ‰æ–ÊŠO”»’è
-		if (enemy1A[i].pos.x < -(float)ENEMY1_A_SIZE_X ||
-			enemy1A[i].pos.x >(float)(GAME_SCREEN_SIZE_X + ENEMY1_A_SIZE_X) ||
-			enemy1A[i].pos.y < -(float)ENEMY1_A_SIZE_X ||
-			enemy1A[i].pos.y >(float)(GAME_SCREEN_SIZE_Y + ENEMY1_A_SIZE_X))
+		if (isMoveOut(enemy1A[i].pos))
 		{
 			enemy1A[i].drawFlag = false;
 		}

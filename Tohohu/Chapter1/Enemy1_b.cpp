@@ -44,7 +44,18 @@ void EnemyCtl1_B(void)
 
 			enemy1B[i].pos.x += enemy1B[i].move.x;
 			enemy1B[i].pos.y += enemy1B[i].move.y;
-			enemy1B[i].moveAngle++;
+			enemy1B[i].moveCount++;
+
+			// ‰æ–ÊŠO”»’è
+			if (isMoveOut(enemy1B[i].pos))
+			{
+				enemy1B[i].drawFlag = false;
+			}
+
+			if (enemy1B[i].moveCount % 2 == 0)
+			{
+				enemy1B[i].moveAngle++;
+			}
 		}
 	}
 
