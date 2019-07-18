@@ -102,12 +102,6 @@ void ScanInitData1_B(void)
 		FileRead_scanf(file, "%d,%d,%f,%f,%d",
 			&enemy1B[i].initData.count, &enemy1B[i].initData.movePtn,
 			&enemy1B[i].initData.pos.x, &enemy1B[i].initData.pos.y, &enemy1B[i].initData.moveAngle);
-
-		if (enemy1B[i].initData.movePtn >= ENEMY1_B_MOVE_PTN_MAX)
-		{
-			AST();
-			enemy1B[i].initData.movePtn = 0;
-		}
 	}
 	
 	FileRead_close(file);

@@ -102,7 +102,7 @@ void EnemyAttack1_A(Vector2 pos)
 		{
 			eShot1A[i].flag = true;
 			eShot1A[i].pos = pos;
-			eShot1A[i].moveAngle = (count - 2) * 22 + (int)(atan2f(player.pos.y - pos.y, player.pos.x - pos.x) * 180.0f / PI);
+			eShot1A[i].moveAngle = (count - 2) * PI / 8.0f + atan2f(player.pos.y - pos.y, player.pos.x - pos.x);
 			
 			count++;
 			if (count >= 5)
@@ -136,12 +136,6 @@ void ScanInitData1_A(void)
 		FileRead_scanf(file, "%d,%d,%f,%f,%d",
 			&enemy1A[i].initData.count, &enemy1A[i].initData.movePtn,
 			&enemy1A[i].initData.pos.x, &enemy1A[i].initData.pos.y, &enemy1A[i].initData.moveAngle);
-
-		if (enemy1A[i].initData.movePtn >= ENEMY1_A_MOVE_PTN_MAX)
-		{
-			AST();
-			enemy1A[i].initData.movePtn = 0;
-		}
 	}
 
 	FileRead_close(file);
