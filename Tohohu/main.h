@@ -64,6 +64,7 @@ struct Enemy
 	Vector2 move;	// ˆÚ“®—Ê
 	float hitRad;	// “–‚½‚è”»’è‚Ì‰~‚Ì”¼Œa
 	float moveCount;// ˆÚ“®‚µn‚ß‚Ä‚©‚ç‚Ì¶³İÄ
+	float moveAngle;// ˆÚ“®Šp“x(“x)
 	int life;		// c‚è‘Ì—Í
 	bool drawFlag;	// •`‰æÌ×¸Ş
 	bool atkFlag;	// UŒ‚Ì×¸Ş
