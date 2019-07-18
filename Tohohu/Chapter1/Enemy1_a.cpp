@@ -7,10 +7,13 @@
 #include <Player.h>
 
 int enemyImg1A;			// 敵Aの画像ID
+void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0};	// 移動の種類
 
 // 初期化
 bool EnemyInit1_A(void)
 {
+	ScanInitData1_A();
+
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
 		enemy1A[i].drawFlag = false;
@@ -107,5 +110,46 @@ void EnemyAttack1_A(Vector2 pos)
 				return;
 			}
 		}
+	}
+}
+
+// 初期配置を読み込む
+void ScanInitData1_A(void)
+{
+	int file;			// ﾌｧｲﾙﾊﾝﾄﾞﾙ
+	char string[256];	// 最初の1行読み飛ばす用
+
+	// ファイル読み込み
+	file = FileRead_open("出現パターン/Enemy1_a.csv");
+	if (file == 0)
+	{
+		AST();
+		return;
+	}
+
+	// 1行読み飛ばし
+	FileRead_gets(string, 256, file);
+
+	// 初期配置設定
+	for (int i = 0; i < ENEMY1_A_NUM; i++)
+	{
+		FileRead_scanf(file, "%d,%d,%f,%f,%d",
+			&enemy1A[i].initData.count, &enemy1A[i].initData.movePtn,
+			&enemy1A[i].initData.pos.x, &enemy1A[i].initData.pos.y, &enemy1A[i].initData.moveAngle);
+	}
+
+	FileRead_close(file);
+}
+
+// 移動0
+void EnemyMove1_A_0(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	enemy->moveCount++;
+
+	if (enemy->moveCount % 2 == 0)
+	{
+		enemy->moveAngle++;
 	}
 }

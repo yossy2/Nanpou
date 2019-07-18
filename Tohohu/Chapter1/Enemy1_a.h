@@ -5,6 +5,8 @@
 #define ENEMY1_A_NUM	50		// “G1_A‚Ì”z—ñŒÂ”
 #define ENEMY1_A_SPEED	4.0f	// “G1_A‚ÌˆÚ“®—Ê
 
+#define ENEMY1_A_MOVE_PTN_MAX 1	// “G1_A‚ÌˆÚ“®ÊßÀ°İ”
+
 #define ENEMY1_A_INV 20			// “G1_A‚ÌoŒ»ŠÔŠu
 
 // externéŒ¾
@@ -19,5 +21,8 @@ ENEMY1_A_EX Enemy enemy1A[ENEMY1_A_NUM];
 bool EnemyInit1_A(void);				// ‰Šú‰»
 void EnemyCtl1_A(void);					// XVˆ—
 void DrawEnemy1_A(void);				// •`‰æ
-
 void EnemyAttack1_A(Vector2 pos);		// UŒ‚
+
+void ScanInitData1_A(void);				// ‰Šú”z’u‚ğ“Ç‚İ‚Ş		
+
+void EnemyMove1_A_0(Enemy * enemy);		// ˆÚ“®ÊßÀ°İ0
