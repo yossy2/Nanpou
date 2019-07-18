@@ -45,6 +45,15 @@ struct Vector2
 	float y;
 };
 
+// 敵の初期配置情報
+struct EnemyInit
+{
+	int count;		// 出現するﾌﾚｰﾑ
+	int movePtn;	// 移動ﾊﾟﾀｰﾝ
+	Vector2 pos;	// 初期座標
+	int moveAngle;	// 移動角度
+};
+
 // 敵の弾
 struct EShot
 {
@@ -68,6 +77,7 @@ struct Enemy
 	int life;		// 残り体力
 	bool drawFlag;	// 描画ﾌﾗｸﾞ
 	bool atkFlag;	// 攻撃ﾌﾗｸﾞ
+	EnemyInit initData;		// 初期配置情報
 };
 
 // extern宣言
