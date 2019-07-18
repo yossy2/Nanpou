@@ -5,7 +5,8 @@
 #include "Enemy1_b.h"
 #include <Player.h>
 
-int enemyImg1B;			// “GA‚Ì‰æ‘œID
+int enemyImg1B;				// “GA‚Ì‰æ‘œID
+void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 };	// ˆÚ“®‚Ìí—Ş
 
 						// ‰Šú‰»
 bool EnemyInit1_B(void)
@@ -42,19 +43,12 @@ void EnemyCtl1_B(void)
 			enemy1B[i].move.x = cosf((float)(enemy1B[i].moveAngle) * PI / 180.0f) * (int)ENEMY1_B_SPEED;
 			enemy1B[i].move.y = sinf((float)(enemy1B[i].moveAngle) * PI / 180.0f) * (int)ENEMY1_B_SPEED;
 
-			enemy1B[i].pos.x += enemy1B[i].move.x;
-			enemy1B[i].pos.y += enemy1B[i].move.y;
-			enemy1B[i].moveCount++;
+			(*enemyMove1B[enemy1B[i].initData.movePtn])(&enemy1B[i]);
 
 			// ‰æ–ÊŠO”»’è
 			if (isMoveOut(enemy1B[i].pos))
 			{
 				enemy1B[i].drawFlag = false;
-			}
-
-			if (enemy1B[i].moveCount % 2 == 0)
-			{
-				enemy1B[i].moveAngle++;
 			}
 		}
 	}
@@ -103,7 +97,7 @@ void ScanInitData1_B(void)
 	FileRead_gets(string, 256, file);
 
 	// ‰Šú”z’uİ’è
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < ENEMY1_B_NUM; i++)
 	{
 		FileRead_scanf(file, "%d,%d,%f,%f,%d",
 			&enemy1B[i].initData.count, &enemy1B[i].initData.movePtn,
@@ -111,5 +105,30 @@ void ScanInitData1_B(void)
 	}
 	
 	FileRead_close(file);
+}
 
+// ˆÚ“®0
+void EnemyMove1_B_0(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	enemy->moveCount++;
+
+	if (enemy->moveCount % 2 == 0)
+	{
+		enemy->moveAngle++;
+	}
+}
+
+// ˆÚ“®1
+void EnemyMove1_B_1(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	enemy->moveCount++;
+
+	if (enemy->moveCount % 2 == 0)
+	{
+		enemy->moveAngle--;
+	}
 }
