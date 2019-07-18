@@ -59,9 +59,9 @@ struct EShot
 {
 	Vector2 pos;	// À•W
 	Vector2 speed;	// ˆÚ“®—Ê
-	float moveAngle;// ˆÚ“®Šp“x(×¼Ş±İ)
+	int moveAngle;// ˆÚ“®Šp“x
 	float hitRad;	// “–‚½‚è”»’è‚Ì‰~‚Ì”¼Œa
-	int rotaAngle;	// ‰ñ“]Šp“x(“x)
+	int rotaAngle;	// ‰ñ“]Šp“x
 	int count;		// ˆÚ“®—p‚Ì¶³İÄ
 	bool flag;		// •\¦Ì×¸Ş
 };

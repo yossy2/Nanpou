@@ -102,7 +102,7 @@ void EnemyAttack1_A(Vector2 pos)
 		{
 			eShot1A[i].flag = true;
 			eShot1A[i].pos = pos;
-			eShot1A[i].moveAngle = (count - 2) * PI / 8.0f + atan2f(player.pos.y - pos.y, player.pos.x - pos.x);
+			eShot1A[i].moveAngle = (count - 2) * 22 + (int)(atan2f(player.pos.y - pos.y, player.pos.x - pos.x) * 180.0f / PI);
 			
 			count++;
 			if (count >= 5)

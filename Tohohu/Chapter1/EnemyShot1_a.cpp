@@ -43,8 +43,8 @@ void EShotCtl1_A(void)
 				eShot1A[i].count++;
 			}
 
-			eShot1A[i].speed.x = speed * cosf(eShot1A[i].moveAngle);
-			eShot1A[i].speed.y = speed * sinf(eShot1A[i].moveAngle);
+			eShot1A[i].speed.x = speed * cosf((float)eShot1A[i].moveAngle * PI / 180.0f);
+			eShot1A[i].speed.y = speed * sinf((float)eShot1A[i].moveAngle * PI / 180.0f);
 
 			eShot1A[i].pos.x += eShot1A[i].speed.x;
 			eShot1A[i].pos.y += eShot1A[i].speed.y;
