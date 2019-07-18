@@ -35,6 +35,12 @@ bool EnemyInit1_A(void)
 // 更新処理
 void EnemyCtl1_A(void)
 {
+	//// デバッグ用ﾌﾚｰﾑ数指定
+	//if (flamCnt == 0)
+	//{
+	//	flamCnt = 500;
+	//}
+
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
 		if (enemy1A[i].drawFlag)
@@ -134,10 +140,16 @@ void ScanInitData1_A(void)
 // 移動0
 void EnemyMove1_A_0(Enemy *enemy)
 {
-	enemy->pos.x += enemy->move.x;
-	enemy->pos.y += enemy->move.y;
-
-	if (enemy->moveCount == 60)
+	if (enemy->moveCount < 60 || enemy->moveCount > 150)
+	{
+		enemy->pos.x += enemy->move.x;
+		enemy->pos.y += enemy->move.y;
+	}
+	else if (enemy->moveCount == 60)
+	{
+		EnemyAttack1_A(enemy->pos);
+	}
+	else if (enemy->moveCount == 150)
 	{
 		enemy->moveAngle = (int)(atan2f(player.pos.y - enemy->pos.y, player.pos.x - enemy->pos.x) * 180 / PI);
 	}
