@@ -17,6 +17,8 @@ bool EnemyInit1_A(void)
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
 		enemy1A[i].drawFlag = false;
+		enemy1A[i].pos = enemy1A[i].initData.pos;
+		enemy1A[i].moveAngle = enemy1A[i].initData.moveAngle;
 	}
 
 	// ‰æ‘œ“Ç‚Ýž‚Ý
@@ -35,21 +37,14 @@ void EnemyCtl1_A(void)
 {
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
-		if (enemy1A[i].drawFlag && !enemy1A[i].atkFlag)
+		if (enemy1A[i].drawFlag)
 		{
-			enemy1A[i].pos.y += ENEMY1_A_SPEED;
-			
+			// ˆÚ“®—ÊŒˆ’è
+			enemy1A[i].move.x = cosf((float)(enemy1A[i].moveAngle) * PI / 180.0f) * (int)ENEMY1_A_SPEED;
+			enemy1A[i].move.y = sinf((float)(enemy1A[i].moveAngle) * PI / 180.0f) * (int)ENEMY1_A_SPEED;
 
-			if (enemy1A[i].pos.y >= 200)
-			{
-				enemy1A[i].atkFlag = true;
-				EnemyAttack1_A(enemy1A[i].pos);
-				enemy1A[i].move.x = ENEMY1_A_SPEED * (1 - 2 * (rand() % 2));
-			}
-		}
-		else if (enemy1A[i].atkFlag && ++enemy1A[i].moveCount > 60)
-		{
-			enemy1A[i].pos.x += enemy1A[i].move.x;
+			(*enemyMove1A[enemy1A[i].initData.movePtn])(&enemy1A[i]);
+			enemy1A[i].moveCount++;
 		}
 
 		// ‰æ–ÊŠO”»’è
@@ -60,19 +55,14 @@ void EnemyCtl1_A(void)
 
 	}
 
-	if (flamCnt % ENEMY1_A_INV == 0 && (flamCnt / ENEMY1_A_INV) < ENEMY1_A_NUM)
-	{
-		enemy1A[flamCnt / ENEMY1_A_INV].drawFlag = true;
-		enemy1A[flamCnt / ENEMY1_A_INV].pos.x = (float)((rand() % (GAME_SCREEN_SIZE_X - ENEMY1_A_SIZE_X)) + ENEMY1_A_SIZE_X / 2);
-		enemy1A[flamCnt / ENEMY1_A_INV].pos.y = -ENEMY1_A_SIZE_Y;
-	}
+	// “GoŒ»
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
-		if (enemy1A[i].drawFlag && player.flag)
+		if (!enemy1A[i].drawFlag)
 		{
-			if (CheckHitObj(enemy1A[i].pos, ENEMY1_A_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
+			if (enemy1A[i].initData.count == flamCnt)
 			{
-				player.flag = false;
+				enemy1A[i].drawFlag = true;
 			}
 		}
 	}
@@ -146,10 +136,9 @@ void EnemyMove1_A_0(Enemy *enemy)
 {
 	enemy->pos.x += enemy->move.x;
 	enemy->pos.y += enemy->move.y;
-	enemy->moveCount++;
 
-	if (enemy->moveCount % 2 == 0)
+	if (enemy->moveCount == 60)
 	{
-		enemy->moveAngle++;
+		enemy->moveAngle = (int)(atan2f(player.pos.y - enemy->pos.y, player.pos.x - enemy->pos.x) * 180 / PI);
 	}
 }

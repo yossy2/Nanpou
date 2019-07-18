@@ -44,6 +44,7 @@ void EnemyCtl1_B(void)
 			enemy1B[i].move.y = sinf((float)(enemy1B[i].moveAngle) * PI / 180.0f) * (int)ENEMY1_B_SPEED;
 
 			(*enemyMove1B[enemy1B[i].initData.movePtn])(&enemy1B[i]);
+			enemy1B[i].moveCount++;
 
 			// ‰æ–ÊŠO”»’è
 			if (isMoveOut(enemy1B[i].pos))
@@ -112,7 +113,6 @@ void EnemyMove1_B_0(Enemy *enemy)
 {
 	enemy->pos.x += enemy->move.x;
 	enemy->pos.y += enemy->move.y;
-	enemy->moveCount++;
 
 	if (enemy->moveCount % 2 == 0)
 	{
@@ -125,7 +125,6 @@ void EnemyMove1_B_1(Enemy *enemy)
 {
 	enemy->pos.x += enemy->move.x;
 	enemy->pos.y += enemy->move.y;
-	enemy->moveCount++;
 
 	if (enemy->moveCount % 2 == 0)
 	{

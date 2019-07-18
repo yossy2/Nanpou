@@ -2,7 +2,7 @@
 
 #define ENEMY1_A_SIZE_X 32		// “G1_A‚Ì»²½ŞX
 #define ENEMY1_A_SIZE_Y 32		// “G1_A‚Ì»²½ŞY
-#define ENEMY1_A_NUM	50		// “G1_A‚Ì”z—ñŒÂ”
+#define ENEMY1_A_NUM	10		// “G1_A‚Ì”z—ñŒÂ”
 #define ENEMY1_A_SPEED	4.0f	// “G1_A‚ÌˆÚ“®—Ê
 
 #define ENEMY1_A_MOVE_PTN_MAX 1	// “G1_A‚ÌˆÚ“®ÊßÀ°İ”
