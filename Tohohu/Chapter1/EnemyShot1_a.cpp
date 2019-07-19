@@ -43,17 +43,14 @@ void EShotCtl1_A(void)
 				eShot1A[i].count++;
 			}
 
-			eShot1A[i].speed.x = speed * cosf(eShot1A[i].moveAngle * PI / 180.0f);
-			eShot1A[i].speed.y = speed * sinf(eShot1A[i].moveAngle * PI / 180.0f);
+			eShot1A[i].move.x = speed * cosf(eShot1A[i].moveAngle * PI / 180.0f);
+			eShot1A[i].move.y = speed * sinf(eShot1A[i].moveAngle * PI / 180.0f);
 
-			eShot1A[i].pos.x += eShot1A[i].speed.x;
-			eShot1A[i].pos.y += eShot1A[i].speed.y;
+			eShot1A[i].pos.x += eShot1A[i].move.x;
+			eShot1A[i].pos.y += eShot1A[i].move.y;
 
 			// ‰æ–ÊŠO”»’è
-			if (eShot1A[i].pos.x < -(float)ESHOT1_A_SIZE_X ||
-				eShot1A[i].pos.x >(float)(GAME_SCREEN_SIZE_X + ESHOT1_A_SIZE_X) ||
-				eShot1A[i].pos.y < -(float)ESHOT1_A_SIZE_X ||
-				eShot1A[i].pos.y >(float)(GAME_SCREEN_SIZE_Y + ESHOT1_A_SIZE_X))
+			if (isMoveOut(eShot1A[i].pos))
 			{
 				eShot1A[i].flag = false;
 			}

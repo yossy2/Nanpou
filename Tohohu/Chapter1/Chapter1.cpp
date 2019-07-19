@@ -6,6 +6,7 @@
 #include "EnemyShot1_a.h"
 #include "Enemy1_b.h"
 #include "Boss1.h"
+#include "BossShot1.h"
 #include <Player.h>
 
 // 1èÕèâä˙âª
@@ -15,6 +16,7 @@ bool ChapterInit1(void)
 	EnemyInit1_B();
 	EShotInit1_A();
 	BossInit1();
+	BShotInit();
 	chapterFunc = Chapter1;
 
 	return true;
@@ -30,6 +32,7 @@ void Chapter1(void)
 		EShotCtl1_A();
 	}
 	BossCtl1();
+	BShotCtl1();
 	DrawChapter1();
 }
 
@@ -47,6 +50,7 @@ void DrawChapter1(void)
 	else
 	{
 		BossDraw1();
+		BShotDraw1();
 	}
 	
 	GameDraw();
