@@ -16,6 +16,15 @@ struct PlayerShot
 	float endPos;			// •`‰æI—¹ˆÊ’u
 };
 
+// externéŒ¾
+#ifdef PSHOT_DEF
+#define PSHOT_EX
+#else
+#define PSHOT_EX extern
+#endif
+
+PSHOT_EX PlayerShot pShot[PSHOT_NUM];		// ÌßÚ²Ô°¼®¯Ä‚ÉŠÖ‚·‚é•Ï”‚ÌéŒ¾
+
 // =============ŠÖ”ÌßÛÄÀ²ÌßéŒ¾
 void PlayerShotInit(void);		// ‰Šú‰»
 void PlayerShotFunc(void);		// ˆ—

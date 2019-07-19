@@ -1,3 +1,4 @@
+#define PSHOT_DEF
 #include <math.h>
 #include <DxLib.h>
 #include "main.h"
@@ -8,7 +9,6 @@
 int pShotImage;					// •`‰æ“o˜^—p•Ï”
 
 // ¹Ş°Ñ—p
-PlayerShot pShot[PSHOT_NUM];		// ÌßÚ²Ô°¼®¯Ä‚ÉŠÖ‚·‚é•Ï”‚ÌéŒ¾
 int pShotCnt;						// ”­ËŠÔŠuŠÇ—
 
 // ‰Šú‰»

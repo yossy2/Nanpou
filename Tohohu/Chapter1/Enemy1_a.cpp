@@ -5,6 +5,7 @@
 #include "Enemy1_a.h"
 #include "EnemyShot1_a.h"
 #include <Player.h>
+#include <PlayerShot.h>
 
 int enemyImg1A;			// “GA‚Ì‰æ‘œID
 void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1};	// ˆÚ“®‚ÌŽí—Þ
@@ -51,14 +52,27 @@ void EnemyCtl1_A(void)
 
 			(*enemyMove1A[enemy1A[i].initData.movePtn])(&enemy1A[i]);
 			enemy1A[i].moveCount++;
-		}
 
-		// ‰æ–ÊŠO”»’è
-		if (isMoveOut(enemy1A[i].pos))
-		{
-			enemy1A[i].drawFlag = false;
-		}
+			// ‰æ–ÊŠO”»’è
+			if (isMoveOut(enemy1A[i].pos))
+			{
+				enemy1A[i].drawFlag = false;
+			}
 
+			// ’e‚Æ‚Ì“–‚½‚è”»’è
+			for (int k = 0; k < PSHOT_NUM; k++)
+			{
+				if (pShot[k].flag)
+				{
+					if (CheckHitObj(pShot[k].pos, (float)PSHOT_SIZE_X / 2.0f, enemy1A[i].pos, (float)ENEMY1_A_SIZE_X / 2.0f))
+					{
+						pShot[k].flag = false;
+						enemy1A[i].drawFlag = false;
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	// “GoŒ»

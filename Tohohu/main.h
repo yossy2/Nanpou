@@ -93,5 +93,6 @@ MAIN_EX void(*sceneOldFunc)(void);	// 1ÌÚ°Ñ‘O‚ÌsceneFunc‚Ìó‘Ô
 MAIN_EX int flamCnt;				// ‚»‚Ì¼°İ‚É‚È‚Á‚Ä‚©‚ç‚ÌÌÚ°Ñ”
 
 //=======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾================================
+
 bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad);		// “–‚½‚è”»’è
-bool isMoveOut(Vector2 pos);									// ‰æ–ÊŠO”»’è
+bool isMoveOut(Vector2 pos);												// ‰æ–ÊŠO”»’è
