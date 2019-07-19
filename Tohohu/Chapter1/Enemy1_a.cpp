@@ -7,7 +7,7 @@
 #include <Player.h>
 
 int enemyImg1A;			// “GA‚Ì‰æ‘œID
-void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0};	// ˆÚ“®‚ÌŽí—Þ
+void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1};	// ˆÚ“®‚ÌŽí—Þ
 
 // ‰Šú‰»
 bool EnemyInit1_A(void)
@@ -152,5 +152,16 @@ void EnemyMove1_A_0(Enemy *enemy)
 	else if (enemy->moveCount == 150)
 	{
 		enemy->moveAngle = (int)(atan2f(player.pos.y - enemy->pos.y, player.pos.x - enemy->pos.x) * 180 / PI);
+	}
+}
+
+// ˆÚ“®1
+void EnemyMove1_A_1(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	if (enemy->moveCount == 60)
+	{
+		EnemyAttack1_A(enemy->pos);
 	}
 }
