@@ -5,6 +5,7 @@
 #include <GameScene.h>
 #include <Player.h>
 #include <Chapter1/Chapter1.h>
+#include "UiManeger.h"
 
 // ¹Ş°Ñ¼°İ‰Šú‰»
 bool GameInit(void)
@@ -14,6 +15,7 @@ bool GameInit(void)
 	srand((unsigned int)time(NULL));
 	PlayerInit();
 	ChapterInit1();
+	UiInit();
 
 	// ‰æ‘œ“Ç‚İ‚İ
 	systemImg = LoadGraph("image/system.png");
@@ -38,4 +40,5 @@ void GameDraw(void)
 {
 	// ¹Ş°Ñ‰æ–Ê˜g
 	DrawGraph(0, 0, systemImg, true);
+	DrawScore();
 }
