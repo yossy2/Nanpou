@@ -6,14 +6,14 @@
 #include "BossShot1.h"
 #include <Player.h>
 
-int bossImg1;		// âÊëúID
+int bossImg1[BOSS1_ANIM_MAX];		// âÊëúID
 int atkAngle1;		// çUåÇ1ÇÃíeÇÃî≠éÀäpìx
 
 // èâä˙âª
 bool BossInit1(void)
 {
-	bossImg1 = LoadGraph("image/boss1.png");
-	if (bossImg1 == -1)
+	if (LoadDivGraph("image/boss1_anim.png", BOSS1_ANIM_MAX, BOSS1_ANIM_MAX, 1,
+		BOSS1_SIZE_X, BOSS1_SIZE_Y, bossImg1) == -1)
 	{
 		AST();
 		return false;
@@ -23,6 +23,7 @@ bool BossInit1(void)
 	boss1.life = 100;
 	boss1.drawFlag = false;
 	boss1.moveCount = 0;
+	boss1.animCount = 0;
 
 	atkAngle1 = 90;
 
@@ -33,7 +34,7 @@ bool BossInit1(void)
 void BossCtl1(void)
 {
 	// èoåª
-	if (flamCnt == BOSS_CNT)
+	if (flamCnt == BOSS1_CNT)
 	{
 		boss1.drawFlag = true;
 	}
@@ -46,13 +47,14 @@ void BossCtl1(void)
 		}
 
 		boss1.moveCount++;
+		boss1.animCount++;
 	}
 }
 
 // ï`âÊ
 void BossDraw1(void)
 {
-	DrawRotaGraphF(boss1.pos.x,boss1.pos.y,1.0,0.0,bossImg1,true,false);
+	DrawRotaGraphF(boss1.pos.x,boss1.pos.y,1.0,0.0,bossImg1[(boss1.animCount / 10) % BOSS1_ANIM_MAX],true,false);
 }
 
 // çUåÇ ﬂ¿∞›ÇªÇÃ1ÅAâÒì]

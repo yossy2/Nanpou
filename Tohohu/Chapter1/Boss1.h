@@ -1,6 +1,10 @@
 #pragma once
 
-#define BOSS_CNT 2500		// 无絺獜o尰偡傞腾把
+#define BOSS1_CNT 2500		// 无絺獜o尰偡傞腾把
+#define BOSS1_ANIM_MAX 4	// 宿藿撞褌瘫埔凹悢
+
+#define BOSS1_SIZE_X 96		// 宿藿撞褌袒步轝
+#define BOSS1_SIZE_Y 96		// 宿藿撞褌袒步轞
 
 // extern愰尵
 #ifdef BOSS1_DEF

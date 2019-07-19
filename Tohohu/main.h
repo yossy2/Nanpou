@@ -89,6 +89,7 @@ struct Boss
 	float hitRad;	// “–‚½‚è”»’è‚Ì‰~‚Ì”¼Œa
 	float moveAngle;// ˆÚ“®Šp“x(“x)
 	int moveCount;	// ˆÚ“®‚µŽn‚ß‚Ä‚©‚ç‚Ì¶³ÝÄ
+	int animCount;	// ±ÆÒ°¼®Ý¶³ÝÄ
 	int life;		// Žc‚è‘Ì—Í
 	bool drawFlag;	// •`‰æÌ×¸Þ
 };
