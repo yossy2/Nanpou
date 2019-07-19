@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chapter1\Boss1.cpp" />
+    <ClCompile Include="Chapter1\BossShot1.cpp" />
     <ClCompile Include="Chapter1\Chapter1.cpp" />
     <ClCompile Include="Chapter1\Enemy1_a.cpp" />
     <ClCompile Include="Chapter1\EnemyShot1_a.cpp" />
@@ -152,6 +154,8 @@
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chapter1\Boss1.h" />
+    <ClInclude Include="Chapter1\BossShot1.h" />
     <ClInclude Include="Chapter1\Chapter1.h" />
     <ClInclude Include="Chapter1\Enemy1_a.h" />
     <ClInclude Include="Chapter1\EnemyShot1_a.h" />

@@ -2,6 +2,6 @@
 #include <math.h>
 #include <DxLib.h>
 #include <main.h>
-#include "Boss.h"
-#include "EnemyShot1_a.h"
+#include "Boss1.h"
+#include "BossShot1.h"
 #include <Player.h>
