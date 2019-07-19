@@ -6,6 +6,8 @@
 #define PSHOT_DEF_SPEED 20
 #define PSHOT_TIME 5
 
+#define PSHOT_HIT_RAD 8
+
 struct PlayerShot
 {
 	Vector2 pos;			// ç¿ïW

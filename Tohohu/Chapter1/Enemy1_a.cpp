@@ -37,10 +37,10 @@ bool EnemyInit1_A(void)
 void EnemyCtl1_A(void)
 {
 	// デバッグ用ﾌﾚｰﾑ数指定
-	if (flamCnt == 0)
+	/*if (flamCnt == 0)
 	{
 		flamCnt = 500;
-	}
+	}*/
 
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
@@ -64,7 +64,7 @@ void EnemyCtl1_A(void)
 			{
 				if (pShot[k].flag)
 				{
-					if (CheckHitObj(pShot[k].pos, (float)PSHOT_SIZE_X / 2.0f, enemy1A[i].pos, (float)ENEMY1_A_SIZE_X / 2.0f))
+					if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1A[i].pos, (float)ENEMY1_A_SIZE_X / 2.0f))
 					{
 						pShot[k].flag = false;
 						enemy1A[i].drawFlag = false;

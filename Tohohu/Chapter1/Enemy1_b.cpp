@@ -6,10 +6,10 @@
 #include <Player.h>
 #include <PlayerShot.h>
 
-int enemyImg1B;				// “GA‚Ì‰æ‘œID
+int enemyImg1B;				// “GB‚Ì‰æ‘œID
 void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 };	// ˆÚ“®‚Ìí—Ş
 
-						// ‰Šú‰»
+// ‰Šú‰»
 bool EnemyInit1_B(void)
 {
 	ScanInitData1_B();
@@ -58,7 +58,7 @@ void EnemyCtl1_B(void)
 			{
 				if (pShot[k].flag)
 				{
-					if (CheckHitObj(pShot[k].pos, (float)PSHOT_SIZE_X / 2.0f, enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f))
+					if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f))
 					{
 						pShot[k].flag = false;
 						enemy1B[i].drawFlag = false;
