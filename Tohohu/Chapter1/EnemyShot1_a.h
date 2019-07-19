@@ -2,8 +2,8 @@
 /*
  * 1Í“GA‚Ì’eŠÖ˜A
  */
-#define ESHOT1_A_SIZE_X 32		// ‰æ‘œ»²½ŞX
-#define ESHOT1_A_SIZE_Y 32		// ‰æ‘œ»²½ŞY
+#define ESHOT1_A_SIZE_X 16		// ‰æ‘œ»²½ŞX
+#define ESHOT1_A_SIZE_Y 16		// ‰æ‘œ»²½ŞY
 #define ESHOT1_A_NUM 250		// ”z—ñ‚ÌŒÂ”
 #define ESHOT1_A_DEF_SPEED 4.0f	// Šî–{ˆÚ“®—Ê
 #define ESHOT1_A_MAX_SPEED 8.0f	// Å‘åˆÚ“®—Ê
