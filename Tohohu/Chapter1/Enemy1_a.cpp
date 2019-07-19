@@ -8,7 +8,7 @@
 #include <PlayerShot.h>
 
 int enemyImg1A;			// 敵Aの画像ID
-void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1};	// 移動の種類
+void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1, EnemyMove1_A_2, EnemyMove1_A_3 , EnemyMove1_A_4 };	// 移動の種類
 
 // 初期化
 bool EnemyInit1_A(void)
@@ -36,11 +36,11 @@ bool EnemyInit1_A(void)
 // 更新処理
 void EnemyCtl1_A(void)
 {
-	//// デバッグ用ﾌﾚｰﾑ数指定
-	//if (flamCnt == 0)
-	//{
-	//	flamCnt = 500;
-	//}
+	// デバッグ用ﾌﾚｰﾑ数指定
+	if (flamCnt == 0)
+	{
+		flamCnt = 500;
+	}
 
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
@@ -177,5 +177,45 @@ void EnemyMove1_A_1(Enemy *enemy)
 	if (enemy->moveCount == 60)
 	{
 		EnemyAttack1_A(enemy->pos);
+	}
+}
+
+// 移動2
+void EnemyMove1_A_2(Enemy *enemy)
+{
+	if (enemy->moveCount < 60 || enemy->moveCount > 180)
+	{
+		enemy->pos.x += enemy->move.x;
+		enemy->pos.y += enemy->move.y;
+	}
+	else if (enemy->moveCount == 150)
+	{
+		EnemyAttack1_A(enemy->pos);
+	}
+}
+
+// 移動3
+void EnemyMove1_A_3(Enemy *enemy)
+{
+	if (enemy->moveCount < 50)
+	{
+		enemy->pos.x -= ENEMY1_A_SPEED;
+	}
+	else if (enemy->moveCount > 100)
+	{
+		enemy->pos.y -= ENEMY1_A_SPEED;
+	}
+}
+
+// 移動4
+void EnemyMove1_A_4(Enemy *enemy)
+{
+	if (enemy->moveCount < 50)
+	{
+		enemy->pos.x += ENEMY1_A_SPEED;
+	}
+	else if (enemy->moveCount > 100)
+	{
+		enemy->pos.y -= ENEMY1_A_SPEED;
 	}
 }
