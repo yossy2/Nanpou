@@ -36,12 +36,6 @@ bool EnemyInit1_A(void)
 // 更新処理
 void EnemyCtl1_A(void)
 {
-	// デバッグ用ﾌﾚｰﾑ数指定
-	/*if (flamCnt == 0)
-	{
-		flamCnt = 500;
-	}*/
-
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
 		if (enemy1A[i].drawFlag)
@@ -112,7 +106,8 @@ void EnemyAttack1_A(Vector2 pos)
 		{
 			eShot1A[i].flag = true;
 			eShot1A[i].pos = pos;
-			eShot1A[i].moveAngle = (count - 2) * PI / 8.0f + atan2f(player.pos.y - pos.y, player.pos.x - pos.x);
+			eShot1A[i].count = 0;
+			eShot1A[i].moveAngle = (int)((count - 2) * 25 + atan2f(player.pos.y - pos.y, player.pos.x - pos.x) * 180.0f / PI);
 			
 			count++;
 			if (count >= 5)
@@ -188,7 +183,7 @@ void EnemyMove1_A_2(Enemy *enemy)
 		enemy->pos.x += enemy->move.x;
 		enemy->pos.y += enemy->move.y;
 	}
-	else if (enemy->moveCount == 150)
+	else if (enemy->moveCount == 100)
 	{
 		EnemyAttack1_A(enemy->pos);
 	}

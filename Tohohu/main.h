@@ -59,7 +59,7 @@ struct EShot
 {
 	Vector2 pos;	// 座標
 	Vector2 speed;	// 移動量
-	float moveAngle;// 移動角度(ﾗｼﾞｱﾝ)
+	int moveAngle;  // 移動角度
 	float hitRad;	// 当たり判定の円の半径
 	int rotaAngle;	// 回転角度(度)
 	int count;		// 移動用のｶｳﾝﾄ
@@ -72,12 +72,24 @@ struct Enemy
 	Vector2 pos;	// 座標
 	Vector2 move;	// 移動量
 	float hitRad;	// 当たり判定の円の半径
-	float moveAngle;// 移動角度(度)
+	int moveAngle;// 移動角度(度)
 	int moveCount;// 移動し始めてからのｶｳﾝﾄ
 	int life;		// 残り体力
 	bool drawFlag;	// 描画ﾌﾗｸﾞ
 	bool atkFlag;	// 攻撃ﾌﾗｸﾞ
 	EnemyInit initData;		// 初期配置情報
+};
+
+// ﾎﾞｽ
+struct Boss
+{
+	Vector2 pos;	// 座標
+	Vector2 move;	// 移動量
+	float hitRad;	// 当たり判定の円の半径
+	float moveAngle;// 移動角度(度)
+	int moveCount;	// 移動し始めてからのｶｳﾝﾄ
+	int life;		// 残り体力
+	bool drawFlag;	// 描画ﾌﾗｸﾞ
 };
 
 // extern宣言
