@@ -13,7 +13,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return -1;
 	}
 
-	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
+	while (!ProcessMessage() && keyFram[KEY_INPUT_ESCAPE] == 0)
 	{
 		// Ã⁄∞—∂≥›ƒä«óù
 		if (sceneOldFunc != sceneFunc)

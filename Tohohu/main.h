@@ -102,11 +102,11 @@ struct Boss
 #endif
 
 MAIN_EX void(*sceneFunc)(void);		// ¼°İŠÇ——pŠÖ”Îß²İÀ
-MAIN_EX void(*sceneOldFunc)(void);	// 1ÌÚ°Ñ‘O‚ÌsceneFunc‚Ìó‘Ô
+MAIN_EX void(*sceneOldFunc)(void);		// 1ÌÚ°Ñ‘O‚ÌsceneFunc‚Ìó‘Ô
 
-MAIN_EX int framCnt;				// ‚»‚Ì¼°İ‚É‚È‚Á‚Ä‚©‚ç‚ÌÌÚ°Ñ”
+MAIN_EX int framCnt;					// ‚»‚Ì¼°İ‚É‚È‚Á‚Ä‚©‚ç‚ÌÌÚ°Ñ”
 
-MAIN_EX int keyFram[256];			// ·°‚Ì‰Ÿ‰ºó‘Ô•Û‘¶
+MAIN_EX int keyFram[256];				// ·°‚Ì‰Ÿ‰ºó‘Ô•Û‘¶
 
 //=======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾================================
 

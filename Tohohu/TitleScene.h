@@ -1,8 +1,15 @@
 #pragma once
 
-#define MENU_NUM 3
 #define MENU_IMAGE_SIZE_X 300
 #define MENU_IMAGE_SIZE_Y 64
+
+enum MENU_ID
+{
+	GAMESTART_ID,
+	CONFIG_ID,
+	EXIT_ID,
+	MENU_ID_MAX
+};
 
 bool TitleInit(void);		// ю╡ды╪╟щ▐┴┼З┴╩
 void TitleScene(void);		// ю╡ды╪╟щ▐┬≈²

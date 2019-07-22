@@ -25,6 +25,8 @@ bool GameInit(void)
 		rtnFlag = false;
 	}
 
+	sceneFunc = GameScene;
+
 	return rtnFlag;
 }
 
