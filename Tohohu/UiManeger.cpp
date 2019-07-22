@@ -7,6 +7,7 @@
 int highScoreImage;			// Ê²½º±—p
 int scoreImage;				// ½º±—p
 int scoreNumImage[SCORE_NUM];			// ½º±”š—p
+int playerLife[PLAYER_LIFE_STATS];
 
 // ‰Šú‰»
 void UiInit(void)
@@ -24,7 +25,15 @@ void UiInit(void)
 	}
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
-		if (LoadDivGraph("image/scorenum.png", SCORE_NUM, SCORE_NUM, 1, SCORE_NUM_SIZE_X, SCORE_NUM_SIZE_Y, scoreNumImage))
+		if (LoadDivGraph("image/scorenum.png", SCORE_NUM, SCORE_NUM, 1, SCORE_NUM_SIZE_X, SCORE_NUM_SIZE_Y, scoreNumImage) == -1)
+		{
+			AST();
+			return;
+		}
+	}
+	for (int i = 0; i < PLAYER_LIFE_STATS; i++)
+	{
+		if (LoadDivGraph("image/playerlife.png", PLAYER_LIFE_STATS, PLAYER_LIFE_STATS, 1, PLLIFE_SIZE_X, PLLIFE_SIZE_Y, playerLife) == -1)
 		{
 			AST();
 			return;
@@ -50,5 +59,9 @@ void DrawScore(void)
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
 		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[i], true);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, playerLife[1], true);
 	}
 }
