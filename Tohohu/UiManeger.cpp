@@ -1,7 +1,8 @@
 #include <DxLib.h>
 #include "main.h"
-#include "UiManeger.h"
 #include "GameScene.h"
+#include "UiManeger.h"
+#include "Player.h"
 
 // =================ïœêîíËã`
 int highScoreImage;			//  ≤Ω∫±óp
@@ -60,7 +61,7 @@ void DrawScore(void)
 	{
 		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[i], true);
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < PLAYER_DEF_LIFE; i++)
 	{
 		DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, playerLife[1], true);
 	}

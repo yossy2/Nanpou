@@ -1,11 +1,13 @@
 #pragma once
 
-#define PLAYER_SIZE_X 48
-#define PLAYER_SIZE_Y 48
+#define PLAYER_SIZE_X 48			// ｲﾒｰｼﾞのｻｲｽﾞX
+#define PLAYER_SIZE_Y 48			// ｲﾒｰｼﾞのｻｲｽﾞY
 
-#define PLAYER_DEF_SPEED 6
+#define PLAYER_DEF_SPEED 6			// ﾃﾞﾌｫﾙﾄの速さ
 
-#define PLAYER_HIT_RAD 3
+#define PLAYER_HIT_RAD 3			// 当たり判定の範囲
+
+#define PLAYER_DEF_LIFE 5			// ﾃﾞﾌｫﾙﾄの残機数
 
 // enum定義
 // ﾌﾟﾚｲﾔｰID
@@ -24,6 +26,7 @@ struct Player
 	float speed;		// 速さ
 	float moveAngle;	// 移動角度
 	bool flag;			// 描画管理
+	int life;			// 残機
 };
 
 struct KeyList

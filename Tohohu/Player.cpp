@@ -11,6 +11,7 @@ bool PlayerInit(void)
 	player.pos.x = (float)(GAME_SCREEN_SIZE_X) / 2.0f;
 	player.pos.y = (float)(GAME_SCREEN_SIZE_Y - PLAYER_SIZE_Y/2);
 	player.speed = PLAYER_DEF_SPEED;
+	player.life = PLAYER_DEF_LIFE;
 	player.flag = true;
 
 	// ∑∞ê›íË
