@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "main.h"
 #include "Init.h"
+#include "TitleScene.h"
 #include "GameScene.h"
 
 // ¼½ÃÑŒn‰Šú‰»
@@ -30,6 +31,7 @@ bool SysInit(void)
 		keyFram[i] = 0;
 	}
 
+	TitleInit();
 	GameInit();
 
 	return rtnFlag;
