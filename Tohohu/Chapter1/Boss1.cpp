@@ -19,7 +19,7 @@ bool BossInit1(void)
 		return false;
 	}
 
-	boss1.pos = { 340.0f,300.0f };
+	boss1.pos = { 320.0f,300.0f };
 	boss1.life = 100;
 	boss1.drawFlag = false;
 	boss1.moveCount = 0;
@@ -54,7 +54,7 @@ void BossCtl1(void)
 // ï`âÊ
 void BossDraw1(void)
 {
-	DrawRotaGraphF(boss1.pos.x,boss1.pos.y,1.0,0.0,bossImg1[(boss1.animCount / 10) % BOSS1_ANIM_MAX],true,false);
+	DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X,boss1.pos.y + GAME_SCREEN_Y,1.0,0.0,bossImg1[(boss1.animCount / 10) % BOSS1_ANIM_MAX],true,false);
 }
 
 // çUåÇ ﬂ¿∞›ÇªÇÃ1ÅAâÒì]

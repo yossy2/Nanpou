@@ -2,6 +2,10 @@
 
 #define BSHOT1_NUM 1000		// ËŞ¯¸Ş½×²Ñ‚Ì’e”
 
+#define BSHOT1_SIZE_X 16	// ËŞ¯¸Ş½×²Ñ‚Ì’e‚Ì»²½ŞX
+#define BSHOT1_SIZE_Y 16	// ËŞ¯¸Ş½×²Ñ‚Ì’e‚Ì»²½ŞY
+
+
 // externéŒ¾
 #ifdef BSHOT1_DEF
 #define BSHOT1_EX

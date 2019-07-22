@@ -39,6 +39,15 @@ void BShotCtl1(void)
 			bShot1[i].pos.x += bShot1[i].move.x;
 			bShot1[i].pos.y += bShot1[i].move.y;
 
+			if (player.flag)
+			{
+				if (CheckHitObj(bShot1[i].pos, BSHOT1_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
+				{
+					PlayerDamage();
+					bShot1[i].flag = false;
+				}
+			}
+
 			// ‰æ–ÊŠO”»’è
 			if (isMoveOut(bShot1[i].pos))
 			{
@@ -55,7 +64,7 @@ void BShotDraw1(void)
 	{
 		if (bShot1[i].flag)
 		{
-			DrawRotaGraph(bShot1[i].pos.x, bShot1[i].pos.y, 1.0, (double)((float)bShot1[i].rotaAngle * PI / 180.0f), bShotImg1, true, false);
+			DrawRotaGraphF(bShot1[i].pos.x + GAME_SCREEN_X, bShot1[i].pos.y + GAME_SCREEN_Y, 1.0, (double)((float)bShot1[i].rotaAngle * PI / 180.0f), bShotImg1, true, false);
 		}
 	}
 }

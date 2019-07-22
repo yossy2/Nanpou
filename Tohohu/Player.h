@@ -5,7 +5,7 @@
 
 #define PLAYER_DEF_SPEED 6			// ﾃﾞﾌｫﾙﾄの速さ
 
-#define PLAYER_HIT_RAD 3			// 当たり判定の範囲
+#define PLAYER_HIT_RAD 3.0f			// 当たり判定の範囲
 
 #define PLAYER_DEF_LIFE 5			// ﾃﾞﾌｫﾙﾄの残機数
 
@@ -55,3 +55,5 @@ void PlayerCtl(void);		// 自機の処理
 void PlayerDraw(void);		// 自機の描画
 	
 void PlayerMove(void);		// 自機の移動処理
+void PlayerDamage(void);	// ﾀﾞﾒｰｼﾞを受けたときの処理
+

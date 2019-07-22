@@ -241,3 +241,12 @@ void PlayerMove(void)
 		player.pos.y += player.move.y;
 	}
 }
+
+// ÀŞÒ°¼Ş‚ğó‚¯‚½‚Æ‚«‚Ìˆ—
+void PlayerDamage(void)
+{
+	if (--player.life <= 0 && player.flag)
+	{
+		player.flag = false;
+	}
+}

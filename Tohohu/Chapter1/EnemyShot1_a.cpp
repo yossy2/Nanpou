@@ -63,7 +63,7 @@ void EShotCtl1_A(void)
 		{
 			if (CheckHitObj(eShot1A[i].pos, ESHOT1_A_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
 			{
-				player.flag = false;
+				PlayerDamage();
 				eShot1A[i].flag = false;
 			}
 		}
