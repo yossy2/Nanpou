@@ -18,12 +18,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// ÌÚ°Ñ¶³İÄŠÇ—
 		if (sceneOldFunc != sceneFunc)
 		{
-			flamCnt = 2400;
+			framCnt = 2400;
 		}
 		sceneOldFunc = sceneFunc;
 
+		UpdateKeyState();
+
 		sceneFunc();
-		flamCnt++;
+		framCnt++;
 	}
 
 	DxLib_End();
@@ -60,4 +62,23 @@ bool isMoveOut(Vector2 pos)
 	}
 
 	return false;
+}
+
+// ·°‰Ÿ‰ºó‘ÔXV
+void UpdateKeyState(void)
+{
+	char tmpKey[256];
+	GetHitKeyStateAll(tmpKey);
+
+	for (int i = 0; i < 256; i++)
+	{
+		if (tmpKey[i])
+		{
+			keyFram[i]++;
+		}
+		else
+		{
+			keyFram[i] = 0;
+		}
+	}
 }

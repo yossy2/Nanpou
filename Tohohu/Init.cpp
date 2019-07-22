@@ -23,7 +23,12 @@ bool SysInit(void)
 
 	// •Ï”‰Šú‰»
 	sceneFunc = GameScene;
-	flamCnt = 0;
+	framCnt = 0;
+
+	for (int i = 0; i < 256; i++)
+	{
+		keyFram[i] = 0;
+	}
 
 	GameInit();
 

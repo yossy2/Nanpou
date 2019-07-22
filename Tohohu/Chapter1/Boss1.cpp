@@ -34,7 +34,7 @@ bool BossInit1(void)
 void BossCtl1(void)
 {
 	// èoåª
-	if (flamCnt == BOSS1_CNT)
+	if (framCnt == BOSS1_CNT)
 	{
 		boss1.drawFlag = true;
 	}

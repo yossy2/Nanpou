@@ -65,7 +65,7 @@ void PlayerShotMove(void)
 			}
 		}
 	}
-	if (!CheckHitKey(keyList.shot) || pShotCnt < PSHOT_TIME || !player.flag)
+	if (keyFram[keyList.shot] == 0 || pShotCnt < PSHOT_TIME || !player.flag)
 	{
 		return;
 	}

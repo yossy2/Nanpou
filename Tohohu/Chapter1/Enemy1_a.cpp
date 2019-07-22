@@ -74,7 +74,7 @@ void EnemyCtl1_A(void)
 	{
 		if (!enemy1A[i].drawFlag)
 		{
-			if (enemy1A[i].initData.count == flamCnt)
+			if (enemy1A[i].initData.count == framCnt)
 			{
 				enemy1A[i].drawFlag = true;
 			}

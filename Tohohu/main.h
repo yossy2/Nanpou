@@ -104,9 +104,12 @@ struct Boss
 MAIN_EX void(*sceneFunc)(void);		// ｼｰﾝ管理用関数ﾎﾟｲﾝﾀ
 MAIN_EX void(*sceneOldFunc)(void);	// 1ﾌﾚｰﾑ前のsceneFuncの状態
 
-MAIN_EX int flamCnt;				// そのｼｰﾝになってからのﾌﾚｰﾑ数
+MAIN_EX int framCnt;				// そのｼｰﾝになってからのﾌﾚｰﾑ数
+
+MAIN_EX int keyFram[256];			// ｷｰの押下状態保存
 
 //=======================関数ﾌﾟﾛﾄﾀｲﾌﾟ宣言================================
 
 bool CheckHitObj(Vector2 aPos, float arad, Vector2 bPos, float brad);		// 当たり判定
 bool isMoveOut(Vector2 pos);												// 画面外判定
+void UpdateKeyState(void);													// ｷｰ押下状態更新

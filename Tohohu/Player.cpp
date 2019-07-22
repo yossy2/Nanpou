@@ -55,7 +55,7 @@ void PlayerDraw(void)
 void PlayerMove(void)
 {
 	// ========== 低速ﾓｰﾄﾞ判定
-	if (CheckHitKey(keyList.slow))
+	if (keyFram[keyList.slow])
 	{
 		player.speed = PLAYER_DEF_SPEED / 2;
 	}
@@ -66,12 +66,12 @@ void PlayerMove(void)
 
 	// ==========移動角度決定
 	// 右移動
-	if (CheckHitKey(keyList.move[DIR_RIGHT]))
+	if (keyFram[keyList.move[DIR_RIGHT]])
 	{
-		if (CheckHitKey(keyList.move[DIR_UP]) && !CheckHitKey(keyList.move[DIR_DOWN]))
+		if (keyFram[keyList.move[DIR_UP]] && keyFram[keyList.move[DIR_DOWN]] == 0)
 		{
 			// 上下ｷｰの内上だけ押されていた場合
-			if (!CheckHitKey(keyList.move[DIR_LEFT]))
+			if (keyFram[keyList.move[DIR_LEFT]] == 0)
 			{
 				// 左が押されていなかったら右上移動
 				player.moveAngle = -PI / 4.0f;
@@ -82,10 +82,10 @@ void PlayerMove(void)
 				player.moveAngle = -PI / 2.0f;
 			}
 		}
-		else if (CheckHitKey(keyList.move[DIR_DOWN]))
+		else if (keyFram[keyList.move[DIR_DOWN]])
 		{
 			// 下が押されていた時
-			if (!CheckHitKey(keyList.move[DIR_LEFT]))
+			if (keyFram[keyList.move[DIR_LEFT]] == 0)
 			{
 				// 左が押されていなかったら右下移動
 				player.moveAngle = PI / 4.0f;
@@ -96,7 +96,7 @@ void PlayerMove(void)
 				player.moveAngle = PI / 2.0f;
 			}
 		}
-		else if (!CheckHitKey(keyList.move[DIR_LEFT]))
+		else if (keyFram[keyList.move[DIR_LEFT]] == 0)
 		{
 			// 右だけ押されていた時右移動（2π）
 			player.moveAngle = PI * 2.0f;
@@ -108,14 +108,14 @@ void PlayerMove(void)
 		}
 	}
 	// 左移動
-	else if (CheckHitKey(keyList.move[DIR_LEFT]))
+	else if (keyFram[keyList.move[DIR_LEFT]])
 	{
-		if (CheckHitKey(keyList.move[DIR_UP]) && !CheckHitKey(keyList.move[DIR_DOWN]))
+		if (keyFram[keyList.move[DIR_UP]] && keyFram[keyList.move[DIR_DOWN]] == 0)
 		{
 			// 上下ｷｰの内上だけ押されていた場合左上移動
 			player.moveAngle = -PI * 3.0f / 4.0f;
 		}
-		else if (CheckHitKey(keyList.move[DIR_DOWN]))
+		else if (keyFram[keyList.move[DIR_DOWN]])
 		{
 			// 下が押されていた時左下移動
 			player.moveAngle = PI * 3.0f / 4.0f;
@@ -127,9 +127,9 @@ void PlayerMove(void)
 		}
 	}
 	// 上移動
-	else if (CheckHitKey(keyList.move[DIR_UP]))
+	else if (keyFram[keyList.move[DIR_UP]])
 	{
-		if (!CheckHitKey(keyList.move[DIR_DOWN]))
+		if (keyFram[keyList.move[DIR_DOWN]] == 0)
 		{
 			//上だけ押されていたら上移動
 			player.moveAngle = -PI / 2.0f;
@@ -141,7 +141,7 @@ void PlayerMove(void)
 		}
 	}
 	// 下移動
-	else if (CheckHitKey(keyList.move[DIR_DOWN]))
+	else if (keyFram[keyList.move[DIR_DOWN]])
 	{
 		// 下だけ押されていたら下移動
 		player.moveAngle = PI / 2.0f;
