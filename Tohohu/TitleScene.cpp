@@ -2,11 +2,12 @@
 #include "main.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "Player.h"
 
 // ²Ò°¼Þ—p
 int titleBgImage;					// À²ÄÙ‚Ì”wŒi
 int menuImage[MENU_ID_MAX];		// ÒÆ­°ˆê——
-int menuGuideImage;				// ÒÆ­°‚Ì¶Þ²ÄÞ×²Ý
+int menuWakuImage[MENU_ID_MAX];	// ÒÆ­°‚Ì˜g
 
 // ²Ò°¼Þ‚ÌŠg‘å—p
 float rate;
@@ -38,12 +39,16 @@ bool TitleInit(void)
 	}
 
 	// ÒÆ­°‚Ì˜g
-	if ((menuGuideImage = LoadGraph("image/menuguideline.png")) == -1)
+	for (int i = 0; i < MENU_ID_MAX; i++)
 	{
-		AST();
-		rtnFlag = false;
+		if (LoadDivGraph("image/menuwaku.png", MENU_ID_MAX, 1, MENU_ID_MAX, MENUWAKU_SIZE_X, MENUWAKU_SIZE_Y, menuWakuImage) == -1)
+		{
+			AST();
+			rtnFlag = false;
+		}
 	}
 
+	PlayerInit();
 	rate = 1.0f;
 	rateFlag = true;
 
@@ -74,7 +79,7 @@ void TitleScene(void)
 
 	TitleDraw();
 
-	if (keyFram[KEY_INPUT_RETURN] == 1)
+	if (keyFram[KEY_INPUT_Z] == 1)
 	{
 		switch (menuID)
 		{
@@ -97,15 +102,15 @@ void TitleScene(void)
 // À²ÄÙ¼°Ý•`‰æ
 void TitleDraw(void)
 {
-	if (framCnt % 3 == 0 && rateFlag)
+	if (framCnt % 4 == 0 && rateFlag)
 	{
 		rate -= 0.01;
-		if (rate < 0.8)
+		if (rate <= 0.8)
 		{
 			rateFlag = false;
 		}
 	}
-	else if (framCnt % 3 == 0 && !rateFlag)
+	else if (framCnt % 4 == 0 && !rateFlag)
 	{
 		rate += 0.01;
 		if (rate >= 1.0)
@@ -120,6 +125,7 @@ void TitleDraw(void)
 
 	for (int i = 0; i < MENU_ID_MAX; i++)
 	{
+		DrawGraph((SCREEN_SIZE_X - MENU_IMAGE_SIZE_X) / 2 - (MENUWAKU_SIZE_X - MENU_IMAGE_SIZE_X) / 2, 400 + ((MENU_IMAGE_SIZE_Y + 20) * i) - ((MENUWAKU_SIZE_Y - MENU_IMAGE_SIZE_Y) / 2), menuWakuImage[i], true);
 		if (menuID != i)
 		{
 			DrawGraph((SCREEN_SIZE_X - MENU_IMAGE_SIZE_X) / 2, 400 + ((MENU_IMAGE_SIZE_Y + 20) * i), menuImage[i], true);
@@ -127,8 +133,6 @@ void TitleDraw(void)
 	}
 
 	DrawRotaGraph(SCREEN_SIZE_X / 2, 400 + MENU_IMAGE_SIZE_Y / 2 + ((MENU_IMAGE_SIZE_Y + 20) * menuID), rate, 0.0f, menuImage[menuID], true, false);
-
-	DrawGraph((SCREEN_SIZE_X - MENU_IMAGE_SIZE_X) / 2, 400 + ((MENU_IMAGE_SIZE_Y + 20) * menuID), menuGuideImage, true);
 
 	ScreenFlip();
 }

@@ -3,6 +3,9 @@
 #define MENU_IMAGE_SIZE_X 300
 #define MENU_IMAGE_SIZE_Y 64
 
+#define MENUWAKU_SIZE_X 350
+#define MENUWAKU_SIZE_Y 75
+
 enum MENU_ID
 {
 	GAMESTART_ID,
