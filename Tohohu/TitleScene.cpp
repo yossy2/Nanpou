@@ -8,6 +8,7 @@
 int titleBgImage;					// ¿≤ƒŸÇÃîwåi
 int menuImage[MENU_ID_MAX];		// “∆≠∞àÍóó
 int menuWakuImage[MENU_ID_MAX];	// “∆≠∞ÇÃòg
+int configImage;					// ∑∞∫›Ã®∏ﬁ(ëÄçÏê‡ñæ)
 
 // ≤“∞ºﬁÇÃägëÂóp
 float rate;
@@ -15,6 +16,7 @@ bool rateFlag;
 
 // “∆≠∞ä÷òA
 MENU_ID menuID;						// “∆≠∞ÇÃä«óù
+bool configFlag;
 
 // ¿≤ƒŸº∞›èâä˙âª
 bool TitleInit(void)
@@ -48,6 +50,14 @@ bool TitleInit(void)
 		}
 	}
 
+	// ∫›Ã®∏ﬁ
+	if ((configImage = LoadGraph("image/config.png")) == -1)
+	{
+		AST();
+		rtnFlag = false;
+	}
+	configFlag = false;
+
 	PlayerInit();
 	rate = 1.0f;
 	rateFlag = true;
@@ -58,28 +68,31 @@ bool TitleInit(void)
 // ¿≤ƒŸº∞›èàóù
 void TitleScene(void)
 {
-	if (keyFram[KEY_INPUT_UP] == 1)
+	if (!configFlag)
 	{
-		menuID = (MENU_ID)(menuID - 1);
-		if (menuID < 0)
+		if (keyFram[KEY_INPUT_UP] == 1)
 		{
-			menuID = EXIT_ID;
+			menuID = (MENU_ID)(menuID - 1);
+			if (menuID < 0)
+			{
+				menuID = EXIT_ID;
+			}
+			rate = 1.0f;
 		}
-		rate = 1.0f;
-	}
-	else if (keyFram[KEY_INPUT_DOWN] == 1)
-	{
-		menuID = (MENU_ID)(menuID + 1);
-		if (menuID >= MENU_ID_MAX)
+		else if (keyFram[KEY_INPUT_DOWN] == 1)
 		{
-			menuID = GAMESTART_ID;
+			menuID = (MENU_ID)(menuID + 1);
+			if (menuID >= MENU_ID_MAX)
+			{
+				menuID = GAMESTART_ID;
+			}
+			rate = 1.0f;
 		}
-		rate = 1.0f;
 	}
 
 	TitleDraw();
 
-	if (keyFram[KEY_INPUT_Z] == 1)
+	if (keyFram[keyList.shot] == 1)
 	{
 		switch (menuID)
 		{
@@ -87,6 +100,7 @@ void TitleScene(void)
 			GameInit();
 			break;
 		case CONFIG_ID:
+			configFlag = true;
 			break;
 		case EXIT_ID:
 			keyFram[KEY_INPUT_ESCAPE] = 1;
@@ -133,6 +147,18 @@ void TitleDraw(void)
 	}
 
 	DrawRotaGraph(SCREEN_SIZE_X / 2, 400 + MENU_IMAGE_SIZE_Y / 2 + ((MENU_IMAGE_SIZE_Y + 20) * menuID), rate, 0.0f, menuImage[menuID], true, false);
+
+	if (configFlag)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
+		DrawBox(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, GetColor(0, 0, 0), true);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		DrawGraph(0, 0, configImage, true);
+		if (keyFram[KEY_INPUT_X] == 1)
+		{
+			configFlag = false;
+		}
+	}
 
 	ScreenFlip();
 }
