@@ -7,7 +7,7 @@
 #include <Player.h>
 #include <PlayerShot.h>
 
-int enemyImg1A;			// “GA‚Ì‰æ‘œID
+int enemyImg1A[ENEMY1_A_ANIM_MAX];			// “GA‚Ì‰æ‘œID
 void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1, EnemyMove1_A_2, EnemyMove1_A_3 , EnemyMove1_A_4 };	// ˆÚ“®‚Ìí—Ş
 
 // ‰Šú‰»
@@ -23,8 +23,9 @@ bool EnemyInit1_A(void)
 	}
 
 	// ‰æ‘œ“Ç‚İ‚İ
-	enemyImg1A = LoadGraph("image/enemy1_A.png");
-	if (enemyImg1A == -1)
+	if (LoadDivGraph("image/enemy1_A_anim.png",
+		ENEMY1_A_ANIM_MAX, ENEMY1_A_ANIM_MAX, 1,
+		ENEMY1_A_SIZE_X, ENEMY1_A_SIZE_Y, enemyImg1A) == -1)
 	{
 		AST();
 		return false;
@@ -90,7 +91,8 @@ void DrawEnemy1_A(void)
 		if (enemy1A[i].drawFlag)
 		{
 			DrawRotaGraphF(enemy1A[i].pos.x + GAME_SCREEN_X, enemy1A[i].pos.y + GAME_SCREEN_Y,
-				1.0, 0.0, enemyImg1A, true, false);
+				1.0, 0.0, enemyImg1A[(enemy1A[i].animCount / 10) % ENEMY1_A_ANIM_MAX], true, false);
+			enemy1A[i].animCount++;
 		}
 	}
 }

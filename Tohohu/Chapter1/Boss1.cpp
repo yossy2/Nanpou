@@ -180,6 +180,7 @@ void BossAtk1_4(void)
 			enemy1B[i].initData.movePtn = 2;
 			enemy1B[i].moveCount = rand() % 180;
 			enemy1B[i].drawFlag = true;
+			enemy1B[i].animCount = 0;
 			break;
 		}
 	}

@@ -78,6 +78,7 @@ struct Enemy
 	float hitRad;	// “–‚½‚è”»’è‚Ì‰~‚Ì”¼Œa
 	int moveAngle;	// ˆÚ“®Šp“x(“x)
 	int moveCount;	// ˆÚ“®‚µn‚ß‚Ä‚©‚ç‚Ì¶³İÄ
+	int animCount;	// ±ÆÒ°¼®İ¶³İÄ
 	int life;		// c‚è‘Ì—Í
 	bool drawFlag;	// •`‰æÌ×¸Ş
 	bool atkFlag;	// UŒ‚Ì×¸Ş

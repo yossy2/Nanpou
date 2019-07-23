@@ -6,7 +6,7 @@
 #include <Player.h>
 #include <PlayerShot.h>
 
-int enemyImg1B;				// “GB‚Ì‰æ‘œID
+int enemyImg1B[ENEMY1_B_ANIM_MAX];				// “GB‚Ì‰æ‘œID
 void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 ,EnemyMove1_B_2};	// ˆÚ“®‚Ìí—Ş
 
 // ‰Šú‰»
@@ -22,8 +22,9 @@ bool EnemyInit1_B(void)
 	}
 
 	// ‰æ‘œ“Ç‚İ‚İ
-	enemyImg1B = LoadGraph("image/enemy1_B.png");
-	if (enemyImg1B == -1)
+	if (LoadDivGraph("image/enemy1_B_anim.png", 
+					  ENEMY1_B_ANIM_MAX, ENEMY1_B_ANIM_MAX, 1,
+					  ENEMY1_B_SIZE_X, ENEMY1_B_SIZE_Y, enemyImg1B) == -1)
 	{
 		AST();
 		return false;
@@ -82,6 +83,7 @@ void EnemyCtl1_B(void)
 			if (enemy1B[i].initData.count == framCnt)
 			{
 				enemy1B[i].drawFlag = true;
+				enemy1B[i].animCount = 0;
 			}
 		}
 	}
@@ -95,7 +97,8 @@ void DrawEnemy1_B(void)
 		if (enemy1B[i].drawFlag)
 		{
 			DrawRotaGraphF(enemy1B[i].pos.x + GAME_SCREEN_X, enemy1B[i].pos.y + GAME_SCREEN_Y,
-				1.0, 0.0, enemyImg1B, true, false);
+				1.0, 0.0, enemyImg1B[(enemy1B[i].animCount / 5) % ENEMY1_B_ANIM_MAX], true, false);
+			enemy1B[i].animCount++;
 		}
 	}
 }

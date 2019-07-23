@@ -6,6 +6,7 @@
 #define ENEMY1_A_SPEED	4.0f	// “G1_A‚ÌˆÚ“®—Ê
 
 #define ENEMY1_A_MOVE_PTN_MAX 5	// “G1_A‚ÌˆÚ“®ÊßÀ°İ”
+#define ENEMY1_A_ANIM_MAX 4		// “G1_A‚Ì±ÆÒ°¼®İ”
 
 #define ENEMY1_A_INV 20			// “G1_A‚ÌoŒ»ŠÔŠu
 
