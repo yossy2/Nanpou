@@ -2,6 +2,7 @@
 #include "main.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "Player.h"
 
 // ²Ò°¼Þ—p
 int titleBgImage;					// À²ÄÙ‚Ì”wŒi
@@ -44,6 +45,7 @@ bool TitleInit(void)
 		rtnFlag = false;
 	}
 
+	PlayerInit();
 	rate = 1.0f;
 	rateFlag = true;
 
@@ -74,7 +76,7 @@ void TitleScene(void)
 
 	TitleDraw();
 
-	if (keyFram[KEY_INPUT_RETURN] == 1)
+	if (keyFram[keyList.shot] == 1)
 	{
 		switch (menuID)
 		{

@@ -26,6 +26,9 @@
 
 #define PI 3.14159265359f		// 円周率
 
+#define RAD_TO_DEG(rad) ((int)(rad * 180.0f / PI))		// ﾗｼﾞｱﾝから度数への変換
+#define DEG_TO_RAD(deg) ((float)(deg * PI / 180.0f))	// 度数からﾗｼﾞｱﾝへの変換
+
 // enum定義
 // 方向
 enum DIR
@@ -86,6 +89,7 @@ struct Boss
 {
 	Vector2 pos;	// 座標
 	Vector2 move;	// 移動量
+	float speed;
 	float hitRad;	// 当たり判定の円の半径
 	float moveAngle;// 移動角度(度)
 	int moveCount;	// 移動し始めてからのｶｳﾝﾄ

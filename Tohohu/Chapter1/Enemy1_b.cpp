@@ -7,7 +7,7 @@
 #include <PlayerShot.h>
 
 int enemyImg1B;				// “GB‚Ì‰æ‘œID
-void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 };	// ˆÚ“®‚Ìí—Ş
+void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 ,EnemyMove1_B_2};	// ˆÚ“®‚Ìí—Ş
 
 // ‰Šú‰»
 bool EnemyInit1_B(void)
@@ -36,7 +36,7 @@ bool EnemyInit1_B(void)
 void EnemyCtl1_B(void)
 {
 	// “GˆÚ“®
-	for (int i = 0; i < ENEMY1_B_NUM; i++)
+	for (int i = 0; i < ENEMY1_B_MAX; i++)
 	{
 		if (enemy1B[i].drawFlag)
 		{
@@ -53,19 +53,24 @@ void EnemyCtl1_B(void)
 				enemy1B[i].drawFlag = false;
 			}
 
-			// ’e‚Æ‚Ì“–‚½‚è”»’è
-			for (int k = 0; k < PSHOT_NUM; k++)
+			if (enemy1B[i].initData.movePtn != 2)
 			{
-				if (pShot[k].flag)
+				// ’e‚Æ‚Ì“–‚½‚è”»’è
+				for (int k = 0; k < PSHOT_NUM; k++)
 				{
-					if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f))
+					if (pShot[k].flag)
 					{
-						pShot[k].flag = false;
-						enemy1B[i].drawFlag = false;
-						break;
+						if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f))
+						{
+							pShot[k].flag = false;
+							enemy1B[i].drawFlag = false;
+							break;
+						}
 					}
 				}
 			}
+
+			
 		}
 	}
 
@@ -85,7 +90,7 @@ void EnemyCtl1_B(void)
 // •`‰æ
 void DrawEnemy1_B(void)
 {
-	for (int i = 0; i < ENEMY1_B_NUM; i++)
+	for (int i = 0; i < ENEMY1_B_MAX; i++)
 	{
 		if (enemy1B[i].drawFlag)
 		{
@@ -145,4 +150,11 @@ void EnemyMove1_B_1(Enemy *enemy)
 	{
 		enemy->moveAngle--;
 	}
+}
+
+// ÎŞ½ê—pˆÚ“®
+void EnemyMove1_B_2(Enemy *enemy)
+{
+	enemy->pos.x += 2.0f * cosf((float)enemy->moveCount / 10.0f);
+	enemy->pos.y += 2.0f;
 }
