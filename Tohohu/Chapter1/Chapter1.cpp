@@ -28,9 +28,9 @@ void Chapter1(void)
 	if (!boss1.drawFlag)
 	{
 		EnemyCtl1_A();
+		EnemyCtl1_B();
 		EShotCtl1_A();
 	}
-	EnemyCtl1_B();
 	BossCtl1();
 	BShotCtl1();
 	DrawChapter1();
@@ -44,6 +44,7 @@ void DrawChapter1(void)
 	if (!boss1.drawFlag)
 	{
 		DrawEnemy1_A();
+		DrawEnemy1_B();
 		DrawEShot1_A();
 	}
 	else
@@ -51,7 +52,6 @@ void DrawChapter1(void)
 		BossDraw1();
 		BShotDraw1();
 	}
-	DrawEnemy1_B();
 	
 	GameDraw();
 

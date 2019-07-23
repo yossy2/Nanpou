@@ -13,10 +13,10 @@ bool GameInit(void)
 	bool rtnFlag = true;
 
 	srand((unsigned int)time(NULL));
+	PlayerInit();
 	ChapterInit1();
 	UiInit();
 
-	srand((unsigned int)time(NULL));
 	// ‰æ‘œ“Ç‚İ‚İ
 	systemImg = LoadGraph("image/system.png");
 	if (systemImg == -1)

@@ -4,11 +4,10 @@
 #include <main.h>
 #include "Boss1.h"
 #include "BossShot1.h"
-#include "Enemy1_b.h"
 #include <Player.h>
 
 int bossImg1[BOSS1_ANIM_MAX];		// ‰æ‘œID
-int atkAngle;		// UŒ‚1‚Ì’e‚Ì”­ËŠp“x
+int atkAngle1;		// UŒ‚1‚Ì’e‚Ì”­ËŠp“x
 
 // ‰Šú‰»
 bool BossInit1(void)
@@ -24,10 +23,9 @@ bool BossInit1(void)
 	boss1.life = 100;
 	boss1.drawFlag = false;
 	boss1.moveCount = 0;
-	boss1.moveAngle = 0;
 	boss1.animCount = 0;
 
-	atkAngle = 90;
+	atkAngle1 = 90;
 
 	return true;
 }
@@ -45,7 +43,7 @@ void BossCtl1(void)
 	{
 		if (boss1.life >= 50 && boss1.moveCount % 2 == 0)
 		{
-			BossAtk1_4();
+			BossAtk1_1();
 		}
 
 		boss1.moveCount++;
@@ -68,147 +66,18 @@ void BossAtk1_1(void)
 		if (!bShot1[i].flag)
 		{
 			bShot1[i].count = 0;
-			bShot1[i].moveAngle = atkAngle;
+			bShot1[i].moveAngle = atkAngle1;
 			bShot1[i].rotaAngle = 0;
-			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
+			bShot1[i].pos = boss1.pos;
 			bShot1[i].speed = 4.0f;
 			bShot1[i].flag = true;
-			atkAngle += 120;
+			atkAngle1 += 120;
 			cnt++;
 			if (cnt >= 3)
 			{
-				atkAngle += 7;
+				atkAngle1 += 7;
 				return;
 			}
 		}
 	}
 }
-
-// ’e‚ğ‰~ó‚É”­Ë
-void BossAtk1_2(void)
-{
-	if ((boss1.moveCount / 60) % 2 == 0)
-	{
-		atkAngle = rand() % 10;
-		return;
-	}
-	else if (boss1.moveCount % 10 != 0)
-	{
-		return;
-	}
-	else
-	{
-
-	}
-
-	int cnt = 0;
-	for (int i = 0; i < BSHOT1_NUM; i++)
-	{
-		if (!bShot1[i].flag)
-		{
-			bShot1[i].count = 0;
-			bShot1[i].moveAngle = atkAngle + cnt * 10;
-			bShot1[i].rotaAngle = 0;
-			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
-			bShot1[i].speed = 2.0f;
-			bShot1[i].flag = true;
-			cnt++;
-			if (cnt >= 36)
-			{
-				atkAngle += 5;
-				return;
-			}
-		}
-	}
-}
-
-// ˆÚ“®‚µ‚È‚ª‚ç’e‚ğ”­Ë
-void BossAtk1_3(void)
-{
-	if ((boss1.moveCount / 60) % 3 != 1)
-	{
-		return;
-	}
-	else if (boss1.moveCount % 60 == 0)
-	{
-		boss1.moveAngle -= 70;
-	}
-	boss1.speed = 8.0f - (float)(boss1.moveCount % 60) / 10.0f;
-
-	boss1.move.x = boss1.speed * cosf(DEG_TO_RAD(boss1.moveAngle));
-	boss1.move.y = boss1.speed * sinf(DEG_TO_RAD(boss1.moveAngle));
-
-	boss1.pos.x += boss1.move.x;
-	boss1.pos.y += boss1.move.y;
-	
-	float angle = atan2f(player.pos.y - boss1.pos.y, player.pos.x - boss1.pos.x);
-
-	//if(boss1.moveCount % 10 != 0)
-	//{
-	//	return;
-	//}
-
-	// ’e‚ğˆê”­
-	for (int i = 0; i < BSHOT1_NUM; i++)
-	{
-		if (!bShot1[i].flag)
-		{
-			bShot1[i].count = 0;
-			bShot1[i].moveAngle = RAD_TO_DEG(angle) + ((rand() % 11) - 5);
-			bShot1[i].rotaAngle = 0;
-			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
-			bShot1[i].speed = 4.0f;
-			bShot1[i].flag = true;
-			return;
-		}
-	}
-}
-
-// ½×²Ñ‘åsi
-void BossAtk1_4(void)
-{
-	if (boss1.moveCount % 10 != 0)
-	{
-		return;
-	}
-
-	for (int i = 0; i < ENEMY1_B_MAX; i++)
-	{
-		if (!enemy1B[i].drawFlag)
-		{
-			enemy1B[i].pos = { (float)(rand() % GAME_SCREEN_SIZE_X), 0.0f };
-			enemy1B[i].initData.movePtn = 2;
-			enemy1B[i].moveCount = rand() % 180;
-			enemy1B[i].drawFlag = true;
-			break;
-		}
-	}
-
-	if (boss1.moveCount % 120 != 0)
-	{
-		return;
-	}
-
-	int cnt = 0;
-	for (int i = 0; i < BSHOT1_NUM; i++)
-	{
-		if (!bShot1[i].flag)
-		{
-			bShot1[i].count = 0;
-			bShot1[i].moveAngle = atkAngle + cnt * 20;
-			bShot1[i].rotaAngle = 0;
-			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
-			bShot1[i].speed = 2.0f;
-			bShot1[i].flag = true;
-			cnt++;
-			if (cnt >= 18)
-			{
-				atkAngle += 10;
-				return;
-			}
-		}
-	}
-}
-
-
-
