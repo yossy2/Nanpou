@@ -11,12 +11,12 @@ struct Item
 	bool flag;
 	Vector2 pos;
 	float speed;
-	int Angel;
+	int rotaAngle;
 };
 
 // ===========================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾============================
 
 void ItemInit(void);			// ‰Šú‰»
 void ItemDrop(Vector2 ePos);	// ±²ÃÑoŒ»
-void ItemCtl(void);		// ±²ÃÑoŒ»
+void ItemCtl(void);				// ±²ÃÑoŒ»
 void ItemDraw(void);			// •`‰æ
