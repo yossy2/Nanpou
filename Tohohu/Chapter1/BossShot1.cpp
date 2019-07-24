@@ -41,7 +41,7 @@ void BShotCtl1(void)
 
 			if (player.flag)
 			{
-				if (CheckHitObj(bShot1[i].pos, BSHOT1_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
+				if (CheckHitObj(bShot1[i].pos, BSHOT1_SIZE_X / 3, player.pos, PLAYER_HIT_RAD))
 				{
 					PlayerDamage();
 					bShot1[i].flag = false;
