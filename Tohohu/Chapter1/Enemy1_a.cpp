@@ -64,7 +64,7 @@ void EnemyCtl1_A(void)
 					{
 						pShot[k].flag = false;
 						enemy1A[i].drawFlag = false;
-						if (rand() % 100 >= 50)
+						if (rand() % 100 >= 30)
 						{
 							ItemDrop(enemy1A[i].pos);
 						}

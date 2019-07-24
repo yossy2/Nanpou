@@ -12,7 +12,9 @@ bool PlayerInit(void)
 	player.pos.y = (float)(GAME_SCREEN_SIZE_Y - PLAYER_SIZE_Y/2);
 	player.speed = PLAYER_DEF_SPEED;
 	player.life = PLAYER_DEF_LIFE;
+	player.power = 0;
 	player.flag = true;
+	player.shotPowUp = 1;
 
 	// ∑∞ê›íË
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
@@ -248,5 +250,24 @@ void PlayerDamage(void)
 	if (--player.life <= 0 && player.flag)
 	{
 		player.flag = false;
+	}
+}
+
+// Ãﬂ⁄≤‘∞ºÆØƒÇÃã≠âª
+void PlayerPowUp(void)
+{
+	player.power += 10;
+	if (player.power >= PLAYER_POWER_MAX)
+	{
+		player.power = PLAYER_POWER_MAX;
+	}
+
+	if (player.power < 100)
+	{
+		player.shotPowUp = 1;
+	}
+	else if (player.power >= 100)
+	{
+		player.shotPowUp = 2;
 	}
 }

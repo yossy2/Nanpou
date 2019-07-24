@@ -2,12 +2,10 @@
 
 #define PLAYER_SIZE_X 48			// ｲﾒｰｼﾞのｻｲｽﾞX
 #define PLAYER_SIZE_Y 48			// ｲﾒｰｼﾞのｻｲｽﾞY
-
 #define PLAYER_DEF_SPEED 6			// ﾃﾞﾌｫﾙﾄの速さ
-
 #define PLAYER_HIT_RAD 3.0f			// 当たり判定の範囲
-
 #define PLAYER_DEF_LIFE 5			// ﾃﾞﾌｫﾙﾄの残機数
+#define PLAYER_POWER_MAX 400		// ﾊﾟﾜｰの最大値
 
 // enum定義
 // ﾌﾟﾚｲﾔｰID
@@ -27,6 +25,8 @@ struct Player
 	float moveAngle;	// 移動角度
 	bool flag;			// 描画管理
 	int life;			// 残機
+	int power;			// ﾊﾟﾜｰの増加
+	int shotPowUp;		// ｼｮｯﾄの状態
 };
 
 struct KeyList
@@ -56,4 +56,6 @@ void PlayerDraw(void);		// 自機の描画
 	
 void PlayerMove(void);		// 自機の移動処理
 void PlayerDamage(void);	// ﾀﾞﾒｰｼﾞを受けたときの処理
+
+void PlayerPowUp(void);		// ﾌﾟﾚｲﾔｰｼｮｯﾄの強化
 

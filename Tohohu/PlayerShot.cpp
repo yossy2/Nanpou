@@ -69,16 +69,43 @@ void PlayerShotMove(void)
 	{
 		return;
 	}
+
+	int powUp = 1;
+
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
 		if (!pShot[i].flag)
 		{
-			pShot[i].pos.x = player.pos.x;
-			pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-			pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-			pShot[i].flag = true;
-			pShotCnt = 0;
-			break;
+			if (player.shotPowUp == 1)
+			{
+				pShot[i].pos.x = player.pos.x;
+				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+				pShot[i].flag = true;
+				pShotCnt = 0;
+				break;
+			}
+			else if (player.shotPowUp == 2)
+			{
+				if (powUp == 1)
+				{
+					pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
+					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+					pShot[i].flag = true;
+				}
+				else if (powUp == 2)
+				{
+					pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
+					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+					pShot[i].flag = true;
+					pShotCnt = 0;
+					powUp = 0;
+					break;
+				}
+				powUp++;
+			}
 		}
 	}
 }

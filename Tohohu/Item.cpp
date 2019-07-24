@@ -44,14 +44,14 @@ void ItemCtl(void)
 	{
 		if (powUpItem[i].flag)
 		{
+			if (CheckHitObj(powUpItem[i].pos, ITEM_HIT_RAD, player.pos, PLAYER_SIZE_X / 2))
+			{
+				PlayerPowUp();
+				powUpItem[i].flag = false;
+			}
 			powUpItem[i].pos.y += powUpItem[i].speed;
 			powUpItem[i].speed += 0.01f;
 			powUpItem[i].rotaAngle++;
-		}
-
-		if (CheckHitObj(powUpItem[i].pos, ITEM_HIT_RAD, player.pos, PLAYER_SIZE_X / 2))
-		{
-			powUpItem[i].flag = false;
 		}
 
 		// ‰æ–ÊŠO
