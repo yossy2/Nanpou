@@ -3,6 +3,7 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "Player.h"
+#include "Item.h"
 
 // ²Ò°¼Þ—p
 int titleBgImage;					// À²ÄÙ‚Ì”wŒi
@@ -59,6 +60,7 @@ bool TitleInit(void)
 	configFlag = false;
 
 	PlayerInit();
+	ItemInit();
 	rate = 1.0f;
 	rateFlag = true;
 

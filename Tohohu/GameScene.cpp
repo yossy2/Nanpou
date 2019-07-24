@@ -6,6 +6,7 @@
 #include <Player.h>
 #include <Chapter1/Chapter1.h>
 #include "UiManeger.h"
+#include "Item.h"
 
 // ¹Ş°Ñ¼°İ‰Šú‰»
 bool GameInit(void)
@@ -33,6 +34,7 @@ bool GameInit(void)
 // ¹Ş°Ñ¼°İˆ—
 void GameScene(void)
 {
+	ItemCtl();
 	PlayerCtl();
 	chapterFunc();
 }

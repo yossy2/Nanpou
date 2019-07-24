@@ -8,6 +8,7 @@
 #include "Boss1.h"
 #include "BossShot1.h"
 #include <Player.h>
+#include "Item.h"
 
 // 1Í‰Šú‰»
 bool ChapterInit1(void)
@@ -53,6 +54,9 @@ void DrawChapter1(void)
 	}
 	DrawEnemy1_B();
 	
+	// ±²ÃÑ•`‰æ
+	ItemDraw();
+
 	GameDraw();
 
 	ScreenFlip();

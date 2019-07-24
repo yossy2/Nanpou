@@ -6,6 +6,7 @@
 #include "EnemyShot1_a.h"
 #include <Player.h>
 #include <PlayerShot.h>
+#include "Item.h"
 
 int enemyImg1A[ENEMY1_A_ANIM_MAX];			// “GA‚Ì‰æ‘œID
 void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1, EnemyMove1_A_2, EnemyMove1_A_3 , EnemyMove1_A_4 };	// ˆÚ“®‚ÌŽí—Þ
@@ -63,6 +64,10 @@ void EnemyCtl1_A(void)
 					{
 						pShot[k].flag = false;
 						enemy1A[i].drawFlag = false;
+						if (rand() % 100 >= 50)
+						{
+							ItemDrop(enemy1A[i].pos);
+						}
 						break;
 					}
 				}

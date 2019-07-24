@@ -148,6 +148,7 @@
     <ClCompile Include="Chapter1\Enemy1_b.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Init.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerShot.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Chapter1\Enemy1_b.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Init.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShot.h" />
