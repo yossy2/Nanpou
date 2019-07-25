@@ -56,6 +56,7 @@ void BossCtl1(void)
 		if (boss1.life % 250 == 0)
 		{
 			boss1.moveCount = 0;
+			ShotDelete();
 		}
 		(*boss1AtkFunc[(BOSS1_ATK_PTN - 1) - boss1.life / 250])();
 
@@ -122,14 +123,14 @@ void BossAtk1_1(void)
 	// íeÇàÍî≠
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].flag)
+		if (!bShot1[i].drwaFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = RAD_TO_DEG(angle) + ((rand() % 11) - 5);
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 4.0f;
-			bShot1[i].flag = true;
+			bShot1[i].drwaFlag = true;
 			return;
 		}
 	}
@@ -163,14 +164,14 @@ void BossAtk1_2(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].flag)
+		if (!bShot1[i].drwaFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle + cnt * 10;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].flag = true;
+			bShot1[i].drwaFlag = true;
 			cnt++;
 			if (cnt >= 36)
 			{
@@ -192,14 +193,14 @@ void BossAtk1_3(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].flag)
+		if (!bShot1[i].drwaFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].flag = true;
+			bShot1[i].drwaFlag = true;
 			atkAngle += 120;
 			cnt++;
 			if (cnt >= 3)
@@ -221,7 +222,7 @@ void BossAtk1_4(void)
 
 	for (int i = 0; i < ENEMY1_B_MAX; i++)
 	{
-		if (!enemy1B[i].drawFlag)
+		if (!enemy1B[i].drawFlag && !enemy1B[i].blastFlag)
 		{
 			enemy1B[i].pos = { (float)(rand() % GAME_SCREEN_SIZE_X), 0.0f };
 			enemy1B[i].initData.movePtn = 2;
@@ -240,14 +241,14 @@ void BossAtk1_4(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].flag)
+		if (!bShot1[i].drwaFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle + cnt * 20;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].flag = true;
+			bShot1[i].drwaFlag = true;
 			cnt++;
 			if (cnt >= 18)
 			{
@@ -269,6 +270,20 @@ void MoveCenter(void)
 	boss1.pos.x += boss1.speed * cosf(DEG_TO_RAD(boss1.moveAngle));
 	boss1.pos.y += boss1.speed * sinf(DEG_TO_RAD(boss1.moveAngle));
 
+}
+
+// çUåÇ ﬂ¿∞›Ç™Ç©ÇÌÇÈÇ∆Ç´íeÇàÍíUè¡Ç∑
+void ShotDelete(void)
+{
+	for (int i = 0; i < BSHOT1_NUM; i++)
+	{
+		if (bShot1[i].drwaFlag)
+		{
+			bShot1[i].count = 0;
+			bShot1[i].drwaFlag = false;
+			bShot1[i].blastFlag = true;
+		}
+	}
 }
 
 

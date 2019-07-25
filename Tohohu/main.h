@@ -24,6 +24,12 @@
 #define GAME_SCREEN_X 20.0f		// ｹﾞｰﾑ画面のｵﾌｾｯﾄX
 #define GAME_SCREEN_Y 20.0f		// ｹﾞｰﾑ画面のｵﾌｾｯﾄY
 
+#define BLAST_DIV_NUM_X 4	// 爆発画像のX方向の分割数
+#define BLAST_DIV_NUM_Y 4	// 爆発画像のY方向の分割数
+
+#define BLAST_SIZE_X 96		// 爆発画像のｻｲｽﾞX
+#define BLAST_SIZE_Y 96		// 爆発画像のｻｲｽﾞY
+
 #define PI 3.14159265359f		// 円周率
 
 #define RAD_TO_DEG(rad) ((int)(rad * 180.0f / PI))		// ﾗｼﾞｱﾝから度数への変換
@@ -67,7 +73,8 @@ struct EShot
 	float hitRad;	// 当たり判定の円の半径
 	int rotaAngle;	// 回転角度(度)
 	int count;		// 移動用のｶｳﾝﾄ
-	bool flag;		// 表示ﾌﾗｸﾞ
+	bool drwaFlag;		// 表示ﾌﾗｸﾞ
+	bool blastFlag;	// 爆発ﾌﾗｸﾞ
 };
 
 // 雑魚敵
@@ -82,6 +89,7 @@ struct Enemy
 	int life;		// 残り体力
 	bool drawFlag;	// 描画ﾌﾗｸﾞ
 	bool atkFlag;	// 攻撃ﾌﾗｸﾞ
+	bool blastFlag;	// 爆発ﾌﾗｸﾞ
 	EnemyInit initData;		// 初期配置情報
 };
 
@@ -112,6 +120,8 @@ MAIN_EX void(*sceneOldFunc)(void);		// 1ﾌﾚｰﾑ前のsceneFuncの状態
 MAIN_EX int framCnt;					// そのｼｰﾝになってからのﾌﾚｰﾑ数
 
 MAIN_EX int keyFram[256];				// ｷｰの押下状態保存
+
+MAIN_EX int blastImg[BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y];	// 爆発画像ID
 
 //=======================関数ﾌﾟﾛﾄﾀｲﾌﾟ宣言================================
 

@@ -19,6 +19,7 @@ bool EnemyInit1_A(void)
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
 		enemy1A[i].drawFlag = false;
+		enemy1A[i].blastFlag = false;
 		enemy1A[i].pos = enemy1A[i].initData.pos;
 		enemy1A[i].moveAngle = enemy1A[i].initData.moveAngle;
 	}
@@ -64,6 +65,8 @@ void EnemyCtl1_A(void)
 					{
 						pShot[k].flag = false;
 						enemy1A[i].drawFlag = false;
+						enemy1A[i].blastFlag = true;
+						enemy1A[i].animCount = 0;
 						if (rand() % 100 >= 30)
 						{
 							ItemDrop(enemy1A[i].pos);
@@ -78,7 +81,7 @@ void EnemyCtl1_A(void)
 	// ìGèoåª
 	for (int i = 0; i < ENEMY1_A_NUM; i++)
 	{
-		if (!enemy1A[i].drawFlag)
+		if (!enemy1A[i].drawFlag && !enemy1A[i].blastFlag)
 		{
 			if (enemy1A[i].initData.count == framCnt)
 			{
@@ -99,6 +102,16 @@ void DrawEnemy1_A(void)
 				1.0, 0.0, enemyImg1A[(enemy1A[i].animCount / 10) % ENEMY1_A_ANIM_MAX], true, false);
 			enemy1A[i].animCount++;
 		}
+		else if (enemy1A[i].blastFlag)
+		{
+			DrawRotaGraphF(enemy1A[i].pos.x + GAME_SCREEN_X, enemy1A[i].pos.y + GAME_SCREEN_Y,
+				1.0, 0.0, blastImg[enemy1A[i].animCount % (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y)], true, false);
+			enemy1A[i].animCount++;
+			if (enemy1A[i].animCount >= (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y))
+			{
+				enemy1A[i].blastFlag = false;
+			}
+		}
 	}
 }
 
@@ -109,9 +122,9 @@ void EnemyAttack1_A(Vector2 pos)
 
 	for (int i = 0; i < ESHOT1_A_NUM; i++)
 	{
-		if (!eShot1A[i].flag)
+		if (!eShot1A[i].drwaFlag)
 		{
-			eShot1A[i].flag = true;
+			eShot1A[i].drwaFlag = true;
 			eShot1A[i].pos = pos;
 			eShot1A[i].count = 0;
 			eShot1A[i].moveAngle = (int)((count - 2) * 25 + atan2f(player.pos.y - pos.y, player.pos.x - pos.x) * 180.0f / PI);

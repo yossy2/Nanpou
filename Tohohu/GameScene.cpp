@@ -26,6 +26,13 @@ bool GameInit(void)
 		rtnFlag = false;
 	}
 
+	if (LoadDivGraph("image/blast.png", BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y, BLAST_DIV_NUM_X, BLAST_DIV_NUM_Y,
+		BLAST_SIZE_X, BLAST_SIZE_Y, blastImg) == -1)
+	{
+		AST();
+		rtnFlag = false;
+	}
+
 	sceneFunc = GameScene;
 
 	return rtnFlag;

@@ -31,3 +31,4 @@ void BossAtk1_3(void);		// ‰ñ“]
 void BossAtk1_4(void);		// ½×²Ñ‘åsi
 
 void MoveCenter(void);		// ’†‰›‚ÉˆÚ“®
+void ShotDelete(void);		// UŒ‚ÊßÀ°İ‚ª‚©‚í‚é‚Æ‚«’e‚ğˆê’UÁ‚·

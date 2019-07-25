@@ -18,6 +18,7 @@ bool EnemyInit1_B(void)
 	for (int i = 0; i < ENEMY1_B_NUM; i++)
 	{
 		enemy1B[i].drawFlag = false;
+		enemy1B[i].blastFlag = false;
 		enemy1B[i].pos = enemy1B[i].initData.pos;
 		enemy1B[i].moveAngle = enemy1B[i].initData.moveAngle;
 	}
@@ -66,6 +67,9 @@ void EnemyCtl1_B(void)
 						{
 							pShot[k].flag = false;
 							enemy1B[i].drawFlag = false;
+							enemy1B[i].blastFlag = true;
+							enemy1B[i].animCount = 0;
+
 							if (rand() % 100 >= 50)
 							{
 								ItemDrop(enemy1B[i].pos);
@@ -83,7 +87,7 @@ void EnemyCtl1_B(void)
 	// ìGèoåª
 	for (int i = 0; i < ENEMY1_B_NUM; i++)
 	{
-		if (!enemy1B[i].drawFlag)
+		if (!enemy1B[i].drawFlag && !enemy1B[i].blastFlag)
 		{
 			if (enemy1B[i].initData.count == framCnt)
 			{
@@ -104,6 +108,16 @@ void DrawEnemy1_B(void)
 			DrawRotaGraphF(enemy1B[i].pos.x + GAME_SCREEN_X, enemy1B[i].pos.y + GAME_SCREEN_Y,
 				1.0, 0.0, enemyImg1B[(enemy1B[i].animCount / 5) % ENEMY1_B_ANIM_MAX], true, false);
 			enemy1B[i].animCount++;
+		}
+		else if (enemy1B[i].blastFlag)
+		{
+			DrawRotaGraphF(enemy1B[i].pos.x + GAME_SCREEN_X, enemy1B[i].pos.y + GAME_SCREEN_Y,
+				1.0, 0.0, blastImg[enemy1B[i].animCount % (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y)], true, false);
+			enemy1B[i].animCount++;
+			if (enemy1B[i].animCount >= (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y))
+			{
+				enemy1B[i].blastFlag = false;
+			}
 		}
 	}
 }
