@@ -11,6 +11,7 @@ int scoreNumImage[SCORE_NUM];			// ｽｺｱ数字用
 int lifeImage[PLAYER_LIFE_STATS];		// 残機ﾊｰﾄ用
 int powGaugeImage;						// ﾊﾟﾜｰｹﾞｰｼﾞ
 int powGaugeFrameImage;				// ﾊﾟﾜｰｹﾞｰｼﾞのﾌﾚｰﾑ
+int powLevelImage;						// ﾚﾍﾞﾙ文字
 
 // 初期化
 void UiInit(void)
@@ -58,6 +59,12 @@ void UiInit(void)
 		AST();
 		return;
 	}
+	// ﾚﾍﾞﾙ
+	if ((powLevelImage = LoadGraph("image/powerlevel.png")) == -1)
+	{
+		AST();
+		return;
+	}
 }
 
 // ｽｺｱ計算
@@ -92,4 +99,6 @@ void DrawScore(void)
 	}
 	DrawGraph(POWGARGE_POS_X - 3, 290 - 3, powGaugeFrameImage, false);
 	DrawRectGraph(POWGARGE_POS_X, 290, 0, 0, player.power, 20,powGaugeImage, false, false);
+	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 330, powLevelImage, true);
+	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 250, 328, scoreNumImage[player.shotPowUp], true);
 }
