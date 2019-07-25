@@ -6,6 +6,7 @@
 #define PLAYER_HIT_RAD 3.0f			// 当たり判定の範囲
 #define PLAYER_DEF_LIFE 5			// ﾃﾞﾌｫﾙﾄの残機数
 #define PLAYER_POWER_MAX 400		// ﾊﾟﾜｰの最大値
+#define PLAYER_ANIM_MAX 4			// ﾌﾟﾚｲﾔｰのｱﾆﾒｰｼｮﾝ数
 
 // enum定義
 // ﾌﾟﾚｲﾔｰID
@@ -23,7 +24,9 @@ struct Player
 	Vector2 move;		// 移動量
 	float speed;		// 速さ
 	float moveAngle;	// 移動角度
-	bool flag;			// 描画管理
+	bool drawFlag;		// 描画管理
+	bool blastFlag;		// 爆発ﾌﾗｸﾞ
+	int animCnt;		// ｱﾆﾒｰｼｮﾝｶｳﾝﾄ
 	int life;			// 残機
 	int power;			// ﾊﾟﾜｰの増加
 	int shotPowUp;		// ｼｮｯﾄの状態
@@ -46,7 +49,7 @@ struct KeyList
 #endif
 
 PL_EX Player player;
-PL_EX int playerImg;
+PL_EX int playerImg[PLAYER_ANIM_MAX];
 
 PL_EX KeyList keyList;
 

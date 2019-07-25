@@ -59,7 +59,7 @@ void EShotCtl1_A(void)
 	// “–‚½‚è”»’è
 	for (int i = 0; i < ESHOT1_A_NUM; i++)
 	{
-		if (eShot1A[i].drwaFlag && player.flag)
+		if (eShot1A[i].drwaFlag && player.drawFlag)
 		{
 			if (CheckHitObj(eShot1A[i].pos, ESHOT1_A_SIZE_X / 2, player.pos, PLAYER_HIT_RAD))
 			{

@@ -13,8 +13,9 @@ bool PlayerInit(void)
 	player.speed = PLAYER_DEF_SPEED;
 	player.life = PLAYER_DEF_LIFE;
 	player.power = 0;
-	player.flag = true;
+	player.drawFlag = true;
 	player.shotPowUp = 1;
+	player.animCnt = 0;
 
 	// ∑∞ê›íË
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
@@ -28,8 +29,8 @@ bool PlayerInit(void)
 	PlayerShotInit();
 
 	// âÊëúÇÃì«Ç›çûÇ›
-	playerImg = LoadGraph("image/player.png");
-	if (playerImg == -1)
+	if (LoadDivGraph("image/player_anim.png", PLAYER_ANIM_MAX, PLAYER_ANIM_MAX, 1,
+		PLAYER_SIZE_X, PLAYER_SIZE_Y, playerImg) == -1)
 	{
 		AST();
 		return false;
@@ -56,9 +57,9 @@ void PlayerCtl(void)
 void PlayerDraw(void)
 {
 	PlayerShotDraw();
-	if (player.flag)
+	if (player.drawFlag)
 	{
-		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y, 1.0, 0.0, playerImg, true, false);
+		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y, 1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
 	}
 }
 
@@ -255,9 +256,9 @@ void PlayerMove(void)
 // ¿ﬁ“∞ºﬁÇéÛÇØÇΩÇ∆Ç´ÇÃèàóù
 void PlayerDamage(void)
 {
-	if (--player.life <= 0 && player.flag)
+	if (--player.life <= 0 && player.drawFlag)
 	{
-		player.flag = false;
+		player.drawFlag = false;
 	}
 }
 

@@ -39,7 +39,7 @@ void BShotCtl1(void)
 			bShot1[i].pos.x += bShot1[i].move.x;
 			bShot1[i].pos.y += bShot1[i].move.y;
 
-			if (player.flag)
+			if (player.drawFlag)
 			{
 				if (CheckHitObj(bShot1[i].pos, BSHOT1_SIZE_X / 3, player.pos, PLAYER_HIT_RAD))
 				{
