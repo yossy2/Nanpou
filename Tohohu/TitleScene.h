@@ -17,3 +17,4 @@ enum MENU_ID
 bool TitleInit(void);		// À²ÄÙ¼°İ‰Šú‰»
 void TitleScene(void);		// À²ÄÙ¼°İˆ—
 void TitleDraw(void);		// À²ÄÙ¼°İ•`‰æ
+void TitleSound(void);		// »³İÄŞÄ¶

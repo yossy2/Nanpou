@@ -6,7 +6,8 @@
 #define PLAYER_LIFE_STATS 2			// 残機の表示状態
 #define PLLIFE_SIZE_X 24			// 残機(ﾊｰﾄ)のｻｲｽﾞX
 #define PLLIFE_SIZE_Y 24			// 残機(ﾊｰﾄ)のｻｲｽﾞY
-#define POWGARGE_POS_X 670
+#define POWGARGE_POS_X 670			// ﾊﾟﾜｰｹﾞｰｼﾞの座標
+#define HIGHSCORE_DEF 5000			// ﾊｲｽｺｱのﾃﾞﾌｫﾙﾄ
 
 // =======================関数ﾌﾟﾛﾄﾀｲﾌﾟ宣言=========================
 void UiInit(void);				// 初期化

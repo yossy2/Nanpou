@@ -12,6 +12,8 @@ int lifeImage[PLAYER_LIFE_STATS];		// 残機ﾊｰﾄ用
 int powGaugeImage;						// ﾊﾟﾜｰｹﾞｰｼﾞ
 int powGaugeFrameImage;				// ﾊﾟﾜｰｹﾞｰｼﾞのﾌﾚｰﾑ
 int powLevelImage;						// ﾚﾍﾞﾙ文字
+int highScore;							// ﾊｲｽｺｱ
+int score;								// ｽｺｱ
 
 // 初期化
 void UiInit(void)
@@ -65,6 +67,9 @@ void UiInit(void)
 		AST();
 		return;
 	}
+
+	highScore = HIGHSCORE_DEF;
+	score = 0;
 }
 
 // ｽｺｱ計算
@@ -77,14 +82,24 @@ void ScoreUpdate(void)
 void DrawScore(void)
 {
 	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 30, highScoreImage, true);
+
+	int scr = (highScore >= 10000000000 ? 9999999999 : highScore);
+
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
-		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 70, scoreNumImage[i], true);
+		int drawNum = scr % 10;
+		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 70, scoreNumImage[drawNum], true);
+		scr = (scr - drawNum) / 10; 
 	}
 	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 110, scoreImage, true);
+
+	scr = (score >= 10000000000 ? 9999999999 : score);
+
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
-		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[i], true);
+		int drawNum = scr % 10;
+		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[drawNum], true);
+		scr = (scr - drawNum) / 10;
 	}
 	for (int i = 0; i < PLAYER_DEF_LIFE; i++)
 	{

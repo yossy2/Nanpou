@@ -11,6 +11,9 @@ int menuImage[MENU_ID_MAX];		// ﾒﾆｭｰ一覧
 int menuWakuImage[MENU_ID_MAX];	// ﾒﾆｭｰの枠
 int configImage;					// ｷｰｺﾝﾌｨｸﾞ(操作説明)
 
+// ｻｳﾝﾄﾞ用
+int titleBgm;						// ﾀｲﾄﾙ用BGM
+
 // ｲﾒｰｼﾞの拡大用
 float rate;
 bool rateFlag;
@@ -57,6 +60,14 @@ bool TitleInit(void)
 		AST();
 		rtnFlag = false;
 	}
+
+	// ==================ｻｳﾝﾄﾞ用
+	if ((titleBgm = LoadSoundMem("bgm/titlebgm.mp3")) == -1)
+	{
+		AST();
+		rtnFlag = false;
+	}
+
 	configFlag = false;
 
 	PlayerInit();
@@ -92,6 +103,7 @@ void TitleScene(void)
 		}
 	}
 
+	TitleSound();
 	TitleDraw();
 
 	if (keyFram[keyList.shot] == 1)
@@ -100,6 +112,7 @@ void TitleScene(void)
 		{
 		case GAMESTART_ID:
 			GameInit();
+			StopSoundMem(titleBgm);
 			break;
 		case CONFIG_ID:
 			configFlag = true;
@@ -163,4 +176,13 @@ void TitleDraw(void)
 	}
 
 	ScreenFlip();
+}
+
+// ｻｳﾝﾄﾞ再生
+void TitleSound(void)
+{
+	if (CheckSoundMem(titleBgm) == 0)
+	{
+		PlaySoundMem(titleBgm, DX_PLAYTYPE_BACK, true);
+	}
 }
