@@ -40,6 +40,14 @@ bool PlayerInit(void)
 // é©ã@ÇÃèàóù
 void PlayerCtl(void)
 {
+	if (player.power < 100)
+	{
+		player.shotPowUp = 1;
+	}
+	else if (player.power >= 100)
+	{
+		player.shotPowUp = 2;
+	}
 	PlayerMove();
 	PlayerShotFunc();
 }
@@ -260,14 +268,5 @@ void PlayerPowUp(void)
 	if (player.power >= PLAYER_POWER_MAX)
 	{
 		player.power = PLAYER_POWER_MAX;
-	}
-
-	if (player.power < 100)
-	{
-		player.shotPowUp = 1;
-	}
-	else if (player.power >= 100)
-	{
-		player.shotPowUp = 2;
 	}
 }
