@@ -16,6 +16,15 @@ enum PL_ID
 	PL_ID_MAX
 };
 
+// ｼｮｯﾄID
+enum PSHOT_ID
+{
+	PSHOT_NORMAL,
+	PSHOT_WIDE,
+	PSHOT_BEAM,
+	PSHOT_MAX
+};
+
 // 構造体定義
 // 自機
 struct Player
@@ -30,6 +39,7 @@ struct Player
 	int life;			// 残機
 	int power;			// ﾊﾟﾜｰの増加
 	int shotPowUp;		// ｼｮｯﾄの状態
+	PSHOT_ID shotPtn;	// ｼｮｯﾄのﾊﾟﾀｰﾝ
 };
 
 struct KeyList
