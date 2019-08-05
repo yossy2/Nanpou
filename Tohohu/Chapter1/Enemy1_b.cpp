@@ -80,8 +80,6 @@ void EnemyCtl1_B(void)
 					}
 				}
 			}
-
-			
 		}
 	}
 

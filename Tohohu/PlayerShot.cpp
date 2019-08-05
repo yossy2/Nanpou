@@ -7,7 +7,6 @@
 
 // ≤“∞ºﬁóp
 int pShotImage;					// íe
-int beamImage[BEAM_ANIM_NUM];		// Àﬁ∞—
 
 // πﬁ∞—óp
 int pShotCnt;						// î≠éÀä‘äuä«óù
@@ -24,13 +23,6 @@ void PlayerShotInit(void)
 		return;
 	}
 
-	// Àﬁ∞—ÇÃìoò^
-	if (LoadDivGraph("image/beam.png", BEAM_ANIM_NUM, BEAM_ANIM_NUM, 1, BEAM_SIZE_X, BEAM_SIZE_Y, beamImage) == -1)
-	{
-		AST();
-		return;
-	}
-
 	// ïœêîÇÃèâä˙âª
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
@@ -41,11 +33,6 @@ void PlayerShotInit(void)
 		pShot[i].move = { 0.0f, 0.0f };
 		pShot[i].endPos = 0;
 	}
-
-	beam.animCnt = 0;
-	beam.drawFlag = false;
-	beam.hitFlag = false;
-	beam.pos = { 0.0f, 0.0f };
 }
 
 // èàóù
@@ -58,9 +45,6 @@ void PlayerShotFunc(void)
 		break;
 	case (PSHOT_WIDE):
 		PShotPtn1();
-		break;
-	case (PSHOT_BEAM):
-		PShotPtn2();
 		break;
 	}
 	pShotCnt++;
@@ -75,17 +59,6 @@ void PlayerShotDraw(void)
 		{
 			DrawRotaGraphF(pShot[i].pos.x + GAME_SCREEN_X, pShot[i].pos.y + GAME_SCREEN_Y, 1.0, 0.0, pShotImage, true, false);
 		}
-	}
-	if (beam.drawFlag)
-	{
-		beam.animCnt = beam.animFram / 10;
-		if (beam.animCnt >= BEAM_ANIM_NUM)
-		{
-			beam.hitFlag = true;
-			beam.animCnt = 3;
-		}
-		DrawRotaGraphF(GAME_SCREEN_X + beam.pos.x, GAME_SCREEN_Y + beam.pos.y, 1.0, 0.0, beamImage[beam.animCnt], true, false);
-		beam.animFram++;
 	}
 }
 
@@ -220,92 +193,4 @@ void PShotPtn1(void)
 			powUp++;
 		}
 	}
-}
-
-// òAéÀ ﬂ¿∞›2
-void PShotPtn2(void)
-{
-	for (int i = 0; i < PSHOT_NUM; i++)
-	{
-		if (pShot[i].flag)
-		{
-			pShot[i].pos.y -= pShot[i].speed;
-			if (pShot[i].pos.y < pShot[i].endPos)
-			{
-				pShot[i].flag = false;
-			}
-		}
-	}
-
-	beam.pos.x = player.pos.x;
-	beam.pos.y = player.pos.y - ((BEAM_SIZE_Y + PLAYER_SIZE_Y) / 2);
-
-	// âüÇµÇƒÇ»Ç©Ç¡ÇΩÇÁèàóùèIóπ
-	if (keyFram[keyList.shot] == 0 || !player.drawFlag)
-	{
-		beam.drawFlag = false;
-		beam.hitFlag = false;
-		return;
-	}
-
-	if (!beam.drawFlag)
-	{
-		beam.animCnt = 0;
-		beam.animFram = 0;
-		beam.drawFlag = true;
-	}
-
-	if (pShotCnt < PSHOT_TIME)
-	{
-		return;
-	}
-
-	int powUp = 1;
-
-	for (int i = 0; i < PSHOT_NUM; i++)
-	{
-		if (!pShot[i].flag)
-		{
-			if (powUp == 1)
-			{
-				pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-			}
-			else if (powUp == 2)
-			{
-				pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-				pShotCnt = 0;
-				powUp = 0;
-				break;
-			}
-			powUp++;
-		}
-	}
-}
-
-// Àﬁ∞—ÇÃìñÇΩÇËîªíË
-bool BeamCheckHit(Vector2 pos, float hitrad)
-{
-	bool hitFlag = false;
-
-	if (!beam.hitFlag)
-	{
-		return hitFlag;
-	}
-
-	float a = sqrtf((beam.pos.x * pos.y) - (beam.pos.y * pos.x));
-	float b = sqrtf((pos.x * pos.x) + (pos.y * pos.y));
-	float c = hitrad + BEAM_HIT;
-
-	if (a / b <= c)
-	{
-		hitFlag = true;
-	}
-
-	return hitFlag;
 }

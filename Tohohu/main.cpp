@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// Ã⁄∞—∂≥›ƒä«óù
 		if (sceneOldFunc != sceneFunc)
 		{
-			framCnt = 2000;
+			framCnt = 0;
 		}
 		sceneOldFunc = sceneFunc;
 
