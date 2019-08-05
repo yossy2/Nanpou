@@ -22,7 +22,7 @@ bool ChapterInit1(void)
 	if ((bg1Image = LoadGraph("image/bg.png")) == -1)
 	{
 		AST();
-		return false;
+		//return false;
 	}
 
 	// ==============»³ÝÄÞ—p
@@ -113,7 +113,7 @@ void Chapter1Sound(void)
 	{
 		if (CheckSoundMem(chapter1Bgm) == 0)
 		{
-			PlaySoundMem(chapter1Bgm, DX_PLAYTYPE_BACK, true);
+			PlaySoundMem(chapter1Bgm, DX_PLAYTYPE_LOOP, true);
 		}
 	}
 }

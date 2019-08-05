@@ -11,7 +11,8 @@
 int bossImg1[BOSS1_ANIM_MAX];		// ‰æ‘œID
 int bossLifeImg;					// ÎŞ½‚ÌHPÊŞ°
 int atkAngle;						// UŒ‚1‚Ì’e‚Ì”­ËŠp“x
-void (*boss1AtkFunc[BOSS1_ATK_PTN])(void) = {BossAtk1_1,BossAtk1_2,BossAtk1_3,BossAtk1_4};			// UŒ‚ŠÖ”Îß²İÀ	
+int slimeCnt;						// “oê‰½•C‚Ì½×²Ñ‚ğ‚¾‚µ‚½‚©
+void (*boss1AtkFunc)(void);			// UŒ‚ŠÖ”Îß²İÀ	
 
 // ‰Šú‰»
 bool BossInit1(void)
@@ -37,7 +38,10 @@ bool BossInit1(void)
 	boss1.moveAngle = 0;
 	boss1.animCount = 0;
 
+	bossStartFlag1 = false;
+	slimeCnt = 0;
 	atkAngle = 90;
+	boss1AtkFunc = BossAtk1_1;
 
 	return true;
 }
@@ -48,17 +52,70 @@ void BossCtl1(void)
 	// oŒ»
 	if (framCnt == BOSS1_CNT)
 	{
-		boss1.drawFlag = true;
+		bossStartFlag1 = true;
+	}
+
+	if (bossStartFlag1)
+	{
+		if (framCnt % 30 == 0 && (slimeCnt < 7))
+		{
+			for (int i = 0; i < ENEMY1_B_MAX; i++)
+			{
+				if (!enemy1B[i].drawFlag && !enemy1B[i].blastFlag)
+				{
+					switch (slimeCnt)
+					{
+					case 0:
+						enemy1B[i].pos = { 310.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 310.0f,320.0f };
+						break;
+					case 1:
+						enemy1B[i].pos = { 330.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 330.0f,320.0f };
+						break;
+					case 2:
+						enemy1B[i].pos = { 300.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 300.0f,300.0f };
+						break;
+					case 3:
+						enemy1B[i].pos = { 340.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 340.0f,300.0f };
+						break;
+					case 4:
+						enemy1B[i].pos = { 310.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 310.0f,280.0f };
+						break;
+					case 5:
+						enemy1B[i].pos = { 330.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 330.0f,280.0f };
+						break;
+					case 6:
+						enemy1B[i].pos = { 320.0f, (float)(-ENEMY1_B_SIZE_Y) };
+						enemy1B[i].initData.pos = { 320.0f,300.0f };
+						break;
+					default:
+						break;
+					}
+					
+					enemy1B[i].initData.movePtn = 3;
+					enemy1B[i].moveCount = 0;
+					enemy1B[i].drawFlag = true;
+					enemy1B[i].animCount = 0;
+					slimeCnt++;
+					break;
+				}
+			}
+		}
+
+		if (framCnt == (BOSS1_CNT + 400))
+		{
+			boss1.drawFlag = true;
+		}
 	}
 
 	if (boss1.drawFlag)
 	{
-		if (boss1.life % 250 == 0)
-		{
-			boss1.moveCount = 0;
-			ShotDelete();
-		}
-		(*boss1AtkFunc[(BOSS1_ATK_PTN - 1) - boss1.life / 250])();
+		boss1AtkFunc();
 
 		boss1.moveCount++;
 		boss1.animCount++;
@@ -97,6 +154,14 @@ void BossDraw1(void)
 // ˆÚ“®‚µ‚È‚ª‚ç’e‚ğ”­Ë
 void BossAtk1_1(void)
 {
+	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
+	if (boss1.life <= (BOSS1_LIFE_MAX * 3 / BOSS1_ATK_PTN))
+	{
+		boss1.moveCount = 0;
+		ShotDelete();
+		boss1AtkFunc = BossAtk1_2;
+	}
+
 	if ((boss1.moveCount / 60) % 3 != 1)
 	{
 		return;
@@ -139,6 +204,14 @@ void BossAtk1_1(void)
 // ’e‚ğ‰~ó‚É”­Ë
 void BossAtk1_2(void)
 {
+	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
+	if (boss1.life <= (BOSS1_LIFE_MAX * 2 / BOSS1_ATK_PTN))
+	{
+		boss1.moveCount = 0;
+		ShotDelete();
+		boss1AtkFunc = BossAtk1_3;
+	}
+
 	if (fabsf((int)(boss1.pos.x - (float)GAME_SCREEN_SIZE_X / 2.0f)) > 0 ||
 		fabsf((int)(boss1.pos.y - (float)GAME_SCREEN_SIZE_Y / 2.0f)) > 0)
 	{
@@ -185,6 +258,14 @@ void BossAtk1_2(void)
 // ‰ñ“]
 void BossAtk1_3(void)
 {
+	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
+	if (boss1.life <= (BOSS1_LIFE_MAX / BOSS1_ATK_PTN))
+	{
+		boss1.moveCount = 0;
+		ShotDelete();
+		boss1AtkFunc = BossAtk1_4;
+	}
+
 	if (boss1.moveCount < 180 || boss1.moveCount % 2 != 0)
 	{
 		return;

@@ -8,7 +8,7 @@
 
 #define ENEMY1_B_ANIM_MAX 4		// “G1_B‚Ì±ÆÒ°¼®İ”
 
-#define ENEMY1_B_MOVE_PTN_MAX 3	// “G1_B‚ÌˆÚ“®ÊßÀ°İ”
+#define ENEMY1_B_MOVE_PTN_MAX 4	// “G1_B‚ÌˆÚ“®ÊßÀ°İ”
 
 // externéŒ¾
 #ifdef ENEMY1_B_DEF
@@ -28,3 +28,4 @@ void ScanInitData1_B(void);				// ‰Šú”z’u‚ğ“Ç‚İ‚Ş
 void EnemyMove1_B_0(Enemy* enemy);		// ˆÚ“®ÊßÀ°İ0
 void EnemyMove1_B_1(Enemy* enemy);		// ˆÚ“®ÊßÀ°İ1
 void EnemyMove1_B_2(Enemy * enemy);		// ÎŞ½ê—pˆÚ“®
+void EnemyMove1_B_3(Enemy * enemy);		// ÎŞ½“oê

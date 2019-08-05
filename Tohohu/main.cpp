@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		sceneFunc();
 		framCnt++;
 	}
-
+	InitSoundMem();
 	DxLib_End();
 
 	return 0;

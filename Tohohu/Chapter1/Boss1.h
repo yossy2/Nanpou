@@ -7,7 +7,7 @@
 #define BOSS1_SIZE_Y 96		// кч╞╦ч╫в╡я┌л╩╡╫чY
 
 #define BOSS1_HIT_RAD 40	// нч╫┌л⌠√┌╫┌Х■╩▓Х┌л■╪▄a
-#define BOSS1_LIFE_MAX 999	// нч╫┌л█е▒Е▒л≈м
+#define BOSS1_LIFE_MAX 1000	// нч╫┌л█е▒Е▒л≈м
 #define BOSS1_ATK_PTN 4		// нч╫┌л█U▄┌йъю╟щ░■
 
 #define BOSS1_SHOT_OFSET 20.0f	// ▓e┌╙▐o┌И┬й▓u┌П▄Ш┌л┬й▓u┌и▓╡░ъ
@@ -20,6 +20,7 @@
 #endif
 
 BOSS1_EX Boss boss1;			// 1▐мнч╫кч╞╦ч╫в╡я
+BOSS1_EX bool bossStartFlag1;	// нч╫┌л⌠o▐Йлв╦ч
 
 bool BossInit1(void);		// ▐┴┼З┴╩
 void BossCtl1(void);		// нч╫┌л▐┬≈²

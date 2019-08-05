@@ -2,13 +2,14 @@
 #include <math.h>
 #include <DxLib.h>
 #include <main.h>
+#include "Boss1.h"
 #include "Enemy1_b.h"
 #include <Player.h>
 #include <PlayerShot.h>
 #include "Item.h"
 
 int enemyImg1B[ENEMY1_B_ANIM_MAX];				// “GB‚Ì‰æ‘œID
-void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 ,EnemyMove1_B_2};	// ˆÚ“®‚Ìí—Ş
+void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 ,EnemyMove1_B_2,EnemyMove1_B_3};	// ˆÚ“®‚Ìí—Ş
 
 // ‰Šú‰»
 bool EnemyInit1_B(void)
@@ -56,7 +57,7 @@ void EnemyCtl1_B(void)
 				enemy1B[i].drawFlag = false;
 			}
 
-			if (enemy1B[i].initData.movePtn != 2)
+			if (enemy1B[i].initData.movePtn != 2 && enemy1B[i].initData.movePtn != 3)
 			{
 				// ’e‚Æ‚Ì“–‚½‚è”»’è
 				for (int k = 0; k < PSHOT_NUM; k++)
@@ -179,4 +180,18 @@ void EnemyMove1_B_2(Enemy *enemy)
 {
 	enemy->pos.x += 2.0f * cosf((float)enemy->moveCount / 10.0f);
 	enemy->pos.y += 2.0f;
+}
+
+// ÎŞ½“oê
+void EnemyMove1_B_3(Enemy *enemy)
+{
+	if (enemy->pos.y < (float)(enemy->initData.pos.y))
+	{
+		enemy->pos.y += enemy->move.y;
+	}
+
+	if (framCnt == (BOSS1_CNT + 400))
+	{
+		enemy->drawFlag = false;
+	}
 }
