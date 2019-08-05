@@ -8,6 +8,9 @@
 // ≤“∞ºﬁóp
 int pShotImage;					// íe
 
+// seóp
+int pShotSound;					// åÇÇ¡ÇΩéûÇÃâπ
+
 // πﬁ∞—óp
 int pShotCnt;						// î≠éÀä‘äuä«óù
 
@@ -18,6 +21,13 @@ void PlayerShotInit(void)
 	// íeÇÃìoò^
 	pShotImage = LoadGraph("image/playershot1.png");
 	if (pShotImage == -1)
+	{
+		AST();
+		return;
+	}
+
+	// se
+	if ((pShotSound = LoadSoundMem("se/pshot.mp3")) == -1)
 	{
 		AST();
 		return;
@@ -91,6 +101,7 @@ void PlayerShotMove(void)
 		{
 			if (player.shotPowUp == 1)
 			{
+				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 				pShot[i].pos.x = player.pos.x;
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
@@ -109,6 +120,7 @@ void PlayerShotMove(void)
 				}
 				else if (powUp == 2)
 				{
+					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 					pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
 					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
@@ -180,6 +192,7 @@ void PShotPtn1(void)
 			}
 			else if (powUp == 4)
 			{
+				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 				pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].move.x = pShot[i].speed * cosf((pShot[i].moveAngle + 20) * PI / 180.0f);

@@ -36,6 +36,12 @@ bool PlayerInit(void)
 		AST();
 		return false;
 	}
+
+	if ((plPowUpSound = LoadSoundMem("se/playerpowerup.mp3")) == -1)
+	{
+		AST();
+		return false;
+	}
 	return true;
 }
 
@@ -50,6 +56,7 @@ void PlayerCtl(void)
 	{
 		player.shotPowUp = 2;
 	}
+
 	PlayerMove();
 	PlayerShotFunc();
 }

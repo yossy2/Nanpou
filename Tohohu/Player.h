@@ -61,6 +61,7 @@ PL_EX Player player;
 PL_EX int playerImg[PLAYER_ANIM_MAX];
 
 PL_EX KeyList keyList;
+PL_EX int plPowUpSound;
 
 bool PlayerInit(void);		// ©‹@‚Ì‰Šú‰»
 void PlayerCtl(void);		// ©‹@‚Ìˆ—

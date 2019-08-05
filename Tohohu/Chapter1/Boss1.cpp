@@ -14,9 +14,9 @@ int atkAngle;						// UŒ‚1‚Ì’e‚Ì”­ËŠp“x
 int slimeCnt;						// “oê‰½•C‚Ì½×²Ñ‚ğ‚¾‚µ‚½‚©
 void (*boss1AtkFunc)(void);			// UŒ‚ŠÖ”Îß²İÀ	
 
-int bossBlastImg[BOSS1_ANIM_MAX];	// ÎŞ½—p‚Ì”š”­‰æ‘œ
-bool blastFlag;						// ”š”­Ì×¸Ş
-int blastCnt;						// ”š”­¶³İÄ
+int bossBlastImg[BOSS1_BLAST_ANIM_MAX];	// ÎŞ½—p‚Ì”š”­‰æ‘œ
+bool blastFlag;							// ”š”­Ì×¸Ş
+int blastCnt;								// ”š”­¶³İÄ
 
 // ‰Šú‰»
 bool BossInit1(void)
