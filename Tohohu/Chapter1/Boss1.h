@@ -2,6 +2,7 @@
 
 #define BOSS1_CNT 2500		// ﾎﾞｽが出現するﾌﾚｰﾑ
 #define BOSS1_ANIM_MAX 4	// ﾋﾞｯｸﾞｽﾗｲﾑのｱﾆﾒｰｼｮﾝ数
+#define BOSS1_ANIM_SPEED 10	// ﾋﾞｯｸﾞｽﾗｲﾑのｱﾆﾒｰｼｮﾝｽﾋﾟｰﾄﾞ
 
 #define BOSS1_SIZE_X 96		// ﾋﾞｯｸﾞｽﾗｲﾑのｻｲｽﾞX
 #define BOSS1_SIZE_Y 96		// ﾋﾞｯｸﾞｽﾗｲﾑのｻｲｽﾞY
@@ -9,6 +10,8 @@
 #define BOSS1_HIT_RAD 40	// ﾎﾞｽの当たり判定の半径
 #define BOSS1_LIFE_MAX 1000	// ﾎﾞｽの最大体力
 #define BOSS1_ATK_PTN 4		// ﾎﾞｽの攻撃ﾊﾟﾀｰﾝ数
+
+#define BOSS1_BLAST_ANIM_MAX 14	// ﾎﾞｽの爆発ｱﾆﾒｰｼｮﾝ数
 
 #define BOSS1_SHOT_OFSET 20.0f	// 弾が出る位置を口の位置に調節
 

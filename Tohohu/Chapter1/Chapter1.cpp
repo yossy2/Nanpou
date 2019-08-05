@@ -12,8 +12,10 @@
 
 int bg1Image;
 Vector2 bgPos[2];
+int bgmVol;
 
 int chapter1Bgm;
+int bossBgm;
 
 // 1Í‰Šú‰»
 bool ChapterInit1(void)
@@ -31,6 +33,11 @@ bool ChapterInit1(void)
 		AST();
 		return false;
 	}
+
+	if ((bossBgm = LoadSoundMem("bgm/boss1.mp3")) == -1)
+	{
+		AST();
+	}
 	// •Ï”‚Ì‰Šú‰»
 	bgPos[0].x = 0;
 	bgPos[0].y = 0;
@@ -42,6 +49,8 @@ bool ChapterInit1(void)
 	EShotInit1_A();
 	BossInit1();
 	BShotInit();
+
+	bgmVol = 240;
 	chapterFunc = Chapter1;
 
 	return true;
@@ -86,7 +95,7 @@ void DrawChapter1(void)
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	PlayerDraw();
-	if (!boss1.drawFlag)
+	if (!bossStartFlag1)
 	{
 		DrawEnemy1_A();
 		DrawEShot1_A();
@@ -115,5 +124,19 @@ void Chapter1Sound(void)
 		{
 			PlaySoundMem(chapter1Bgm, DX_PLAYTYPE_LOOP, true);
 		}
+	}
+
+	if (framCnt > BOSS1_CNT - 60 && !boss1.drawFlag)
+	{
+		bgmVol -= (240 / 60);
+		if (bgmVol < 0)
+		{
+			StopSoundMem(chapter1Bgm);
+		}
+		ChangeVolumeSoundMem(bgmVol, chapter1Bgm);
+	}
+	else if (boss1.drawFlag && CheckSoundMem(bossBgm) == 0)
+	{
+		PlaySoundMem(bossBgm, DX_PLAYTYPE_LOOP, true);
 	}
 }

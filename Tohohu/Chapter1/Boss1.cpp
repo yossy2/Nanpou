@@ -14,12 +14,23 @@ int atkAngle;						// UŒ‚1‚Ì’e‚Ì”­ËŠp“x
 int slimeCnt;						// “oê‰½•C‚Ì½×²Ñ‚ğ‚¾‚µ‚½‚©
 void (*boss1AtkFunc)(void);			// UŒ‚ŠÖ”Îß²İÀ	
 
+int bossBlastImg[BOSS1_ANIM_MAX];	// ÎŞ½—p‚Ì”š”­‰æ‘œ
+bool blastFlag;						// ”š”­Ì×¸Ş
+int blastCnt;						// ”š”­¶³İÄ
+
 // ‰Šú‰»
 bool BossInit1(void)
 {
 	// ‰æ‘œ“Ç‚İ‚İ
 	if (LoadDivGraph("image/boss1_anim.png", BOSS1_ANIM_MAX, BOSS1_ANIM_MAX, 1,
 		BOSS1_SIZE_X, BOSS1_SIZE_Y, bossImg1) == -1)
+	{
+		AST();
+		return false;
+	}
+
+	if (LoadDivGraph("image/blast2.png", BOSS1_BLAST_ANIM_MAX, 7, 2,
+		64, 64, bossBlastImg) == -1)
 	{
 		AST();
 		return false;
@@ -42,6 +53,8 @@ bool BossInit1(void)
 	slimeCnt = 0;
 	atkAngle = 90;
 	boss1AtkFunc = BossAtk1_1;
+	blastFlag = false;
+	blastCnt = 0;
 
 	return true;
 }
@@ -55,7 +68,7 @@ void BossCtl1(void)
 		bossStartFlag1 = true;
 	}
 
-	if (bossStartFlag1)
+	if (bossStartFlag1 && !boss1.drawFlag && !blastFlag)
 	{
 		if (framCnt % 30 == 0 && (slimeCnt < 7))
 		{
@@ -109,7 +122,8 @@ void BossCtl1(void)
 
 		if (framCnt == (BOSS1_CNT + 400))
 		{
-			boss1.drawFlag = true;
+			blastFlag = true;
+			//boss1.drawFlag = true;
 		}
 	}
 
@@ -142,13 +156,35 @@ void BossCtl1(void)
 // •`‰æ
 void BossDraw1(void)
 {
-	// ÎŞ½
-	DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X,boss1.pos.y + GAME_SCREEN_Y,
-		1.0,0.0,bossImg1[(boss1.animCount / 10) % BOSS1_ANIM_MAX],true,false);
+	if (boss1.drawFlag)
+	{
+		// ÎŞ½
+		DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X, boss1.pos.y + GAME_SCREEN_Y,
+			1.0, 0.0, bossImg1[(boss1.animCount / BOSS1_ANIM_SPEED) % BOSS1_ANIM_MAX], true, false);
 
-	// HP
-	DrawRectGraph(GAME_SCREEN_X, 20, 0, 0, (int)(boss1.life * GAME_SCREEN_SIZE_X / BOSS1_LIFE_MAX), 10, bossLifeImg, true, false);
+		// HP
+		DrawRectGraph(GAME_SCREEN_X, 20, 0, 0, 
+			(int)(boss1.life * GAME_SCREEN_SIZE_X / BOSS1_LIFE_MAX), 10, bossLifeImg, true, false);
+	}
 
+	if (blastFlag)
+	{
+		// ÎŞ½
+		DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X, boss1.pos.y + GAME_SCREEN_Y,
+			3.0, 0.0, bossBlastImg[(blastCnt / 2) % BOSS1_BLAST_ANIM_MAX], true, false);
+		if (++blastCnt >= 2 * BOSS1_BLAST_ANIM_MAX)
+		{
+			blastFlag = false;
+		}
+		else if (((blastCnt / 2) % BOSS1_BLAST_ANIM_MAX) == 7)
+		{
+			boss1.drawFlag = true;
+		}
+		else
+		{
+
+		}
+	}
 }
 
 // ˆÚ“®‚µ‚È‚ª‚ç’e‚ğ”­Ë
