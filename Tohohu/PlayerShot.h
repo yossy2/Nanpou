@@ -10,6 +10,7 @@
 #define BEAM_SIZE_X 32				// ËŞ°Ñ‚Ì»²½ŞX
 #define BEAM_SIZE_Y 680				// ËŞ°Ñ‚Ì»²½ŞY
 #define BEAM_ANIM_NUM 4				// ËŞ°Ñ‚Ì±ÆÒ°¼®İ–‡”
+#define BEAM_HIT 3					// ËŞ°Ñ‚Ì“–‚½‚è”»’è‚Ì‘å‚«‚³
 
 struct PlayerShot
 {
@@ -44,6 +45,7 @@ PSHOT_EX Beam beam;							// ËŞ°Ñ‚ÉŠÖ‚·‚é•Ï”‚ÌéŒ¾
 void PlayerShotInit(void);		// ‰Šú‰»
 void PlayerShotFunc(void);		// ˆ—
 void PlayerShotDraw(void);		// •`‰æ
-void PlayerShotMove(void);		// ˆÚ“®ˆ—
+void PlayerShotMove(void);		// ˜AËÉ°ÏÙ
 void PShotPtn1(void);			// ˜AËÊßÀ°İ1
 void PShotPtn2(void);			// ˜AËÊßÀ°İ2
+bool BeamCheckHit(Vector2 pos, int hitrad);		// ËŞ°Ñ‚Ì“–‚½‚è”»’è

@@ -81,6 +81,7 @@ void PlayerShotDraw(void)
 		beam.animCnt = beam.animFram / 10;
 		if (beam.animCnt >= BEAM_ANIM_NUM)
 		{
+			beam.hitFlag = true;
 			beam.animCnt = 3;
 		}
 		DrawRotaGraphF(GAME_SCREEN_X + beam.pos.x, GAME_SCREEN_Y + beam.pos.y, 1.0, 0.0, beamImage[beam.animCnt], true, false);
@@ -88,7 +89,7 @@ void PlayerShotDraw(void)
 	}
 }
 
-// ˆÚ“®ˆ—
+// ˜AËÉ°ÏÙ
 void PlayerShotMove(void)
 {
 	for (int i = 0; i < PSHOT_NUM; i++)
@@ -243,6 +244,7 @@ void PShotPtn2(void)
 	if (keyFram[keyList.shot] == 0 || !player.drawFlag)
 	{
 		beam.drawFlag = false;
+		beam.hitFlag = false;
 		return;
 	}
 
@@ -284,4 +286,26 @@ void PShotPtn2(void)
 			powUp++;
 		}
 	}
+}
+
+// ËŞ°Ñ‚Ì“–‚½‚è”»’è
+bool BeamCheckHit(Vector2 pos, float hitrad)
+{
+	bool hitFlag = false;
+
+	if (!beam.hitFlag)
+	{
+		return hitFlag;
+	}
+
+	float a = sqrtf((beam.pos.x * pos.y) - (beam.pos.y * pos.x));
+	float b = sqrtf((pos.x * pos.x) + (pos.y * pos.y));
+	float c = hitrad + BEAM_HIT;
+
+	if (a / b <= c)
+	{
+		hitFlag = true;
+	}
+
+	return hitFlag;
 }

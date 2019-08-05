@@ -16,7 +16,7 @@ bool PlayerInit(void)
 	player.drawFlag = true;
 	player.shotPowUp = 1;
 	player.animCnt = 0;
-	player.shotPtn = PSHOT_NORMAL;
+	player.shotPtn = PSHOT_BEAM;
 
 	// ∑∞ê›íË
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
