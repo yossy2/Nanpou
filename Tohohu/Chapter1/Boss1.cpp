@@ -172,22 +172,24 @@ void BossDraw1(void)
 	if (boss1.drawFlag)
 	{
 		// нч╫
-		DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X, boss1.pos.y + GAME_SCREEN_Y,
+		DrawRotaGraphF(boss1.pos.x, boss1.pos.y,
 			1.0, 0.0, bossImg1[(boss1.animCount / BOSS1_ANIM_SPEED) % BOSS1_ANIM_MAX], true, false);
 
 		// HP
-		DrawRectGraph((int)GAME_SCREEN_X, 20, 0, 0, 
+		DrawRectGraph(0, 0, 0, 0, 
 			(int)(boss1.life * GAME_SCREEN_SIZE_X / BOSS1_LIFE_MAX), 10, bossLifeImg, true, false);
 	}
 
 	if (blastFlag)
 	{
 		// нч╫
-		DrawRotaGraphF(boss1.pos.x + GAME_SCREEN_X, boss1.pos.y + GAME_SCREEN_Y,
+		DrawRotaGraphF(boss1.pos.x, boss1.pos.y,
 			3.0, 0.0, bossBlastImg[(blastCnt / 2) % BOSS1_BLAST_ANIM_MAX], true, false);
+		shake = { (float)(rand() % 10) - 10.0f,(float)(rand() % 10) - 10.0f };
 		if (++blastCnt >= 2 * BOSS1_BLAST_ANIM_MAX)
 		{
 			blastCnt = 0;
+			shake = { 0,0 };
 			blastFlag = false;
 		}
 		else if (((blastCnt / 2) % BOSS1_BLAST_ANIM_MAX) == 7 && (boss1.life > 0))

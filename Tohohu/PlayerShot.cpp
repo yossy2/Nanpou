@@ -40,6 +40,7 @@ void PlayerShotInit(void)
 		pShot[i].pos = { 0.0f, 0.0f };
 		pShot[i].speed = PSHOT_DEF_SPEED;
 		pShot[i].moveAngle = -90;
+		pShot[i].rotaAngle = 0.0f;
 		pShot[i].move = { 0.0f, 0.0f };
 		pShot[i].endPos = 0;
 	}
@@ -67,7 +68,7 @@ void PlayerShotDraw(void)
 	{
 		if (pShot[i].flag)
 		{
-			DrawRotaGraphF(pShot[i].pos.x + GAME_SCREEN_X, pShot[i].pos.y + GAME_SCREEN_Y, 1.0, 0.0, pShotImage, true, false);
+			DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, 1.0, (double)pShot[i].rotaAngle, pShotImage, true, false);
 		}
 	}
 }
@@ -79,7 +80,7 @@ void PlayerShotMove(void)
 	{
 		if (pShot[i].flag)
 		{
-			pShot[i].pos.y -= pShot[i].speed;
+			pShot[i].pos.y += pShot[i].move.y;
 			if (pShot[i].pos.y < pShot[i].endPos)
 			{
 				pShot[i].flag = false;
@@ -104,6 +105,8 @@ void PlayerShotMove(void)
 				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 				pShot[i].pos.x = player.pos.x;
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
+				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 				pShot[i].flag = true;
 				pShotCnt = 0;
@@ -115,6 +118,8 @@ void PlayerShotMove(void)
 				{
 					pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
 					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+					pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
+					pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
 					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 					pShot[i].flag = true;
 				}
@@ -123,6 +128,8 @@ void PlayerShotMove(void)
 					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 					pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
 					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+					pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
+					pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
 					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 					pShot[i].flag = true;
 					pShotCnt = 0;
@@ -169,6 +176,7 @@ void PShotPtn1(void)
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
 				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
+				pShot[i].rotaAngle = DEG_TO_RAD(0);
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 				pShot[i].flag = true;
 			}
@@ -178,6 +186,7 @@ void PShotPtn1(void)
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
 				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
+				pShot[i].rotaAngle = DEG_TO_RAD(0);
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 				pShot[i].flag = true;
 			}
@@ -187,6 +196,7 @@ void PShotPtn1(void)
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].move.x = pShot[i].speed * cosf((pShot[i].moveAngle - 20) * PI / 180.0f);
 				pShot[i].move.y = pShot[i].speed * sinf((pShot[i].moveAngle - 20) * PI / 180.0f);
+				pShot[i].rotaAngle = DEG_TO_RAD(-20);
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 				pShot[i].flag = true;
 			}
@@ -197,6 +207,7 @@ void PShotPtn1(void)
 				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
 				pShot[i].move.x = pShot[i].speed * cosf((pShot[i].moveAngle + 20) * PI / 180.0f);
 				pShot[i].move.y = pShot[i].speed * sinf((pShot[i].moveAngle + 20) * PI / 180.0f);
+				pShot[i].rotaAngle = DEG_TO_RAD(20);
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
 				pShot[i].flag = true;
 				pShotCnt = 0;

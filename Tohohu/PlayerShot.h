@@ -11,10 +11,11 @@ struct PlayerShot
 {
 	Vector2 pos;			// À•W
 	Vector2 move;			// ˆÚ“®—Ê
-	float speed;			// ‘¬‚³
-	float moveAngle;		// “®‚­•ûŒü
-	bool flag;				// •`‰æÌ×¸Ş
 	float endPos;			// •`‰æI—¹ˆÊ’u
+	float speed;			// ‘¬‚³
+	float rotaAngle;		// ‰ñ“]Šp
+	int moveAngle;			// “®‚­•ûŒü
+	bool flag;				// •`‰æÌ×¸Ş	
 };
 
 // externéŒ¾

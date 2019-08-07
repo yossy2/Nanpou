@@ -77,7 +77,7 @@ void DrawEShot1_A(void)
 	{
 		if (eShot1A[i].drawFlag)
 		{
-			DrawRotaGraphF(eShot1A[i].pos.x + GAME_SCREEN_X, eShot1A[i].pos.y + GAME_SCREEN_Y,
+			DrawRotaGraphF(eShot1A[i].pos.x, eShot1A[i].pos.y,
 				1.0, (double)((float)eShot1A[i].rotaAngle * PI / 180.0f), eShotImg1A, true, false);
 			eShot1A[i].rotaAngle++;
 		}

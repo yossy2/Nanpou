@@ -122,8 +122,10 @@ MAIN_EX int framCnt;					// ‚»‚Ì¼°İ‚É‚È‚Á‚Ä‚©‚ç‚ÌÌÚ°Ñ”
 MAIN_EX int keyFram[256];				// ·°‚Ì‰Ÿ‰ºó‘Ô•Û‘¶
 
 MAIN_EX int blastImg[BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y];	// ”š”­‰æ‘œID
-MAIN_EX int eShotSound;
-MAIN_EX int blastSound;
+MAIN_EX int eShotSound;					// “G‚Ì’e‚ÌŒø‰Ê‰¹
+MAIN_EX int blastSound;					// ”š”­‰¹
+
+MAIN_EX Vector2 shake;					// ‰æ–Ê‚ğ—h‚ç‚·
 
 //=======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾================================
 

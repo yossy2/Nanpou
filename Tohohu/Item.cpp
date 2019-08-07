@@ -69,7 +69,7 @@ void ItemDraw(void)
 	{
 		if (powUpItem[i].flag)
 		{
-			DrawRotaGraphF(powUpItem[i].pos.x + GAME_SCREEN_X, powUpItem[i].pos.y + GAME_SCREEN_Y, 1.0f, (double)((float)powUpItem[i].rotaAngle * PI / 180.0f), powUpItemImage, true, false);
+			DrawRotaGraphF(powUpItem[i].pos.x, powUpItem[i].pos.y, 1.0f, (double)((float)powUpItem[i].rotaAngle * PI / 180.0f), powUpItemImage, true, false);
 		}
 	}
 }

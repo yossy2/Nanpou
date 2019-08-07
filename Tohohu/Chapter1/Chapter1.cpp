@@ -91,12 +91,14 @@ void Chapter1(void)
 void DrawChapter1(void)
 {
 	ClsDrawScreen();
+	SetDrawScreen(gameScreen);
 	for (int i = 0; i < 2; i++)
 	{
-		DrawGraph(GAME_SCREEN_X + bgPos[i].x, GAME_SCREEN_Y + bgPos[i].y, bg1Image, false);
+		DrawGraph(bgPos[i].x,bgPos[i].y, bg1Image, false);
 	}
+	// ½×²Ñ‚Æ”wŒi‚ÌF‚ªˆê‚¾‚©‚çˆÃ‚­‚·‚é
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 70);
-	DrawBox(GAME_SCREEN_X, GAME_SCREEN_Y, GAME_SCREEN_SIZE_X + 1 + GAME_SCREEN_X, GAME_SCREEN_SIZE_Y +  1 + GAME_SCREEN_Y, 0x000000, true);
+	DrawBox(0, 0, GAME_SCREEN_SIZE_X + 1, GAME_SCREEN_SIZE_Y +  1, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	PlayerDraw();
@@ -115,6 +117,8 @@ void DrawChapter1(void)
 	// ±²ÃÑ•`‰æ
 	ItemDraw();
 
+	SetDrawScreen(DX_SCREEN_BACK);
+	ClsDrawScreen();
 	GameDraw();
 
 	ScreenFlip();

@@ -122,13 +122,13 @@ void DrawEnemy1_B(void)
 	{
 		if (enemy1B[i].drawFlag)
 		{
-			DrawRotaGraphF(enemy1B[i].pos.x + GAME_SCREEN_X, enemy1B[i].pos.y + GAME_SCREEN_Y,
+			DrawRotaGraphF(enemy1B[i].pos.x, enemy1B[i].pos.y,
 				1.0, 0.0, enemyImg1B[(enemy1B[i].animCount / 5) % ENEMY1_B_ANIM_MAX], true, false);
 			enemy1B[i].animCount++;
 		}
 		else if (enemy1B[i].blastFlag)
 		{
-			DrawRotaGraphF(enemy1B[i].pos.x + GAME_SCREEN_X, enemy1B[i].pos.y + GAME_SCREEN_Y,
+			DrawRotaGraphF(enemy1B[i].pos.x, enemy1B[i].pos.y,
 				1.0, 0.0, blastImg[enemy1B[i].animCount % (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y)], true, false);
 			enemy1B[i].animCount++;
 			if (enemy1B[i].animCount >= (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y))

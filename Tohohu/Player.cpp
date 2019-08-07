@@ -80,12 +80,12 @@ void PlayerDraw(void)
 	PlayerShotDraw();
 	if (player.drawFlag)
 	{
-		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+		DrawRotaGraphF(player.pos.x, player.pos.y,
 			1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
 	}
 	else if (player.blastFlag)
 	{
-		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+		DrawRotaGraphF(player.pos.x, player.pos.y,
 			1.0, 0.0, blastImg[player.animCnt % (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y)], true, false);
 		player.animCnt++;
 		if (player.animCnt >= (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y))
@@ -98,7 +98,7 @@ void PlayerDraw(void)
 	{
 		if (revivalCnt > PLAYER_REVIVAL_CNT && ((revivalCnt / 2) % 2))
 		{
-			DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+			DrawRotaGraphF(player.pos.x, player.pos.y,
 				1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
 		}
 		else if (revivalCnt == PLAYER_REVIVAL_CNT)
