@@ -33,7 +33,7 @@ void PlayerShotInit(void)
 		pShot[i].flag = false;
 		pShot[i].pos = { 0.0f, 0.0f };
 		pShot[i].speed = PSHOT_DEF_SPEED;
-		pShot[i].rotaAngle = 0.0f;
+		pShot[i].rotaAngle = 0;
 		pShot[i].move = { 0.0f, 0.0f };
 		pShot[i].endPos = 0;
 	}
@@ -50,6 +50,7 @@ void PlayerShotDraw(void)
 			if (pShot[i].shotID == PSHOT_ID_FIRE)
 			{
 				rate = (double)player.shotPowUp;
+				pShot[i].rotaAngle++;
 			}
 			else
 			{

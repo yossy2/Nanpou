@@ -94,7 +94,7 @@ void DrawChapter1(void)
 	SetDrawScreen(gameScreen);
 	for (int i = 0; i < 2; i++)
 	{
-		DrawGraph(bgPos[i].x,bgPos[i].y, bg1Image, false);
+		DrawGraph((int)bgPos[i].x,(int)bgPos[i].y, bg1Image, false);
 	}
 	// ½×²Ñ‚Æ”wŒi‚ÌF‚ªˆê‚¾‚©‚çˆÃ‚­‚·‚é
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 70);

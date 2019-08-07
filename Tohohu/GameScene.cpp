@@ -57,7 +57,7 @@ void GameScene(void)
 void GameDraw(void)
 {
 	// ¹Þ°Ñ‰æ–Ê˜g
-	DrawGraph(GAME_SCREEN_X + shake.x, GAME_SCREEN_Y + shake.y, gameScreen, true);
+	DrawGraph(GAME_SCREEN_X + (int)shake.x, GAME_SCREEN_Y + (int)shake.y, gameScreen, true);
 	DrawGraph(0, 0, systemImg, true);
 	DrawScore();
 }

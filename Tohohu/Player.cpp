@@ -24,7 +24,7 @@ bool PlayerInit(void)
 	player.revivalFlag = false;
 	player.shotPowUp = 1;
 	player.animCnt = 0;
-	player.shotPtn = PSHOT_ID_FIRE;
+	player.shotPtn = PSHOT_ID_NORMAL;
 
 	// ·°Ý’è
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
@@ -33,6 +33,7 @@ bool PlayerInit(void)
 	keyList.move[DIR_LEFT] = KEY_INPUT_LEFT;
 	keyList.shot = KEY_INPUT_Z;
 	keyList.slow = KEY_INPUT_LCONTROL;
+	keyList.change = KEY_INPUT_SPACE;
 
 	// ÌßÚ²Ô°¼®¯Ä‚Ì‰Šú‰»
 	PlayerShotInit();
@@ -101,6 +102,15 @@ void PlayerCtl(void)
 				break;
 			}
 			
+		}
+	}
+
+	if (keyFram[keyList.change] == 1)
+	{
+		player.shotPtn = (PSHOT_ID)((int)player.shotPtn + 1);
+		if (player.shotPtn >= PSHOT_ID_MAX)
+		{
+			player.shotPtn = PSHOT_ID_NORMAL;
 		}
 	}
 	pShotCnt++;

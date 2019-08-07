@@ -50,6 +50,7 @@ struct KeyList
 	int bomb;			// ÎŞÑA·¬İ¾Ù
 	int pause;			// Îß°½Ş
 	int slow;			// ’á‘¬
+	int change;			// –‚–@Áªİ¼Ş
 };
 
 // externéŒ¾
