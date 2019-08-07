@@ -7,6 +7,7 @@
 #include "Enemy1_b.h"
 #include <Player.h>
 #include <PlayerShot.h>
+#include <UiManeger.h>
 
 int bossImg1[BOSS1_ANIM_MAX];		// ‰æ‘œID
 int bossLifeImg;					// ÎÞ½‚ÌHPÊÞ°
@@ -17,7 +18,8 @@ void (*boss1AtkFunc)(void);			// UŒ‚ŠÖ”Îß²ÝÀ
 int bossBlastImg[BOSS1_BLAST_ANIM_MAX];	// ÎÞ½—p‚Ì”š”­‰æ‘œ
 bool blastFlag;							// ”š”­Ì×¸Þ
 int blastCnt;							// ”š”­¶³ÝÄ
-int bossBlastSound;							// ”š”­Œø‰Ê‰¹
+int bossBlastSound;						// ”š”­Œø‰Ê‰¹
+BOSS_LIFE color;
 
 // ‰Šú‰»
 bool BossInit1(void)
@@ -37,7 +39,7 @@ bool BossInit1(void)
 		return false;
 	}
 
-	bossLifeImg = LoadGraph("image/enemyLife.png");
+	bossLifeImg = LoadGraph("image/enemyLife2.png");
 	if (bossLifeImg == -1)
 	{
 		AST();
@@ -62,6 +64,7 @@ bool BossInit1(void)
 	atkAngle = 90;
 	boss1AtkFunc = BossAtk1_1;
 	blastFlag = false;
+	color = BOSS_LIFE_BLUE;
 	blastCnt = 0;
 
 	return true;
@@ -159,6 +162,8 @@ void BossCtl1(void)
 						boss1.drawFlag = false;
 						PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
 						blastFlag = true;
+						ScoreUpdate(10000);
+						break;
 					}
 				}
 			}
@@ -176,7 +181,7 @@ void BossDraw1(void)
 			1.0, 0.0, bossImg1[(boss1.animCount / BOSS1_ANIM_SPEED) % BOSS1_ANIM_MAX], true, false);
 
 		// HP
-		DrawRectGraph(0, 0, 0, 0, 
+		DrawRectGraph(0, 0, 0, 10 * color, 
 			(int)(boss1.life * GAME_SCREEN_SIZE_X / BOSS1_LIFE_MAX), 10, bossLifeImg, true, false);
 	}
 
@@ -213,6 +218,7 @@ void BossAtk1_1(void)
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_2;
 		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
+		color = BOSS_LIFE_GREEN;
 	}
 
 	if ((boss1.moveCount / 60) % 3 != 1)
@@ -268,6 +274,7 @@ void BossAtk1_2(void)
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_3;
 		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
+		color = BOSS_LIFE_YELLOW;
 	}
 
 	if (fabs((int)(boss1.pos.x - (float)GAME_SCREEN_SIZE_X / 2.0f)) > 0 ||
@@ -324,6 +331,7 @@ void BossAtk1_3(void)
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_4;
 		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
+		color = BOSS_LIFE_RED;
 	}
 
 	if (boss1.moveCount < 180 || boss1.moveCount % 2 != 0)

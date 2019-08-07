@@ -73,9 +73,13 @@ void UiInit(void)
 }
 
 // ½º±ŒvŽZ
-void ScoreUpdate(void)
+void ScoreUpdate(int addScr)
 {
-
+	score += addScr;
+	if (highScore < score)
+	{
+		highScore = score;
+	}
 }
 
 // •`‰æ

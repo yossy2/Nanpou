@@ -15,6 +15,16 @@
 
 #define BOSS1_SHOT_OFSET 20.0f	// 弾が出る位置を口の位置に調節
 
+// enum
+// ﾎﾞｽのHPの色
+enum BOSS_LIFE
+{
+	BOSS_LIFE_BLUE,
+	BOSS_LIFE_GREEN,
+	BOSS_LIFE_YELLOW,
+	BOSS_LIFE_RED
+};
+
 // extern宣言
 #ifdef BOSS1_DEF
 #define BOSS1_EX

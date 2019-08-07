@@ -6,6 +6,7 @@
 #include "Enemy1_b.h"
 #include <Player.h>
 #include <PlayerShot.h>
+#include <UiManeger.h>
 #include "Item.h"
 
 int enemyImg1B[ENEMY1_B_ANIM_MAX];				// “GB‚Ì‰æ‘œID
@@ -93,6 +94,7 @@ void EnemyCtl1_B(void)
 								ItemDrop(enemy1B[i].pos);
 							}
 							PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
+							ScoreUpdate(100);
 							break;
 						}
 					}

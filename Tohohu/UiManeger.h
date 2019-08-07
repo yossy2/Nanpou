@@ -11,5 +11,5 @@
 
 // =======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾=========================
 void UiInit(void);				// ‰Šú‰»
-void ScoreUpdate(void);			// ˆ—
+void ScoreUpdate(int addScr);			// ˆ—
 void DrawScore(void);			// •`‰æ
