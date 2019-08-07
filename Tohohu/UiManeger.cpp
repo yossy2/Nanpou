@@ -85,14 +85,14 @@ void ScoreUpdate(int addScr)
 // •`‰æ
 void DrawScore(void)
 {
-	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 30, highScoreImage, true);
+	DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 30, highScoreImage, true);
 
 	int scr = (highScore >= 10000000000 ? 9999999999 : highScore);
 
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
 		int drawNum = scr % 10;
-		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 70, scoreNumImage[drawNum], true);
+		DrawGraphF(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 70, scoreNumImage[drawNum], true);
 		scr = (scr - drawNum) / 10; 
 	}
 	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 110, scoreImage, true);
@@ -102,22 +102,22 @@ void DrawScore(void)
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
 		int drawNum = scr % 10;
-		DrawGraph(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[drawNum], true);
+		DrawGraphF(SCREEN_SIZE_X - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), 150, scoreNumImage[drawNum], true);
 		scr = (scr - drawNum) / 10;
 	}
 	for (int i = 0; i < PLAYER_DEF_LIFE; i++)
 	{
 		if (player.life >= i + 1)
 		{
-			DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, lifeImage[1], true);
+			DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, lifeImage[1], true);
 		}
 		else
 		{
-			DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, lifeImage[0], true);
+			DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, lifeImage[0], true);
 		}
 	}
 	DrawGraph(POWGARGE_POS_X - 3, 290 - 3, powGaugeFrameImage, false);
 	DrawRectGraph(POWGARGE_POS_X, 290, 0, 0, player.power, 20,powGaugeImage, false, false);
-	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 330, powLevelImage, true);
-	DrawGraph(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 250, 328, scoreNumImage[player.shotPowUp], true);
+	DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 330, powLevelImage, true);
+	DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 250, 328, scoreNumImage[player.shotPowUp], true);
 }

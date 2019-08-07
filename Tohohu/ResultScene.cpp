@@ -13,6 +13,8 @@ int lifeLogoImg;			// ×²ÌÛºÞ
 int powLogoImg;			// ÊßÜ°ÛºÞ
 int symbImg[2];				// •„†
 int totalImg;				// Ä°ÀÙÛºÞ
+int oldScore;				// ¹Þ°Ñ¸Ø±‚Ü‚½‚Í¹Þ°Ñµ°ÊÞ°Žž‚Ì½º±
+int totalScore;
 
 bool CheckClear;			// ¹Þ°Ñ¸Ø±‚©‚Ç‚¤‚©‚ð¹Þ°Ñ¼°Ý‚©‚çŽó‚¯Žæ‚é
 
@@ -57,6 +59,8 @@ void ResultInit(bool flag)
 		return;
 	}
 
+	oldScore = score;
+	totalScore = score + (player.life * 1000) + (player.power * 100);
 	CheckClear = flag;
 	sceneFunc = ResultScene;
 }
@@ -91,7 +95,7 @@ void ResultSceDraw(bool flag)
 
 	DrawGraphF(GAME_SCREEN_X + 80, GAME_SCREEN_Y + 270, scoreImage, true);
 
-	int tmpNum = (score >= 10000000000 ? 9999999999 : score);
+	int tmpNum = oldScore;
 
 	for (int i = 0; i < SCORE_NUM; i++)
 	{
@@ -168,7 +172,22 @@ void ResultSceDraw(bool flag)
 	}
 	if (framCnt >= 510)
 	{
+		DrawGraphF(GAME_SCREEN_X + 60, GAME_SCREEN_Y + 600, totalImg, true);
+		tmpNum = (score >= 10000000000 ? 9999999999 : score);
 
+		for (int i = 0; i < SCORE_NUM; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF((GAME_SCREEN_SIZE_X - 50) - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), GAME_SCREEN_Y + 600, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 570)
+	{
+		if (score < totalScore)
+		{
+			ScoreUpdate(100);
+		}
 	}
 
 	DrawScore();
