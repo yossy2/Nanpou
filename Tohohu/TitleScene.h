@@ -1,5 +1,8 @@
 #pragma once
 
+#define TITLE_LOGO_SIZE_X 900
+#define TITLE_LOGO_SIZE_Y 300
+
 #define MENU_IMAGE_SIZE_X 300
 #define MENU_IMAGE_SIZE_Y 64
 

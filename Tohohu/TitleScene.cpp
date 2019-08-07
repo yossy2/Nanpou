@@ -10,6 +10,7 @@ int titleBgImage;					// À²ÄÙ‚Ì”wŒi
 int menuImage[MENU_ID_MAX];		// ÒÆ­°ˆê——
 int menuWakuImage[MENU_ID_MAX];	// ÒÆ­°‚Ì˜g
 int configImage;					// ·°ºİÌ¨¸Ş(‘€ìà–¾)
+int titleImage;					// À²ÄÙÛºŞ
 
 // »³İÄŞ—p
 int titleBgm;						// À²ÄÙ—pBGM
@@ -56,6 +57,13 @@ bool TitleInit(void)
 
 	// ºİÌ¨¸Ş
 	if ((configImage = LoadGraph("image/config.png")) == -1)
+	{
+		AST();
+		rtnFlag = false;
+	}
+
+	// À²ÄÙÛºŞ
+	if ((titleImage = LoadGraph("image/title.png")) == -1)
 	{
 		AST();
 		rtnFlag = false;
@@ -151,6 +159,8 @@ void TitleDraw(void)
 	ClsDrawScreen();
 
 	DrawGraph(0, 0, titleBgImage, false);
+
+	DrawGraph((SCREEN_SIZE_X - TITLE_LOGO_SIZE_X) / 2, 50, titleImage, true);
 
 	for (int i = 0; i < MENU_ID_MAX; i++)
 	{

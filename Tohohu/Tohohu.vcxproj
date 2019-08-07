@@ -152,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerShot.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="UiManeger.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShot.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="UiManeger.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include <Chapter1/Chapter1.h>
 #include "UiManeger.h"
 #include "Item.h"
+#include "ResultScene.h"
 
 // ¹Ş°Ñ¼°İ‰Šú‰»
 bool GameInit(void)
@@ -44,6 +45,10 @@ void GameScene(void)
 	ItemCtl();
 	PlayerCtl();
 	chapterFunc();
+	if (player.life <= 0)
+	{
+		ResultInit(false);
+	}
 }
 
 // ¹Ş°Ñ¼°İ•`‰æ
