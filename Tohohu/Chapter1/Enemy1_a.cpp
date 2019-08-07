@@ -100,7 +100,7 @@ void EnemyCtl1_A(void)
 		{
 			if (enemy1A[i].initData.count == framCnt)
 			{
-				enemy1A[i].life = 2;
+				enemy1A[i].life = 1;
 				enemy1A[i].drawFlag = true;
 			}
 		}

@@ -5,7 +5,7 @@
 #define PSHOT_NUM 50				// 弾の描画確保
 #define PSHOT_DEF_SPEED 20			// 弾速
 #define PSHOT_TIME_NORMAL 5			// 通常攻撃連射間隔
-#define PSHOT_TIME_FIRE 10			// 炎魔法攻撃連射間隔
+#define PSHOT_TIME_FIRE 20			// 炎魔法攻撃連射間隔
 #define PSHOT_HIT_RAD 8				// 当たり判定
 
 struct PlayerShot

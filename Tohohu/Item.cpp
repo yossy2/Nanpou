@@ -44,7 +44,7 @@ void ItemCtl(void)
 	{
 		if (powUpItem[i].flag)
 		{
-			if (CheckHitObj(powUpItem[i].pos, ITEM_HIT_RAD, player.pos, PLAYER_SIZE_X / 2))
+			if (CheckHitObj(powUpItem[i].pos, ITEM_HIT_RAD, player.pos, PLAYER_SIZE_X / 2) && player.drawFlag)
 			{
 				PlayerPowUp();
 				powUpItem[i].flag = false;

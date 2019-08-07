@@ -453,7 +453,7 @@ void PlayerAttack2(void)
 		if (!pShot[i].flag)
 		{
 			pShot[i].rad = (float)(PSHOT_HIT_RAD * player.shotPowUp);
-			pShot[i].damage = 5;
+			pShot[i].damage = 10;
 			PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
 			pShot[i].speed = (float)PSHOT_DEF_SPEED / 2.0f;
 			pShot[i].shotID = PSHOT_ID_FIRE;
