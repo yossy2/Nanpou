@@ -73,7 +73,7 @@ struct EShot
 	float hitRad;	// 当たり判定の円の半径
 	int rotaAngle;	// 回転角度(度)
 	int count;		// 移動用のｶｳﾝﾄ
-	bool drwaFlag;		// 表示ﾌﾗｸﾞ
+	bool drawFlag;		// 表示ﾌﾗｸﾞ
 	bool blastFlag;	// 爆発ﾌﾗｸﾞ
 };
 
@@ -100,7 +100,7 @@ struct Boss
 	Vector2 move;	// 移動量
 	float speed;
 	float hitRad;	// 当たり判定の円の半径
-	float moveAngle;// 移動角度(度)
+	int moveAngle;// 移動角度(度)
 	int moveCount;	// 移動し始めてからのｶｳﾝﾄ
 	int animCount;	// ｱﾆﾒｰｼｮﾝｶｳﾝﾄ
 	int life;		// 残り体力
@@ -122,6 +122,7 @@ MAIN_EX int framCnt;					// そのｼｰﾝになってからのﾌﾚｰﾑ数
 MAIN_EX int keyFram[256];				// ｷｰの押下状態保存
 
 MAIN_EX int blastImg[BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y];	// 爆発画像ID
+MAIN_EX int eShotSound;
 
 //=======================関数ﾌﾟﾛﾄﾀｲﾌﾟ宣言================================
 

@@ -56,6 +56,16 @@ void EnemyCtl1_A(void)
 				enemy1A[i].drawFlag = false;
 			}
 
+			// Ž©‹@‚Æ‚Ì“–‚½‚è”»’è
+			if (player.drawFlag)
+			{
+				if (CheckHitObj(enemy1A[i].pos, (float)ENEMY1_A_SIZE_X / 2.0f, player.pos, PLAYER_HIT_RAD))
+				{
+					PlayerDamage();
+					enemy1A[i].drawFlag = false;
+				}
+			}
+
 			// ’e‚Æ‚Ì“–‚½‚è”»’è
 			for (int k = 0; k < PSHOT_NUM; k++)
 			{
@@ -122,9 +132,9 @@ void EnemyAttack1_A(Vector2 pos)
 
 	for (int i = 0; i < ESHOT1_A_NUM; i++)
 	{
-		if (!eShot1A[i].drwaFlag)
+		if (!eShot1A[i].drawFlag)
 		{
-			eShot1A[i].drwaFlag = true;
+			eShot1A[i].drawFlag = true;
 			eShot1A[i].pos = pos;
 			eShot1A[i].count = 0;
 			eShot1A[i].moveAngle = (int)((count - 2) * 25 + atan2f(player.pos.y - pos.y, player.pos.x - pos.x) * 180.0f / PI);
@@ -132,6 +142,7 @@ void EnemyAttack1_A(Vector2 pos)
 			count++;
 			if (count >= 5)
 			{
+				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
 				return;
 			}
 		}

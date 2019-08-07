@@ -20,7 +20,7 @@ bool BShotInit(void)
 
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		bShot1[i].drwaFlag = false;
+		bShot1[i].drawFlag = false;
 	}
 
 	return true;
@@ -31,7 +31,7 @@ void BShotCtl1(void)
 {
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (bShot1[i].drwaFlag)
+		if (bShot1[i].drawFlag)
 		{
 			bShot1[i].move.x = bShot1[i].speed * cosf(bShot1[i].moveAngle * PI / 180.0f);
 			bShot1[i].move.y = bShot1[i].speed * sinf(bShot1[i].moveAngle * PI / 180.0f);
@@ -44,14 +44,14 @@ void BShotCtl1(void)
 				if (CheckHitObj(bShot1[i].pos, BSHOT1_SIZE_X / 3, player.pos, PLAYER_HIT_RAD))
 				{
 					PlayerDamage();
-					bShot1[i].drwaFlag = false;
+					bShot1[i].drawFlag = false;
 				}
 			}
 
 			// ‰æ–ÊŠO”»’è
 			if (isMoveOut(bShot1[i].pos))
 			{
-				bShot1[i].drwaFlag = false;
+				bShot1[i].drawFlag = false;
 			}
 		}
 	}
@@ -62,7 +62,7 @@ void BShotDraw1(void)
 {
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (bShot1[i].drwaFlag)
+		if (bShot1[i].drawFlag)
 		{
 			DrawRotaGraphF(bShot1[i].pos.x + GAME_SCREEN_X, bShot1[i].pos.y + GAME_SCREEN_Y,
 				1.0, (double)((float)bShot1[i].rotaAngle * PI / 180.0f), bShotImg1, true, false);

@@ -9,6 +9,7 @@
 #include "Item.h"
 
 int enemyImg1B[ENEMY1_B_ANIM_MAX];				// “GB‚Ì‰æ‘œID
+int slimeSound;
 void(*enemyMove1B[ENEMY1_B_MOVE_PTN_MAX])(Enemy*) = { EnemyMove1_B_0,EnemyMove1_B_1 ,EnemyMove1_B_2,EnemyMove1_B_3};	// ˆÚ“®‚ÌŽí—Þ
 
 // ‰Šú‰»
@@ -28,6 +29,13 @@ bool EnemyInit1_B(void)
 	if (LoadDivGraph("image/enemy1_B_anim.png", 
 					  ENEMY1_B_ANIM_MAX, ENEMY1_B_ANIM_MAX, 1,
 					  ENEMY1_B_SIZE_X, ENEMY1_B_SIZE_Y, enemyImg1B) == -1)
+	{
+		AST();
+		return false;
+	}
+
+	// Œø‰Ê‰¹
+	if ((slimeSound = LoadSoundMem("se/slime.mp3")) == -1)
 	{
 		AST();
 		return false;
@@ -55,6 +63,16 @@ void EnemyCtl1_B(void)
 			if (isMoveOut(enemy1B[i].pos))
 			{
 				enemy1B[i].drawFlag = false;
+			}
+
+			// Ž©‹@‚Æ‚Ì“–‚½‚è”»’è
+			if (player.drawFlag)
+			{
+				if (CheckHitObj(enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f, player.pos, PLAYER_HIT_RAD))
+				{
+					PlayerDamage();
+					enemy1B[i].drawFlag = false;
+				}
 			}
 
 			if (enemy1B[i].initData.movePtn != 2 && enemy1B[i].initData.movePtn != 3)
@@ -183,7 +201,7 @@ void EnemyMove1_B_2(Enemy *enemy)
 // ÎÞ½“oê
 void EnemyMove1_B_3(Enemy *enemy)
 {
-	if (enemy->pos.y < (float)(enemy->initData.pos.y))
+	if (enemy->pos.y < enemy->initData.pos.y)
 	{
 		enemy->pos.y += enemy->move.y;
 	}

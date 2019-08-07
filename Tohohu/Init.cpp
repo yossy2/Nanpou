@@ -22,6 +22,13 @@ bool SysInit(void)
 	
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	// Œø‰Ê‰¹
+	if ((eShotSound = LoadSoundMem("se/eShot.mp3")) == -1)
+	{
+		AST();
+		return false;
+	}
+
 	// •Ï”‰Šú‰»
 	sceneFunc = TitleScene;
 	framCnt = 0;

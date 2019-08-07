@@ -163,7 +163,7 @@ void BossDraw1(void)
 			1.0, 0.0, bossImg1[(boss1.animCount / BOSS1_ANIM_SPEED) % BOSS1_ANIM_MAX], true, false);
 
 		// HP
-		DrawRectGraph(GAME_SCREEN_X, 20, 0, 0, 
+		DrawRectGraph((int)GAME_SCREEN_X, 20, 0, 0, 
 			(int)(boss1.life * GAME_SCREEN_SIZE_X / BOSS1_LIFE_MAX), 10, bossLifeImg, true, false);
 	}
 
@@ -224,14 +224,15 @@ void BossAtk1_1(void)
 	// ’e‚ðˆê”­
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].drwaFlag)
+		if (!bShot1[i].drawFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = RAD_TO_DEG(angle) + ((rand() % 11) - 5);
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 4.0f;
-			bShot1[i].drwaFlag = true;
+			bShot1[i].drawFlag = true;
+			PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
 			return;
 		}
 	}
@@ -248,8 +249,8 @@ void BossAtk1_2(void)
 		boss1AtkFunc = BossAtk1_3;
 	}
 
-	if (fabsf((int)(boss1.pos.x - (float)GAME_SCREEN_SIZE_X / 2.0f)) > 0 ||
-		fabsf((int)(boss1.pos.y - (float)GAME_SCREEN_SIZE_Y / 2.0f)) > 0)
+	if (fabs((int)(boss1.pos.x - (float)GAME_SCREEN_SIZE_X / 2.0f)) > 0 ||
+		fabs((int)(boss1.pos.y - (float)GAME_SCREEN_SIZE_Y / 2.0f)) > 0)
 	{
 		MoveCenter();
 		boss1.moveCount = 0;
@@ -273,18 +274,19 @@ void BossAtk1_2(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].drwaFlag)
+		if (!bShot1[i].drawFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle + cnt * 10;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].drwaFlag = true;
+			bShot1[i].drawFlag = true;
 			cnt++;
 			if (cnt >= 36)
 			{
 				atkAngle += 5;
+				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
 				return;
 			}
 		}
@@ -310,19 +312,20 @@ void BossAtk1_3(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].drwaFlag)
+		if (!bShot1[i].drawFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].drwaFlag = true;
+			bShot1[i].drawFlag = true;
 			atkAngle += 120;
 			cnt++;
 			if (cnt >= 3)
 			{
 				atkAngle += 13;
+				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
 				return;
 			}
 		}
@@ -358,18 +361,19 @@ void BossAtk1_4(void)
 	int cnt = 0;
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (!bShot1[i].drwaFlag)
+		if (!bShot1[i].drawFlag)
 		{
 			bShot1[i].count = 0;
 			bShot1[i].moveAngle = atkAngle + cnt * 20;
 			bShot1[i].rotaAngle = 0;
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 2.0f;
-			bShot1[i].drwaFlag = true;
+			bShot1[i].drawFlag = true;
 			cnt++;
 			if (cnt >= 18)
 			{
 				atkAngle += 10;
+				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
 				return;
 			}
 		}
@@ -394,10 +398,10 @@ void ShotDelete(void)
 {
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
-		if (bShot1[i].drwaFlag)
+		if (bShot1[i].drawFlag)
 		{
 			bShot1[i].count = 0;
-			bShot1[i].drwaFlag = false;
+			bShot1[i].drawFlag = false;
 			bShot1[i].blastFlag = true;
 		}
 	}
