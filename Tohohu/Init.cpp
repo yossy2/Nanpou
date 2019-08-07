@@ -3,6 +3,7 @@
 #include "Init.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "UiManeger.h"
 
 // ºΩ√—ånèâä˙âª
 bool SysInit(void)
@@ -42,6 +43,7 @@ bool SysInit(void)
 	{
 		keyFram[i] = 0;
 	}
+	highScore = HIGHSCORE_DEF;
 
 	TitleInit();
 

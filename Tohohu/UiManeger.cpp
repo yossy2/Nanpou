@@ -67,8 +67,6 @@ void UiInit(void)
 		AST();
 		return;
 	}
-
-	highScore = HIGHSCORE_DEF;
 	score = 0;
 }
 

@@ -24,6 +24,7 @@ bool EnemyInit1_A(void)
 		enemy1A[i].blastFlag = false;
 		enemy1A[i].pos = enemy1A[i].initData.pos;
 		enemy1A[i].moveAngle = enemy1A[i].initData.moveAngle;
+		enemy1A[i].moveCount = 0;
 	}
 
 	// ‰æ‘œ“Ç‚İ‚İ

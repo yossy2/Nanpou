@@ -21,6 +21,8 @@ bool BShotInit(void)
 	for (int i = 0; i < BSHOT1_NUM; i++)
 	{
 		bShot1[i].drawFlag = false;
+		bShot1[i].blastFlag = false;
+
 	}
 
 	return true;

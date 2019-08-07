@@ -1,3 +1,5 @@
+#define CP1_DEF
+
 #include <DxLib.h>
 #include <main.h>
 #include <GameScene.h>
@@ -13,9 +15,6 @@
 int bg1Image;
 Vector2 bgPos[2];
 int bgmVol;
-
-int chapter1Bgm;
-int bossBgm;
 
 // 1Í‰Šú‰»
 bool ChapterInit1(void)
@@ -147,5 +146,19 @@ void Chapter1Sound(void)
 	else if (boss1.drawFlag && CheckSoundMem(bossBgm) == 0)
 	{
 		PlaySoundMem(bossBgm, DX_PLAYTYPE_LOOP, true);
+	}
+}
+
+// ‰¹Šy‚ğ~‚ß‚é
+void StopBgm(void)
+{
+	if (CheckSoundMem(chapter1Bgm) != 0)
+	{
+		StopSoundMem(chapter1Bgm);
+	}
+
+	if (CheckSoundMem(bossBgm) != 0)
+	{
+		StopSoundMem(bossBgm);
 	}
 }

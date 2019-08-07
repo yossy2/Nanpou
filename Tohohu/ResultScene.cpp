@@ -5,6 +5,7 @@
 #include "TitleScene.h"
 #include "UiManeger.h"
 #include "Player.h"
+#include <Chapter1/Chapter1.h>
 
 // =============≤“∞ºﬁóp=====================
 int gameClearImage;		// πﬁ∞—∏ÿ±ÇÃ€∫ﬁ
@@ -71,6 +72,7 @@ void ResultScene(void)
 	ResultSceDraw(CheckClear);
 	if (keyFram[KEY_INPUT_Z] == 1)
 	{
+		StopBgm();
 		TitleInit();
 	}
 }
