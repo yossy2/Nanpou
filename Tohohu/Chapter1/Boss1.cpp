@@ -8,6 +8,7 @@
 #include <Player.h>
 #include <PlayerShot.h>
 #include <UiManeger.h>
+#include <ResultScene.h>
 
 int bossImg1[BOSS1_ANIM_MAX];		// ‰æ‘œID
 int bossLifeImg;					// ÎÞ½‚ÌHPÊÞ°
@@ -196,6 +197,10 @@ void BossDraw1(void)
 			blastCnt = 0;
 			shake = { 0,0 };
 			blastFlag = false;
+			if (boss1.life <= 0)
+			{
+				ResultInit(true);
+			}
 		}
 		else if (((blastCnt / 2) % BOSS1_BLAST_ANIM_MAX) == 7 && (boss1.life > 0))
 		{
