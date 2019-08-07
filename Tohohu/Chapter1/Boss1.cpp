@@ -118,7 +118,7 @@ void BossCtl1(void)
 						break;
 					}
 					
-					enemy1B[i].move.y = 4;
+					enemy1B[i].moveAngle = 90;
 					enemy1B[i].initData.movePtn = 3;
 					enemy1B[i].moveCount = 0;
 					enemy1B[i].drawFlag = true;
