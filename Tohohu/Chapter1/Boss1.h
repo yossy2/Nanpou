@@ -1,6 +1,6 @@
 #pragma once
 
-#define BOSS1_CNT 2500		// 无絺獜o尰偡傞腾把
+#define BOSS1_CNT 2900		// 无絺獜o尰偡傞腾把
 #define BOSS1_ANIM_MAX 4	// 宿藿撞褌瘫埔凹悢
 #define BOSS1_ANIM_SPEED 10	// 宿藿撞褌瘫埔凹剿甙霓
 

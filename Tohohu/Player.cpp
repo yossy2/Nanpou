@@ -58,9 +58,13 @@ void PlayerCtl(void)
 	{
 		player.shotPowUp = 1;
 	}
-	else if (player.power >= 100)
+	else if (player.power >= 100 && player.power < 400)
 	{
 		player.shotPowUp = 2;
+	}
+	else if (player.power >= 400)
+	{
+		player.shotPtn = PSHOT_WIDE;
 	}
 
 	if (player.drawFlag || (player.revivalFlag && (revivalCnt > PLAYER_REVIVAL_CNT)))

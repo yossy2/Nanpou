@@ -9,7 +9,8 @@
 #include "Item.h"
 
 int enemyImg1A[ENEMY1_A_ANIM_MAX];			// “GA‚Ì‰æ‘œID
-void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1, EnemyMove1_A_2, EnemyMove1_A_3 , EnemyMove1_A_4 };	// ˆÚ“®‚ÌŽí—Þ
+void(*enemyMove1A[ENEMY1_A_MOVE_PTN_MAX])(Enemy*) = {EnemyMove1_A_0, EnemyMove1_A_1, EnemyMove1_A_2, EnemyMove1_A_3 , EnemyMove1_A_4 ,
+														EnemyMove1_A_5 , EnemyMove1_A_6 , EnemyMove1_A_7 , EnemyMove1_A_8 };	// ˆÚ“®‚ÌŽí—Þ
 
 // ‰Šú‰»
 bool EnemyInit1_A(void)
@@ -243,5 +244,47 @@ void EnemyMove1_A_4(Enemy *enemy)
 	else if (enemy->moveCount > 100)
 	{
 		enemy->pos.y -= ENEMY1_A_SPEED;
+	}
+}
+
+// ˆÚ“®5
+void EnemyMove1_A_5(Enemy *enemy)
+{
+	enemy->pos.x += ENEMY1_A_SPEED;
+	if (enemy->moveCount == 100)
+	{
+		EnemyAttack1_A(enemy->pos);
+	}
+}
+
+// ˆÚ“®6
+void EnemyMove1_A_6(Enemy *enemy)
+{
+	enemy->pos.x -= ENEMY1_A_SPEED;
+	if (enemy->moveCount == 100)
+	{
+		EnemyAttack1_A(enemy->pos);
+	}
+}
+
+// ˆÚ“®7
+void EnemyMove1_A_7(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	if (enemy->moveCount == 100)
+	{
+		EnemyAttack1_A(enemy->pos);
+	}
+}
+
+// ˆÚ“®8
+void EnemyMove1_A_8(Enemy *enemy)
+{
+	enemy->pos.x += enemy->move.x;
+	enemy->pos.y += enemy->move.y;
+	if (enemy->moveCount == 100)
+	{
+		EnemyAttack1_A(enemy->pos);
 	}
 }
