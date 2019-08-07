@@ -13,3 +13,14 @@
 void UiInit(void);				// 初期化
 void ScoreUpdate(int addScr);			// 処理
 void DrawScore(void);			// 描画
+
+// =======================変数ｴｸｽﾀﾝ宣言============================
+extern int highScoreImage;					// ﾊｲｽｺｱ用
+extern int scoreImage;						// ｽｺｱ用
+extern int scoreNumImage[SCORE_NUM];			// ｽｺｱ数字用
+extern int lifeImage[PLAYER_LIFE_STATS];		// 残機ﾊｰﾄ用
+extern int powGaugeImage;						// ﾊﾟﾜｰｹﾞｰｼﾞ
+extern int powGaugeFrameImage;				// ﾊﾟﾜｰｹﾞｰｼﾞのﾌﾚｰﾑ
+extern int powLevelImage;						// ﾚﾍﾞﾙ文字
+extern int highScore;							// ﾊｲｽｺｱ
+extern int score;								// ｽｺｱ

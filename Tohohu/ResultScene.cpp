@@ -4,9 +4,15 @@
 #include "ResultScene.h"
 #include "TitleScene.h"
 #include "UiManeger.h"
+#include "Player.h"
 
+// =============ｲﾒｰｼﾞ用=====================
 int gameClearImage;		// ｹﾞｰﾑｸﾘｱのﾛｺﾞ
 int gameOverImage;			// ｹﾞｰﾑｵｰﾊﾞｰのﾛｺﾞ
+int lifeLogoImg;			// ﾗｲﾌﾛｺﾞ
+int powLogoImg;			// ﾊﾟﾜｰﾛｺﾞ
+int symbImg[2];				// 符号
+int totalImg;				// ﾄｰﾀﾙﾛｺﾞ
 
 bool CheckClear;			// ｹﾞｰﾑｸﾘｱかどうかをｹﾞｰﾑｼｰﾝから受け取る
 
@@ -22,6 +28,30 @@ void ResultInit(bool flag)
 	}
 	// ｹﾞｰﾑｵｰﾊﾞｰﾛｺﾞ
 	if ((gameOverImage = LoadGraph("image/gameover.png")) == -1)
+	{
+		AST();
+		return;
+	}
+	// ﾗｲﾌ
+	if ((lifeLogoImg = LoadGraph("image/life.png")) == -1)
+	{
+		AST();
+		return;
+	}
+	// ﾊﾟﾜｰ
+	if ((powLogoImg = LoadGraph("image/power.png")) == -1)
+	{
+		AST();
+		return;
+	}
+	// 符号
+	if (LoadDivGraph("image/symbol.png", 2, 2, 1, 30, 40, symbImg) == -1)
+	{
+		AST();
+		return;
+	}
+	// ﾄｰﾀﾙﾛｺﾞ
+	if ((totalImg = LoadGraph("image/total.png")) == -1)
 	{
 		AST();
 		return;
@@ -48,17 +78,100 @@ void ResultSceDraw(bool flag)
 	ClsDrawScreen();
 	
 	DrawGraph(0, 0, systemImg, true);
-	DrawGraph(GAME_SCREEN_X, GAME_SCREEN_Y, gameScreen, true);
-	DrawScore();
+	DrawGraphF(GAME_SCREEN_X, GAME_SCREEN_Y, gameScreen, true);
 
 	if (flag)
 	{
-		DrawGraph(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 100, gameClearImage, true);
+		DrawGraphF(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 80, gameClearImage, true);
 	}
 	else
 	{
-		DrawGraph(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 100, gameOverImage, true);
+		DrawGraphF(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 80, gameOverImage, true);
 	}
+
+	DrawGraphF(GAME_SCREEN_X + 80, GAME_SCREEN_Y + 270, scoreImage, true);
+
+	int tmpNum = (score >= 10000000000 ? 9999999999 : score);
+
+	for (int i = 0; i < SCORE_NUM; i++)
+	{
+		int drawNum = tmpNum % 10;
+		DrawGraphF((GAME_SCREEN_SIZE_X - 50) - SCORE_NUM_SIZE_X - (SCORE_NUM_SIZE_X * i), GAME_SCREEN_Y + 300, scoreNumImage[drawNum], true);
+		tmpNum = (tmpNum - drawNum) / 10;
+	}
+
+	if (framCnt >= 180)
+	{
+		DrawGraphF(GAME_SCREEN_X + 70, GAME_SCREEN_Y + 400, lifeLogoImg, true);
+		DrawGraphF(GAME_SCREEN_X + 200, GAME_SCREEN_Y + 400, scoreNumImage[player.life], true);
+	}
+	if (framCnt >= 210)
+	{
+		DrawGraphF(GAME_SCREEN_X + 250, GAME_SCREEN_Y + 400, symbImg[0], true);
+		// 乗算の基数を表示
+		tmpNum = 1000;
+		for (int i = 0; i < 4; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF(((GAME_SCREEN_X + 280) + SCORE_NUM_SIZE_X * 4) - (SCORE_NUM_SIZE_X * i), GAME_SCREEN_Y + 400, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 270)
+	{
+		DrawGraphF(GAME_SCREEN_X + 400, GAME_SCREEN_Y + 450, symbImg[1], true);
+		// 加算するｽｺｱを表示
+		tmpNum = 1000 * player.life;
+		for (int i = 0; i < 4; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF(((GAME_SCREEN_X + 450) + SCORE_NUM_SIZE_X * 4) - (SCORE_NUM_SIZE_X * i), GAME_SCREEN_Y + 450, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 330)
+	{
+		tmpNum = player.power;
+		// ﾊﾟﾜｰﾛｺﾞの表示
+		DrawGraphF(GAME_SCREEN_X + 70, GAME_SCREEN_Y + 500, powLogoImg, true);
+		for (int i = 0; i < 3; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF(((GAME_SCREEN_X + 230) + SCORE_NUM_SIZE_X * 3) - (SCORE_NUM_SIZE_X * i), 
+				GAME_SCREEN_Y + 500, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 360)
+	{
+		DrawGraphF(GAME_SCREEN_X + 390, GAME_SCREEN_Y + 500, symbImg[0], true);
+		// 加算の基数を表示
+		tmpNum = 100;
+		for (int i = 0; i < 3; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF(((GAME_SCREEN_X + 420) + SCORE_NUM_SIZE_X * 3) - (SCORE_NUM_SIZE_X * i), 
+				GAME_SCREEN_Y + 500, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 420)
+	{
+		DrawGraphF(GAME_SCREEN_X + 304, GAME_SCREEN_Y + 550, symbImg[1], true);
+		tmpNum = 100 * player.power;
+		for (int i = 0; i < 7; i++)
+		{
+			int drawNum = tmpNum % 10;
+			DrawGraphF(((GAME_SCREEN_X + 354) + SCORE_NUM_SIZE_X * 7) - (SCORE_NUM_SIZE_X * i), GAME_SCREEN_Y + 550, scoreNumImage[drawNum], true);
+			tmpNum = (tmpNum - drawNum) / 10;
+		}
+	}
+	if (framCnt >= 510)
+	{
+
+	}
+
+	DrawScore();
 
 	ScreenFlip();
 }
