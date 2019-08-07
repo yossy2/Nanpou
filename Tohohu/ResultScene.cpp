@@ -15,7 +15,8 @@ int powLogoImg;			// ÊßÜ°ÛºŞ
 int symbImg[2];				// •„†
 int totalImg;				// Ä°ÀÙÛºŞ
 int oldScore;				// ¹Ş°Ñ¸Ø±‚Ü‚½‚Í¹Ş°Ñµ°ÊŞ°‚Ì½º±
-int totalScore;
+int totalScore;			// Ä°ÀÙÛºŞ
+bool resSceneFlag;			// Ø»ŞÙÄ•\¦’†‚É¼°İˆÚs‚µ‚È‚¢
 
 bool CheckClear;			// ¹Ş°Ñ¸Ø±‚©‚Ç‚¤‚©‚ğ¹Ş°Ñ¼°İ‚©‚çó‚¯æ‚é
 
@@ -60,6 +61,7 @@ void ResultInit(bool flag)
 		return;
 	}
 
+	resSceneFlag = false;
 	oldScore = score;
 	totalScore = score + (player.life * 1000) + (player.power * 100);
 	CheckClear = flag;
@@ -70,7 +72,7 @@ void ResultInit(bool flag)
 void ResultScene(void)
 {
 	ResultSceDraw(CheckClear);
-	if (keyFram[KEY_INPUT_Z] == 1)
+	if (keyFram[KEY_INPUT_Z] == 1 && resSceneFlag)
 	{
 		StopBgm();
 		TitleInit();
@@ -189,6 +191,10 @@ void ResultSceDraw(bool flag)
 		if (score < totalScore)
 		{
 			ScoreUpdate(100);
+		}
+		else
+		{
+			resSceneFlag = true;
 		}
 	}
 
