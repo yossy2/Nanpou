@@ -17,12 +17,12 @@ enum PL_ID
 	PL_ID_MAX
 };
 
-// ｼｮｯﾄID
+//自機の弾の種類
 enum PSHOT_ID
 {
-	PSHOT_NORMAL,
-	PSHOT_WIDE,
-	PSHOT_MAX
+	PSHOT_ID_NORMAL,
+	PSHOT_ID_FIRE,
+	PSHOT_ID_MAX,
 };
 
 // 構造体定義
@@ -71,6 +71,7 @@ void PlayerDraw(void);		// 自機の描画
 	
 void PlayerMove(void);		// 自機の移動処理
 void PlayerDamage(void);	// ﾀﾞﾒｰｼﾞを受けたときの処理
-
 void PlayerPowUp(void);		// ﾌﾟﾚｲﾔｰｼｮｯﾄの強化
+void PlayerAttack1(void);	// 通常攻撃
+void PlayerAttack2(void);	// 炎魔法攻撃
 

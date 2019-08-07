@@ -4,6 +4,7 @@
 #include <main.h>
 #include <GameScene.h>
 #include <Player.h>
+#include <PlayerShot.h>
 #include <Chapter1/Chapter1.h>
 #include "UiManeger.h"
 #include "Item.h"
@@ -44,6 +45,7 @@ void GameScene(void)
 {
 	ItemCtl();
 	PlayerCtl();
+	PlayerShotMove();
 	chapterFunc();
 	if (player.life <= 0)
 	{

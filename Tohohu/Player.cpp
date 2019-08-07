@@ -6,6 +6,10 @@
 #include "PlayerShot.h"
 
 int revivalCnt;		// ïúäà∂≥›ƒ
+int pShotCnt;		// î≠éÀä‘äuä«óù
+
+// seóp
+int pShotSound;		// åÇÇ¡ÇΩéûÇÃâπ
 
 // é©ã@ÇÃèâä˙âª
 bool PlayerInit(void)
@@ -20,7 +24,7 @@ bool PlayerInit(void)
 	player.revivalFlag = false;
 	player.shotPowUp = 1;
 	player.animCnt = 0;
-	player.shotPtn = PSHOT_NORMAL;
+	player.shotPtn = PSHOT_ID_FIRE;
 
 	// ∑∞ê›íË
 	keyList.move[DIR_UP] = KEY_INPUT_UP;
@@ -36,6 +40,13 @@ bool PlayerInit(void)
 	// âÊëúÇÃì«Ç›çûÇ›
 	if (LoadDivGraph("image/player_anim.png", PLAYER_ANIM_MAX, PLAYER_ANIM_MAX, 1,
 		PLAYER_SIZE_X, PLAYER_SIZE_Y, playerImg) == -1)
+	{
+		AST();
+		return false;
+	}
+
+	// se
+	if ((pShotSound = LoadSoundMem("se/pshot.mp3")) == -1)
 	{
 		AST();
 		return false;
@@ -64,14 +75,35 @@ void PlayerCtl(void)
 	}
 	else if (player.power >= 400)
 	{
-		player.shotPtn = PSHOT_WIDE;
+		player.shotPowUp = 3;
 	}
 
 	if (player.drawFlag || (player.revivalFlag && (revivalCnt > PLAYER_REVIVAL_CNT)))
 	{
 		PlayerMove();
+		if (keyFram[keyList.shot] != 0 && pShotCnt > PSHOT_TIME_NORMAL)
+		{
+			switch (player.shotPtn)
+			{
+			case PSHOT_ID_NORMAL:
+				PlayerAttack1();			
+				break;
+				
+			case PSHOT_ID_FIRE:
+				if (pShotCnt > PSHOT_TIME_FIRE)
+				{
+					PlayerAttack2();
+				}
+				break;
+
+			default:
+				AST();
+				break;
+			}
+			
+		}
 	}
-	PlayerShotFunc();
+	pShotCnt++;
 }
 
 // é©ã@ÇÃï`âÊ
@@ -327,5 +359,104 @@ void PlayerPowUp(void)
 	if (player.power >= PLAYER_POWER_MAX)
 	{
 		player.power = PLAYER_POWER_MAX;
+	}
+}
+
+// çUåÇ
+void PlayerAttack1(void)
+{
+	int cnt = 0;
+	for (int i = 0; i < PSHOT_NUM; i++)
+	{
+		if (!pShot[i].flag)
+		{
+			pShot[i].shotID = PSHOT_ID_NORMAL;
+			pShot[i].damage = 1;
+			pShot[i].rad = PSHOT_HIT_RAD;
+			pShot[i].speed = PSHOT_DEF_SPEED;
+			switch (player.shotPowUp)
+			{
+			case 1:
+				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
+				pShot[i].pos.x = player.pos.x;
+				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+				pShot[i].moveAngle = -90;
+				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+				pShot[i].flag = true;
+				pShot[i].rotaAngle = 0;
+				pShotCnt = 0;
+				return;
+			case 2:
+				pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X + cnt * 2 * PSHOT_SIZE_X;
+				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+				pShot[i].moveAngle = -90;
+				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+				pShot[i].flag = true;
+				pShot[i].rotaAngle = 0;
+
+				if (cnt == 1)
+				{
+					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
+					pShotCnt = 0;
+					return;
+				}
+				break;
+			case 3:
+				pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X + (cnt % 2) * 2 * PSHOT_SIZE_X;
+				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+				pShot[i].moveAngle = -90;
+				pShot[i].rotaAngle = 0;
+				if (cnt >= 2)
+				{
+					pShot[i].moveAngle += (-20 + (cnt % 2) * 40);
+					pShot[i].rotaAngle = (-20 + (cnt % 2) * 40);
+				}
+				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
+				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+				pShot[i].flag = true;
+				if (cnt >= 4)
+				{
+					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
+					pShotCnt = 0;
+					return;
+				}
+				break;
+			default:
+				AST();
+				break;
+			}
+
+			cnt++;
+		}
+	}
+}
+
+void PlayerAttack2(void)
+{
+	for (int i = 0; i < PSHOT_NUM; i++)
+	{
+		if (!pShot[i].flag)
+		{
+			pShot[i].rad = (float)(PSHOT_HIT_RAD * player.shotPowUp);
+			pShot[i].damage = 5;
+			PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
+			pShot[i].speed = (float)PSHOT_DEF_SPEED / 2.0f;
+			pShot[i].shotID = PSHOT_ID_FIRE;
+			pShot[i].pos.x = player.pos.x;
+			pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
+			pShot[i].moveAngle = -90;
+			pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
+			pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
+			pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
+			pShot[i].flag = true;
+			pShot[i].rotaAngle = 0;
+			pShotCnt = 0;
+			return;
+		}
 	}
 }

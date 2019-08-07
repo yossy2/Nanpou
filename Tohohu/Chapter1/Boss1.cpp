@@ -153,11 +153,9 @@ void BossCtl1(void)
 		{
 			if (pShot[k].flag)
 			{
-				if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, boss1.pos, (float)BOSS1_SIZE_X / 2.0f))
+				if (CheckHitObj(pShot[k].pos, pShot[k].rad, boss1.pos, (float)BOSS1_SIZE_X / 2.0f))
 				{
-					pShot[k].flag = false;
-					boss1.life --;
-					if (boss1.life <= 0)
+					if ((boss1.life -= HitShot(&pShot[k])) <= 0)
 					{
 						ShotDelete();
 						boss1.drawFlag = false;

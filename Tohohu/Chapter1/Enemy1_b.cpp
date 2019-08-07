@@ -82,20 +82,22 @@ void EnemyCtl1_B(void)
 				{
 					if (pShot[k].flag)
 					{
-						if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f))
+						if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1B[i].pos, pShot[k].rad))
 						{
-							pShot[k].flag = false;
-							enemy1B[i].drawFlag = false;
-							enemy1B[i].blastFlag = true;
-							enemy1B[i].animCount = 0;
-
-							if (rand() % 100 >= 50)
+							if ((enemy1B[i].life -= HitShot(&pShot[k])) <= 0)
 							{
-								ItemDrop(enemy1B[i].pos);
+								enemy1B[i].drawFlag = false;
+								enemy1B[i].blastFlag = true;
+								enemy1B[i].animCount = 0;
+
+								if (rand() % 100 >= 50)
+								{
+									ItemDrop(enemy1B[i].pos);
+								}
+								PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
+								ScoreUpdate(100);
+								break;
 							}
-							PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
-							ScoreUpdate(100);
-							break;
 						}
 					}
 				}
@@ -110,6 +112,7 @@ void EnemyCtl1_B(void)
 		{
 			if (enemy1B[i].initData.count == framCnt)
 			{
+				enemy1B[i].life = 1;
 				enemy1B[i].drawFlag = true;
 				enemy1B[i].animCount = 0;
 			}

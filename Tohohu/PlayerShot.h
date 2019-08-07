@@ -4,7 +4,8 @@
 #define PSHOT_SIZE_Y 24				// ’e‚Ì»²½ŞY
 #define PSHOT_NUM 50				// ’e‚Ì•`‰æŠm•Û
 #define PSHOT_DEF_SPEED 20			// ’e‘¬
-#define PSHOT_TIME 5				// ˜AËŠÔŠu
+#define PSHOT_TIME_NORMAL 5			// ’ÊíUŒ‚˜AËŠÔŠu
+#define PSHOT_TIME_FIRE 10			// ‰Š–‚–@UŒ‚˜AËŠÔŠu
 #define PSHOT_HIT_RAD 8				// “–‚½‚è”»’è
 
 struct PlayerShot
@@ -13,8 +14,11 @@ struct PlayerShot
 	Vector2 move;			// ˆÚ“®—Ê
 	float endPos;			// •`‰æI—¹ˆÊ’u
 	float speed;			// ‘¬‚³
-	float rotaAngle;		// ‰ñ“]Šp
+	float rad;				// ”¼Œa
+	int  rotaAngle;			// ‰ñ“]Šp
 	int moveAngle;			// “®‚­•ûŒü
+	int damage;				// UŒ‚—Í
+	PSHOT_ID shotID;		// ’e‚Ìí—Ş
 	bool flag;				// •`‰æÌ×¸Ş	
 };
 
@@ -29,7 +33,7 @@ PSHOT_EX PlayerShot pShot[PSHOT_NUM];		// ÌßÚ²Ô°¼®¯Ä‚ÉŠÖ‚·‚é•Ï”‚ÌéŒ¾
 
 // =============ŠÖ”ÌßÛÄÀ²ÌßéŒ¾
 void PlayerShotInit(void);		// ‰Šú‰»
-void PlayerShotFunc(void);		// ˆ—
 void PlayerShotDraw(void);		// •`‰æ
 void PlayerShotMove(void);		// ˜AËÉ°ÏÙ
-void PShotPtn1(void);			// ˜AËÊßÀ°İ1
+
+int HitShot(PlayerShot * pShot);	// ’e‚ª“–‚½‚Á‚½‚Ìˆ—A•Ô‚è’l‚Í’e‚ÌÀŞÒ°¼Ş

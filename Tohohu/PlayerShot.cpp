@@ -6,28 +6,22 @@
 #include "PlayerShot.h"
 
 // ≤“∞ºﬁóp
-int pShotImage;					// íe
-
-// seóp
-int pShotSound;					// åÇÇ¡ÇΩéûÇÃâπ
-
-// πﬁ∞—óp
-int pShotCnt;						// î≠éÀä‘äuä«óù
+int pShotImage[PSHOT_ID_MAX];					// íe
 
 // èâä˙âª
 void PlayerShotInit(void)
 {
 	// =================∏ﬁ◊Ã®Ø∏ìoò^
 	// íeÇÃìoò^
-	pShotImage = LoadGraph("image/playershot1.png");
-	if (pShotImage == -1)
+	pShotImage[PSHOT_ID_NORMAL] = LoadGraph("image/playershot1.png");
+	if (pShotImage[PSHOT_ID_NORMAL] == -1)
 	{
 		AST();
 		return;
 	}
 
-	// se
-	if ((pShotSound = LoadSoundMem("se/pshot.mp3")) == -1)
+	pShotImage[PSHOT_ID_FIRE] = LoadGraph("image/playershot2.png");
+	if (pShotImage[PSHOT_ID_FIRE] == -1)
 	{
 		AST();
 		return;
@@ -39,111 +33,36 @@ void PlayerShotInit(void)
 		pShot[i].flag = false;
 		pShot[i].pos = { 0.0f, 0.0f };
 		pShot[i].speed = PSHOT_DEF_SPEED;
-		pShot[i].moveAngle = -90;
 		pShot[i].rotaAngle = 0.0f;
 		pShot[i].move = { 0.0f, 0.0f };
 		pShot[i].endPos = 0;
 	}
 }
 
-// èàóù
-void PlayerShotFunc(void)
-{
-	switch (player.shotPtn)
-	{
-	case (PSHOT_NORMAL):
-		PlayerShotMove();
-		break;
-	case (PSHOT_WIDE):
-		PShotPtn1();
-		break;
-	}
-	pShotCnt++;
-}
-
 // ï`âÊ
 void PlayerShotDraw(void)
 {
+	double rate;
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
 		if (pShot[i].flag)
 		{
-			DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, 1.0, (double)pShot[i].rotaAngle, pShotImage, true, false);
+			if (pShot[i].shotID == PSHOT_ID_FIRE)
+			{
+				rate = (double)player.shotPowUp;
+			}
+			else
+			{
+				rate = 1.0;
+			}
+			DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, (double)DEG_TO_RAD(pShot[i].rotaAngle),
+				pShotImage[pShot[i].shotID], true, false);
 		}
 	}
 }
 
-// òAéÀ…∞œŸ
+// íeà⁄ìÆ
 void PlayerShotMove(void)
-{
-	for (int i = 0; i < PSHOT_NUM; i++)
-	{
-		if (pShot[i].flag)
-		{
-			pShot[i].pos.y += pShot[i].move.y;
-			if (pShot[i].pos.y < pShot[i].endPos)
-			{
-				pShot[i].flag = false;
-			}
-		}
-	}
-
-	// âüÇµÇƒÇ»Ç©Ç¡ÇΩÇÁèàóùèIóπ
-	if (keyFram[keyList.shot] == 0 || pShotCnt < PSHOT_TIME || !player.drawFlag)
-	{
-		return;
-	}
-
-	int powUp = 1;
-
-	for (int i = 0; i < PSHOT_NUM; i++)
-	{
-		if (!pShot[i].flag)
-		{
-			if (player.shotPowUp == 1)
-			{
-				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
-				pShot[i].pos.x = player.pos.x;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-				pShotCnt = 0;
-				break;
-			}
-			else if (player.shotPowUp == 2)
-			{
-				if (powUp == 1)
-				{
-					pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
-					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-					pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
-					pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
-					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-					pShot[i].flag = true;
-				}
-				else if (powUp == 2)
-				{
-					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
-					pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
-					pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-					pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
-					pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
-					pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-					pShot[i].flag = true;
-					pShotCnt = 0;
-					powUp = 0;
-					break;
-				}
-				powUp++;
-			}
-		}
-	}
-}
-
-// òAéÀ ﬂ¿∞›1
-void PShotPtn1(void)
 {
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
@@ -157,64 +76,11 @@ void PShotPtn1(void)
 			}
 		}
 	}
+}
 
-	// âüÇµÇƒÇ»Ç©Ç¡ÇΩÇÁèàóùèIóπ
-	if (keyFram[keyList.shot] == 0 || pShotCnt < PSHOT_TIME || !player.drawFlag)
-	{
-		return;
-	}
-
-	int powUp = 1;
-
-	for (int i = 0; i < PSHOT_NUM; i++)
-	{
-		if (!pShot[i].flag)
-		{
-			if (powUp == 1)
-			{
-				pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].rotaAngle = DEG_TO_RAD(0);
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-			}
-			else if (powUp == 2)
-			{
-				pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].move.x = pShot[i].speed * cosf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].move.y = pShot[i].speed * sinf(pShot[i].moveAngle * PI / 180.0f);
-				pShot[i].rotaAngle = DEG_TO_RAD(0);
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-			}
-			else if (powUp == 3)
-			{
-				pShot[i].pos.x = player.pos.x - PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].move.x = pShot[i].speed * cosf((pShot[i].moveAngle - 20) * PI / 180.0f);
-				pShot[i].move.y = pShot[i].speed * sinf((pShot[i].moveAngle - 20) * PI / 180.0f);
-				pShot[i].rotaAngle = DEG_TO_RAD(-20);
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-			}
-			else if (powUp == 4)
-			{
-				PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
-				pShot[i].pos.x = player.pos.x + PSHOT_SIZE_X;
-				pShot[i].pos.y = player.pos.y - PSHOT_SIZE_Y - PLAYER_SIZE_Y / 2;
-				pShot[i].move.x = pShot[i].speed * cosf((pShot[i].moveAngle + 20) * PI / 180.0f);
-				pShot[i].move.y = pShot[i].speed * sinf((pShot[i].moveAngle + 20) * PI / 180.0f);
-				pShot[i].rotaAngle = DEG_TO_RAD(20);
-				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
-				pShotCnt = 0;
-				powUp = 0;
-				break;
-			}
-			powUp++;
-		}
-	}
+// íeÇ™ìñÇΩÇ¡ÇΩéûÇÃèàóùÅAï‘ÇËílÇÕíeÇÃ¿ﬁ“∞ºﬁ
+int HitShot(PlayerShot *pShot)
+{
+	pShot->flag = false;
+	return pShot->damage;
 }
