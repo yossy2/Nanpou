@@ -36,7 +36,6 @@ bool SysInit(void)
 	}
 
 	// •Ï”‰Šú‰»
-	sceneFunc = TitleScene;
 	framCnt = 0;
 
 	for (int i = 0; i < 256; i++)

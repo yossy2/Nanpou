@@ -83,6 +83,8 @@ bool TitleInit(void)
 	rate = 1.0f;
 	rateFlag = true;
 
+	sceneFunc = TitleScene;
+
 	return rtnFlag;
 }
 

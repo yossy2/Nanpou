@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "ResultScene.h"
 #include "TitleScene.h"
+#include "UiManeger.h"
 
 int gameClearImage;		// πﬁ∞—∏ÿ±ÇÃ€∫ﬁ
 int gameOverImage;			// πﬁ∞—µ∞ ﬁ∞ÇÃ€∫ﬁ
@@ -43,16 +44,21 @@ void ResultScene(void)
 // ï`âÊ
 void ResultSceDraw(bool flag)
 {
+	GraphFilter(gameScreen, DX_GRAPH_FILTER_GAUSS, 16, 100);
 	ClsDrawScreen();
+	
+	DrawGraph(0, 0, systemImg, true);
 	DrawGraph(GAME_SCREEN_X, GAME_SCREEN_Y, gameScreen, true);
+	DrawScore();
 
 	if (flag)
 	{
-		DrawGraph(0, 0, gameClearImage, true);
+		DrawGraph(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 100, gameClearImage, true);
 	}
 	else
 	{
-		DrawGraph(0, 0, gameOverImage, true);
+		DrawGraph(GAME_SCREEN_X + (GAME_SCREEN_SIZE_X - RESULT_LOGO_SIZE_X) / 2, GAME_SCREEN_Y + 100, gameOverImage, true);
 	}
+
 	ScreenFlip();
 }
