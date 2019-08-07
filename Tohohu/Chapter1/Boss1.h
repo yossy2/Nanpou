@@ -8,7 +8,7 @@
 #define BOSS1_SIZE_Y 96		// кч╞╦ч╫в╡я┌л╩╡╫чY
 
 #define BOSS1_HIT_RAD 40	// нч╫┌л⌠√┌╫┌Х■╩▓Х┌л■╪▄a
-#define BOSS1_LIFE_MAX 1000	// нч╫┌л█е▒Е▒л≈м
+#define BOSS1_LIFE_MAX 1500	// нч╫┌л█е▒Е▒л≈м
 #define BOSS1_ATK_PTN 4		// нч╫┌л█U▄┌йъю╟щ░■
 
 #define BOSS1_BLAST_ANIM_MAX 14	// нч╫┌л■ ■╜╠фр╟╪╝щ░■

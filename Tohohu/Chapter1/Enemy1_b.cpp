@@ -71,7 +71,6 @@ void EnemyCtl1_B(void)
 				if (CheckHitObj(enemy1B[i].pos, (float)ENEMY1_B_SIZE_X / 2.0f, player.pos, PLAYER_HIT_RAD))
 				{
 					PlayerDamage();
-					enemy1B[i].drawFlag = false;
 				}
 			}
 
@@ -93,6 +92,7 @@ void EnemyCtl1_B(void)
 							{
 								ItemDrop(enemy1B[i].pos);
 							}
+							PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
 							break;
 						}
 					}
@@ -204,7 +204,12 @@ void EnemyMove1_B_3(Enemy *enemy)
 	if (enemy->pos.y < enemy->initData.pos.y)
 	{
 		enemy->pos.y += enemy->move.y;
+		if (enemy->pos.y >= enemy->initData.pos.y)
+		{
+			PlaySoundMem(slimeSound, DX_PLAYTYPE_BACK, true);
+		}
 	}
+	
 
 	if (framCnt == (BOSS1_CNT + 400))
 	{

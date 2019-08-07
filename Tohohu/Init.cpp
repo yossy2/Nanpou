@@ -29,6 +29,12 @@ bool SysInit(void)
 		return false;
 	}
 
+	if ((blastSound = LoadSoundMem("se/bomb.mp3")) == -1)
+	{
+		AST();
+		return false;
+	}
+
 	// •Ï”‰Šú‰»
 	sceneFunc = TitleScene;
 	framCnt = 0;

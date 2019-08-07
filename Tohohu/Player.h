@@ -7,6 +7,7 @@
 #define PLAYER_DEF_LIFE 5			// ﾃﾞﾌｫﾙﾄの残機数
 #define PLAYER_POWER_MAX 400		// ﾊﾟﾜｰの最大値
 #define PLAYER_ANIM_MAX 4			// ﾌﾟﾚｲﾔｰのｱﾆﾒｰｼｮﾝ数
+#define PLAYER_REVIVAL_CNT 60		// ﾌﾟﾚｲﾔｰが爆発してから再表示されるまでの時間
 
 // enum定義
 // ﾌﾟﾚｲﾔｰID
@@ -34,6 +35,7 @@ struct Player
 	float moveAngle;	// 移動角度
 	bool drawFlag;		// 描画管理
 	bool blastFlag;		// 爆発ﾌﾗｸﾞ
+	bool revivalFlag;	// 復活ﾌﾗｸﾞ
 	int animCnt;		// ｱﾆﾒｰｼｮﾝｶｳﾝﾄ
 	int life;			// 残機
 	int power;			// ﾊﾟﾜｰの増加

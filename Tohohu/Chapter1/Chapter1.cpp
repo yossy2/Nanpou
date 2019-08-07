@@ -65,6 +65,11 @@ void Chapter1(void)
 		{
 			bgPos[i].y += 2;
 		}
+		else
+		{
+			bgPos[i].y++;
+		}
+
 		if (bgPos[i].y >= GAME_SCREEN_SIZE_Y)
 		{
 			bgPos[i].y = -GAME_SCREEN_SIZE_Y + 2;

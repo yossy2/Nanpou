@@ -62,7 +62,6 @@ void EnemyCtl1_A(void)
 				if (CheckHitObj(enemy1A[i].pos, (float)ENEMY1_A_SIZE_X / 2.0f, player.pos, PLAYER_HIT_RAD))
 				{
 					PlayerDamage();
-					enemy1A[i].drawFlag = false;
 				}
 			}
 
@@ -81,6 +80,7 @@ void EnemyCtl1_A(void)
 						{
 							ItemDrop(enemy1A[i].pos);
 						}
+						PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
 						break;
 					}
 				}

@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "PlayerShot.h"
 
+int revivalCnt;		// •œŠˆ¶³İÄ
+
 // ©‹@‚Ì‰Šú‰»
 bool PlayerInit(void)
 {
@@ -14,6 +16,8 @@ bool PlayerInit(void)
 	player.life = PLAYER_DEF_LIFE;
 	player.power = 0;
 	player.drawFlag = true;
+	player.blastFlag = false;
+	player.revivalFlag = false;
 	player.shotPowUp = 1;
 	player.animCnt = 0;
 	player.shotPtn = PSHOT_NORMAL;
@@ -42,6 +46,8 @@ bool PlayerInit(void)
 		AST();
 		return false;
 	}
+
+	revivalCnt = 0;
 	return true;
 }
 
@@ -57,7 +63,10 @@ void PlayerCtl(void)
 		player.shotPowUp = 2;
 	}
 
-	PlayerMove();
+	if (player.drawFlag || (player.revivalFlag && (revivalCnt > PLAYER_REVIVAL_CNT)))
+	{
+		PlayerMove();
+	}
 	PlayerShotFunc();
 }
 
@@ -67,7 +76,40 @@ void PlayerDraw(void)
 	PlayerShotDraw();
 	if (player.drawFlag)
 	{
-		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y, 1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
+		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+			1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
+	}
+	else if (player.blastFlag)
+	{
+		DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+			1.0, 0.0, blastImg[player.animCnt % (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y)], true, false);
+		player.animCnt++;
+		if (player.animCnt >= (BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y))
+		{
+			player.blastFlag = false;
+			player.revivalFlag = true;
+		}
+	}
+	else if(player.revivalFlag)
+	{
+		if (revivalCnt > PLAYER_REVIVAL_CNT && ((revivalCnt / 2) % 2))
+		{
+			DrawRotaGraphF(player.pos.x + GAME_SCREEN_X, player.pos.y + GAME_SCREEN_Y,
+				1.0, 0.0, playerImg[(++player.animCnt / 5) % PLAYER_ANIM_MAX], true, false);
+		}
+		else if (revivalCnt == PLAYER_REVIVAL_CNT)
+		{
+			player.pos.x = (float)(GAME_SCREEN_SIZE_X) / 2.0f;
+			player.pos.y = (float)(GAME_SCREEN_SIZE_Y - PLAYER_SIZE_Y / 2);
+			player.animCnt = 0;
+		}
+
+		if (++revivalCnt >= PLAYER_REVIVAL_CNT * 3)
+		{
+			revivalCnt = 0;
+			player.revivalFlag = false;
+			player.drawFlag = true;
+		}
 	}
 }
 
@@ -264,9 +306,13 @@ void PlayerMove(void)
 // ÀŞÒ°¼Ş‚ğó‚¯‚½‚Æ‚«‚Ìˆ—
 void PlayerDamage(void)
 {
-	if (--player.life <= 0 && player.drawFlag)
+	player.drawFlag = false;
+	player.blastFlag = true;
+	player.animCnt = 0;
+	PlaySoundMem(blastSound, DX_PLAYTYPE_BACK, true);
+	if (player.life > 0)
 	{
-		player.drawFlag = false;
+		player.life--;
 	}
 }
 

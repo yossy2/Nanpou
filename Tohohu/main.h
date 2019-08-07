@@ -123,6 +123,7 @@ MAIN_EX int keyFram[256];				// ·°‚Ì‰Ÿ‰ºó‘Ô•Û‘¶
 
 MAIN_EX int blastImg[BLAST_DIV_NUM_X * BLAST_DIV_NUM_Y];	// ”š”­‰æ‘œID
 MAIN_EX int eShotSound;
+MAIN_EX int blastSound;
 
 //=======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾================================
 

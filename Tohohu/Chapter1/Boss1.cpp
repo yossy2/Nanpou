@@ -16,7 +16,8 @@ void (*boss1AtkFunc)(void);			// UŒ‚ŠÖ”Îß²İÀ
 
 int bossBlastImg[BOSS1_BLAST_ANIM_MAX];	// ÎŞ½—p‚Ì”š”­‰æ‘œ
 bool blastFlag;							// ”š”­Ì×¸Ş
-int blastCnt;								// ”š”­¶³İÄ
+int blastCnt;							// ”š”­¶³İÄ
+int bossBlastSound;							// ”š”­Œø‰Ê‰¹
 
 // ‰Šú‰»
 bool BossInit1(void)
@@ -40,6 +41,13 @@ bool BossInit1(void)
 	if (bossLifeImg == -1)
 	{
 		AST();
+	}
+
+	// Œø‰Ê‰¹
+	if ((bossBlastSound = LoadSoundMem("se/blast.mp3")) == -1)
+	{
+		AST();
+		return false;
 	}
 
 	boss1.pos = { 320.0f,300.0f };
@@ -110,6 +118,7 @@ void BossCtl1(void)
 						break;
 					}
 					
+					enemy1B[i].move.y = 4;
 					enemy1B[i].initData.movePtn = 3;
 					enemy1B[i].moveCount = 0;
 					enemy1B[i].drawFlag = true;
@@ -123,6 +132,7 @@ void BossCtl1(void)
 		if (framCnt == (BOSS1_CNT + 400))
 		{
 			blastFlag = true;
+			PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
 			//boss1.drawFlag = true;
 		}
 	}
@@ -145,7 +155,10 @@ void BossCtl1(void)
 					boss1.life --;
 					if (boss1.life <= 0)
 					{
+						ShotDelete();
 						boss1.drawFlag = false;
+						PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
+						blastFlag = true;
 					}
 				}
 			}
@@ -174,9 +187,10 @@ void BossDraw1(void)
 			3.0, 0.0, bossBlastImg[(blastCnt / 2) % BOSS1_BLAST_ANIM_MAX], true, false);
 		if (++blastCnt >= 2 * BOSS1_BLAST_ANIM_MAX)
 		{
+			blastCnt = 0;
 			blastFlag = false;
 		}
-		else if (((blastCnt / 2) % BOSS1_BLAST_ANIM_MAX) == 7)
+		else if (((blastCnt / 2) % BOSS1_BLAST_ANIM_MAX) == 7 && (boss1.life > 0))
 		{
 			boss1.drawFlag = true;
 		}
@@ -191,11 +205,12 @@ void BossDraw1(void)
 void BossAtk1_1(void)
 {
 	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
-	if (boss1.life <= (BOSS1_LIFE_MAX * 3 / BOSS1_ATK_PTN))
+	if (boss1.life <= 1250)
 	{
 		boss1.moveCount = 0;
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_2;
+		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
 	}
 
 	if ((boss1.moveCount / 60) % 3 != 1)
@@ -232,7 +247,10 @@ void BossAtk1_1(void)
 			bShot1[i].pos = { boss1.pos.x , boss1.pos.y + BOSS1_SHOT_OFSET };
 			bShot1[i].speed = 4.0f;
 			bShot1[i].drawFlag = true;
-			PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
+			if (boss1.moveCount % 5 == 0)
+			{
+				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
+			}
 			return;
 		}
 	}
@@ -242,11 +260,12 @@ void BossAtk1_1(void)
 void BossAtk1_2(void)
 {
 	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
-	if (boss1.life <= (BOSS1_LIFE_MAX * 2 / BOSS1_ATK_PTN))
+	if (boss1.life <= 1000)
 	{
 		boss1.moveCount = 0;
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_3;
+		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
 	}
 
 	if (fabs((int)(boss1.pos.x - (float)GAME_SCREEN_SIZE_X / 2.0f)) > 0 ||
@@ -297,11 +316,12 @@ void BossAtk1_2(void)
 void BossAtk1_3(void)
 {
 	// Ÿ‚ÌUŒ‚‚ÉˆÚ‚é‚æ
-	if (boss1.life <= (BOSS1_LIFE_MAX / BOSS1_ATK_PTN))
+	if (boss1.life <= 500)
 	{
 		boss1.moveCount = 0;
 		ShotDelete();
 		boss1AtkFunc = BossAtk1_4;
+		PlaySoundMem(bossBlastSound, DX_PLAYTYPE_BACK, true);
 	}
 
 	if (boss1.moveCount < 180 || boss1.moveCount % 2 != 0)
@@ -325,7 +345,10 @@ void BossAtk1_3(void)
 			if (cnt >= 3)
 			{
 				atkAngle += 13;
-				PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
+				if (boss1.moveCount % 5 == 0)
+				{
+					PlaySoundMem(eShotSound, DX_PLAYTYPE_BACK, true);
+				}
 				return;
 			}
 		}
