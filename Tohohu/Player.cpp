@@ -378,7 +378,7 @@ void PlayerAttack1(void)
 	int cnt = 0;
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
-		if (!pShot[i].flag)
+		if (!pShot[i].drawFlag)
 		{
 			pShot[i].shotID = PSHOT_ID_NORMAL;
 			pShot[i].damage = 1;
@@ -394,7 +394,7 @@ void PlayerAttack1(void)
 				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
+				pShot[i].drawFlag = true;
 				pShot[i].rotaAngle = 0;
 				pShotCnt = 0;
 				return;
@@ -405,7 +405,7 @@ void PlayerAttack1(void)
 				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
+				pShot[i].drawFlag = true;
 				pShot[i].rotaAngle = 0;
 
 				if (cnt == 1)
@@ -428,7 +428,7 @@ void PlayerAttack1(void)
 				pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
 				pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-				pShot[i].flag = true;
+				pShot[i].drawFlag = true;
 				if (cnt >= 4)
 				{
 					PlaySoundMem(pShotSound, DX_PLAYTYPE_BACK, true);
@@ -450,7 +450,7 @@ void PlayerAttack2(void)
 {
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
-		if (!pShot[i].flag)
+		if (!pShot[i].drawFlag)
 		{
 			pShot[i].rad = (float)(PSHOT_HIT_RAD * player.shotPowUp);
 			pShot[i].damage = 10;
@@ -463,7 +463,8 @@ void PlayerAttack2(void)
 			pShot[i].move.x = pShot[i].speed * cosf(DEG_TO_RAD(pShot[i].moveAngle));
 			pShot[i].move.y = pShot[i].speed * sinf(DEG_TO_RAD(pShot[i].moveAngle));
 			pShot[i].endPos = player.pos.y - (GAME_SCREEN_SIZE_Y - PSHOT_SIZE_Y);
-			pShot[i].flag = true;
+			pShot[i].drawFlag = true;
+			pShot[i].blastFlag = false;
 			pShot[i].rotaAngle = 0;
 			pShotCnt = 0;
 			return;

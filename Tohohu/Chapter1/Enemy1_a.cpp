@@ -71,7 +71,7 @@ void EnemyCtl1_A(void)
 			// ’e‚Æ‚Ì“–‚½‚è”»’è
 			for (int k = 0; k < PSHOT_NUM; k++)
 			{
-				if (pShot[k].flag)
+				if (pShot[k].drawFlag)
 				{
 					if (CheckHitObj(pShot[k].pos, (float)PSHOT_HIT_RAD, enemy1A[i].pos, pShot[k].rad))
 					{

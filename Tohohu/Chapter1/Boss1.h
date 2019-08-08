@@ -11,8 +11,6 @@
 #define BOSS1_LIFE_MAX 1500	// нч╫┌л█е▒Е▒л≈м
 #define BOSS1_ATK_PTN 4		// нч╫┌л█U▄┌йъю╟щ░■
 
-#define BOSS1_BLAST_ANIM_MAX 14	// нч╫┌л■ ■╜╠фр╟╪╝щ░■
-
 #define BOSS1_SHOT_OFSET 20.0f	// ▓e┌╙▐o┌И┬й▓u┌П▄Ш┌л┬й▓u┌и▓╡░ъ
 
 // enum

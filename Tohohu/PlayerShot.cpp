@@ -30,7 +30,7 @@ void PlayerShotInit(void)
 	// •Ï”‚Ì‰Šú‰»
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
-		pShot[i].flag = false;
+		pShot[i].drawFlag = false;
 		pShot[i].pos = { 0.0f, 0.0f };
 		pShot[i].speed = PSHOT_DEF_SPEED;
 		pShot[i].rotaAngle = 0;
@@ -45,7 +45,7 @@ void PlayerShotDraw(void)
 	double rate;
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
-		if (pShot[i].flag)
+		if (pShot[i].drawFlag)
 		{
 			if (pShot[i].shotID == PSHOT_ID_FIRE)
 			{
@@ -56,8 +56,24 @@ void PlayerShotDraw(void)
 			{
 				rate = 1.0;
 			}
-			DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, (double)DEG_TO_RAD(pShot[i].rotaAngle),
-				pShotImage[pShot[i].shotID], true, false);
+
+			if (!pShot[i].blastFlag)
+			{
+				DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, (double)DEG_TO_RAD(pShot[i].rotaAngle),
+					pShotImage[pShot[i].shotID], true, false);
+			}
+			else
+			{
+				DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, 0.0,
+					bigBlastImg[pShot[i].blastCnt], true, false);
+				pShot[i].blastCnt++;
+				if (pShot[i].blastCnt >= BIG_BLAST_ANIM_MAX)
+				{
+					pShot[i].blastFlag = false;
+					pShot[i].blastCnt = 0;
+					pShot[i].drawFlag = false;
+				}
+			}
 		}
 	}
 }
@@ -67,13 +83,13 @@ void PlayerShotMove(void)
 {
 	for (int i = 0; i < PSHOT_NUM; i++)
 	{
-		if (pShot[i].flag)
+		if (pShot[i].drawFlag)
 		{
 			pShot[i].pos.x += pShot[i].move.x;
 			pShot[i].pos.y += pShot[i].move.y;
 			if (pShot[i].pos.y < pShot[i].endPos)
 			{
-				pShot[i].flag = false;
+				pShot[i].drawFlag = false;
 			}
 		}
 	}
@@ -82,6 +98,14 @@ void PlayerShotMove(void)
 // ’e‚ª“–‚½‚Á‚½‚Ìˆ—A•Ô‚è’l‚Í’e‚ÌÀŞÒ°¼Ş
 int HitShot(PlayerShot *pShot)
 {
-	pShot->flag = false;
+	if (pShot->shotID == PSHOT_ID_FIRE)
+	{
+		pShot->blastFlag = true;
+		PlaySoundMem(bigBlastSound,DX_PLAYTYPE_BACK,true);
+	}
+	else
+	{
+		pShot->drawFlag = false;
+	}
 	return pShot->damage;
 }

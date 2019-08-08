@@ -30,6 +30,8 @@
 #define BLAST_SIZE_X 96		// ”š”­‰æ‘œ‚Ì»²½ŞX
 #define BLAST_SIZE_Y 96		// ”š”­‰æ‘œ‚Ì»²½ŞY
 
+#define BIG_BLAST_ANIM_MAX 14	// ÎŞ½‚Ì”š”­±ÆÒ°¼®İ”
+
 #define PI 3.14159265359f		// ‰~ü—¦
 
 #define RAD_TO_DEG(rad) ((int)(rad * 180.0f / PI))		// ×¼Ş±İ‚©‚ç“x”‚Ö‚Ì•ÏŠ·
@@ -126,6 +128,8 @@ MAIN_EX int eShotSound;					// “G‚Ì’e‚ÌŒø‰Ê‰¹
 MAIN_EX int blastSound;					// ”š”­‰¹
 
 MAIN_EX Vector2 shake;					// ‰æ–Ê‚ğ—h‚ç‚·
+MAIN_EX int bigBlastImg[BIG_BLAST_ANIM_MAX];	// ÎŞ½—p‚Ì”š”­‰æ‘œ
+MAIN_EX int bigBlastSound;						// ”š”­Œø‰Ê‰¹
 
 //=======================ŠÖ”ÌßÛÄÀ²ÌßéŒ¾================================
 

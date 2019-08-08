@@ -18,8 +18,10 @@ struct PlayerShot
 	int  rotaAngle;			// ‰ñ“]Šp
 	int moveAngle;			// “®‚­•ûŒü
 	int damage;				// UŒ‚—Í
+	int blastCnt;			// ”š”­‚Ì¶³İÄ
 	PSHOT_ID shotID;		// ’e‚Ìí—Ş
-	bool flag;				// •`‰æÌ×¸Ş	
+	bool drawFlag;			// •`‰æÌ×¸Ş	
+	bool blastFlag;			// ”š”­Ì×¸Ş
 };
 
 // externéŒ¾

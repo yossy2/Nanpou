@@ -23,6 +23,14 @@ bool SysInit(void)
 	
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	// ‰æ‘œ
+	if (LoadDivGraph("image/blast2.png", BIG_BLAST_ANIM_MAX, 7, 2,
+		64, 64, bigBlastImg) == -1)
+	{
+		AST();
+		return false;
+	}
+
 	// Œø‰Ê‰¹
 	if ((eShotSound = LoadSoundMem("se/eShot.mp3")) == -1)
 	{
@@ -31,6 +39,13 @@ bool SysInit(void)
 	}
 
 	if ((blastSound = LoadSoundMem("se/bomb.mp3")) == -1)
+	{
+		AST();
+		return false;
+	}
+
+	// Œø‰Ê‰¹
+	if ((bigBlastSound = LoadSoundMem("se/blast.mp3")) == -1)
 	{
 		AST();
 		return false;
