@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "UiManeger.h"
 #include "Player.h"
+#include "PlayerShot.h"
 
 // =================ïœêîíËã`
 int highScoreImage;					//  ≤Ω∫±óp
@@ -114,6 +115,10 @@ void DrawScore(void)
 			DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * i), 230, lifeImage[0], true);
 		}
 	}
+
+	// íeâÊëú
+	DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X + 10 + ((PLLIFE_SIZE_X + 10) * PLAYER_DEF_LIFE), 230, pShotImage[player.shotPtn], true);
+
 	DrawGraph(POWGARGE_POS_X - 3, 290 - 3, powGaugeFrameImage, false);
 	DrawRectGraph(POWGARGE_POS_X, 290, 0, 0, player.power, 20,powGaugeImage, false, false);
 	DrawGraphF(GAME_SCREEN_X + GAME_SCREEN_SIZE_X, 330, powLevelImage, true);

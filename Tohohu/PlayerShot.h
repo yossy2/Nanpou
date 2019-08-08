@@ -32,6 +32,7 @@ struct PlayerShot
 #endif
 
 PSHOT_EX PlayerShot pShot[PSHOT_NUM];		// ÌßÚ²Ô°¼®¯Ä‚ÉŠÖ‚·‚é•Ï”‚ÌéŒ¾
+PSHOT_EX int pShotImage[PSHOT_ID_MAX];		// ’e
 
 // =============ŠÖ”ÌßÛÄÀ²ÌßéŒ¾
 void PlayerShotInit(void);		// ‰Šú‰»

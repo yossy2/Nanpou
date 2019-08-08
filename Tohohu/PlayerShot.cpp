@@ -5,9 +5,6 @@
 #include "Player.h"
 #include "PlayerShot.h"
 
-// ²Ò°¼Þ—p
-int pShotImage[PSHOT_ID_MAX];					// ’e
-
 // ‰Šú‰»
 void PlayerShotInit(void)
 {
@@ -47,7 +44,7 @@ void PlayerShotDraw(void)
 	{
 		if (pShot[i].drawFlag)
 		{
-			if (pShot[i].shotID == PSHOT_ID_FIRE)
+			if (pShot[i].shotID == PSHOT_ID_FIRE && !pShot[i].blastFlag)
 			{
 				rate = (double)player.shotPowUp;
 				pShot[i].rotaAngle++;
@@ -58,14 +55,16 @@ void PlayerShotDraw(void)
 			}
 
 			if (!pShot[i].blastFlag)
-			{
+			{				
 				DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, (double)DEG_TO_RAD(pShot[i].rotaAngle),
 					pShotImage[pShot[i].shotID], true, false);
 			}
 			else
 			{
+				SetDrawBright(150, 150, 150);
 				DrawRotaGraphF(pShot[i].pos.x, pShot[i].pos.y, rate, 0.0,
 					bigBlastImg[pShot[i].blastCnt], true, false);
+				SetDrawBright(255, 255, 255);
 				pShot[i].blastCnt++;
 				if (pShot[i].blastCnt >= BIG_BLAST_ANIM_MAX)
 				{
@@ -101,7 +100,9 @@ int HitShot(PlayerShot *pShot)
 	if (pShot->shotID == PSHOT_ID_FIRE)
 	{
 		pShot->blastFlag = true;
+		ChangeVolumeSoundMem(150, bigBlastSound);
 		PlaySoundMem(bigBlastSound,DX_PLAYTYPE_BACK,true);
+		ChangeVolumeSoundMem(2550, bigBlastSound);
 	}
 	else
 	{
